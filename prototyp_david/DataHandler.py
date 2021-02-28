@@ -3,11 +3,11 @@ import pandas as pd
 
 def booking_info():
     df = pd.read_csv("data/skas_data.csv", sep=";")
-    df = df[['Operationsdatum', 'BehandlingsNummer']]
+    df = df[['Operationsdatum', 'BehandlingsNummer','HuvudDiagnosNamn1',
+                'Operationskort Undergrupp Namn','Anestesikort']]
     df = df.dropna()
     return df
 
-CURRENT_FILE = booking_info()
 
 
 def filter_data(df, col, val):
@@ -15,14 +15,13 @@ def filter_data(df, col, val):
     return filtered.to_dict("records")
 
 
-def find_similar(cell):
-    if cell != None:
-        row = CURRENT_FILE.iloc[cell.get('row')]
-        date = row['Operationsdatum']
-        print(date)
-        return CURRENT_FILE.where(CURRENT_FILE['Operationsdatum'] == date).dropna()
+
+def find_similar(row_nr):
+    if row_nr != None:
+        row = CURRENT_FILE.iloc[row_nr]
+        opCard = row['Operationskort Undergrupp Namn']
+        print(row['BehandlingsNummer'])
+        return CURRENT_FILE.where(CURRENT_FILE['Operationskort Undergrupp Namn'] ==  opCard).dropna()
 
 
-"""df = pd.DataFrame.from_dict(CURRENT_FILE)
-filter_data(df, "Operationsdatum", "2021-01-01")
-filter_data(df, "Operationsdatum", "2019-01-01")"""
+CURRENT_FILE = booking_info()
