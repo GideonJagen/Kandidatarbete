@@ -45,6 +45,7 @@ def operation_tab():
     return widget
 
 
+
 def anesthesia_tab():
     widget = dcc.Tab(
         id='anesthesia_tab',
