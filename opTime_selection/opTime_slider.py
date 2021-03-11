@@ -18,7 +18,7 @@ def opTime_slider(min_time, max_time):
     id='opTime_slider',
     min = min_time,
     max = max_time,
-    marks = {i: '{}min'.format(i) for i in range(min_time, max_time+5, 5)},
+    marks = {i: ('{}min'.format(i) if(i == min_time or i == max_time) else '{}'.format(i)) for i in range(min_time, max_time+5, 5)},
     step = 5
     )
     return widget
