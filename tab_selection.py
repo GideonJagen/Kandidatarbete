@@ -1,7 +1,7 @@
 import dash_core_components as dcc
-from opTime_selection.opTime_slider import opTime_widget
-from opCode_selection.opCode_selection import opCode_selection
-from statistics_code.statistics_code import statistics_code_widget
+from components.opTime_selection.opTime_slider import opTime_widget
+from components.opCode_selection.opCode_selection import opCode_selection
+from components.statistics_code.statistics_code import statistics_code_widget
 
 import dash_html_components as html
 
@@ -43,7 +43,6 @@ def operation_tab():
             opCode_selection(['NH132', 'SU145', 'LU987', 'NX132', 'SX145', 'LX987']),
         ])
     return widget
-
 
 
 def anesthesia_tab():
