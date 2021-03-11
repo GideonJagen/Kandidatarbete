@@ -14,7 +14,7 @@ def opTime_widget(min_time, max_time):
     return widget
 
 def opTime_slider(min_time, max_time):
-    widget = dcc.Slider(
+    widget = dcc.RangeSlider(
     id='opTime_slider',
     min = min_time,
     max = max_time,
