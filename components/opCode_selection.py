@@ -4,7 +4,7 @@ import dash_html_components as html
 import pandas as pd
 
 
-class OpCode_selection:
+class OpCodeSelection:
     @staticmethod
     def opCode_selection(opCodes):
         """
@@ -14,8 +14,8 @@ class OpCode_selection:
             id="opCode_selection",
             children=[
                 html.H4("Operationskod"),
-                OpCode_selection._opCode_options(),
-                OpCode_selection._opCode_dropdown(opCodes),
+                OpCodeSelection._opCode_options(),
+                OpCodeSelection._opCode_dropdown(opCodes),
             ],
         )
         return widget

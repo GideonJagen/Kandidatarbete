@@ -3,14 +3,14 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 
 
-class Vardtyp_widget:
+class VardtypWidget:
     @staticmethod
     def vardtyp_widget():
         widget = html.Div(
             id="vardtyp",
             children=[
                 html.H4("Vårdtyp"),
-                Vardtyp_widget._vardtyp_radiobuttons(),
+                VardtypWidget._vardtyp_radiobuttons(),
                 # Vardtyp_widget._varvardtyp_dropdown(),
             ],
         )

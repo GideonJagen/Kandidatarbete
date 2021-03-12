@@ -1,10 +1,10 @@
 import dash_core_components as dcc
 import dash_html_components as html
 
-from components.opCode_selection import OpCode_selection
-from components.opTime_slider import OpTime_widget
-from components.statistics_code import Statistics_code_widget
-from components.vardtyp import Vardtyp_widget
+from components.opCode_selection import OpCodeSelection
+from components.opTime_slider import OpTimeWidget
+from components.statistics_code import StatisticsCodeWidget
+from components.vardtyp import VardtypWidget
 
 
 def tab_selection():
@@ -33,8 +33,8 @@ def patient_tab():
         label="Patient",
         children=[
             html.H4("David Johnsson, extremt jävla frisk"),
-            Statistics_code_widget.statistics_code_widget(),
-            Vardtyp_widget.vardtyp_widget(),
+            StatisticsCodeWidget.statistics_code_widget(),
+            VardtypWidget.vardtyp_widget(),
         ],
     )
     return widget
@@ -45,8 +45,8 @@ def operation_tab():
         id="operation_tab",
         label="Operation",
         children=[
-            OpTime_widget.opTime_widget(5, 120),
-            OpCode_selection.opCode_selection(
+            OpTimeWidget.opTime_widget(5, 120),
+            OpCodeSelection.opCode_selection(
                 ["NH132", "SU145", "LU987", "NX132", "SX145", "LX987"]
             ),
         ],

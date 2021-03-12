@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 
 
-class Anestesi_widget:
+class AnestesiWidget:
     @staticmethod
     def anestesi_widget():
         widget = html.Div(
