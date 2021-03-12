@@ -4,7 +4,7 @@ import dash_table
 from dash.dependencies import Input, Output
 
 
-class Search_result():
+class SearchResult():
     @staticmethod
     def search_result():
         cols = ['Behandlingsnr', 'Anmälningstidpunkt', 'SistaOpTidpunkt',
@@ -61,7 +61,7 @@ class Search_result():
                         asa,opTime,age,anesthesia,statCode,area, vardtyp, opCode_option
                         ))
 
-            #TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary. 
+            #TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary.
             return None
 
         return app
