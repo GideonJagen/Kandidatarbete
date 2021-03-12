@@ -18,25 +18,22 @@ app = dash.Dash(external_stylesheets=[dbc.themes.GRID])  # create Dash object
 
 app.layout = html.Div(
     # Top of hierarcy
-    id='Main',
+    id="Main",
     children=[
         tab_selection(),
         Reset_and_search.reset_and_search(),
-
         # TODO: Move this to proper place:
-        html.H1(
-            id='h1',
-            children='Plando-prototype'),
-        dbc.Col([
-            Asa_widget.asa_widget(),
-            Anestesi_widget.anestesi_widget(),
-            Age_widget.age_widget(),
-            Kommuner_widget.kommuner_widget(),
+        html.H1(id="h1", children="Plando-prototype"),
+        dbc.Col(
+            [
+                Asa_widget.asa_widget(),
+                Anestesi_widget.anestesi_widget(),
+                Age_widget.age_widget(),
+                Kommuner_widget.kommuner_widget(),
             ]
         )
-
         # Top
-    ]
+    ],
 )
 
 app.run_server(debug=True)
