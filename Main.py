@@ -8,7 +8,7 @@ from components.asa import AsaWidget
 from components.Reset_and_search import ResetAndSearch
 from components.kommuner import KommunerWidget
 from components.search_result import SearchResult
-from tab_selection import tab_selection
+from components.tab_selection import tab_selection
 from components.vardtyp import VardtypWidget
 from components.opTime_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
