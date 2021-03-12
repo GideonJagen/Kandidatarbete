@@ -2,8 +2,11 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-def anestesi_widget():
-    widget = html.Div(
+class Anestesi_widget():
+
+    @staticmethod
+    def anestesi_widget():
+        widget = html.Div(
             id = 'anestesi',
             children = [
             html.H4(
@@ -38,5 +41,5 @@ def anestesi_widget():
             'textAlign': 'center',
             'margin': '5px'
             }
-            )
-    return widget
+        )
+        return widget

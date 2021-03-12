@@ -2,8 +2,11 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-def asa_widget():
-    widget = html.Div(
+class Asa_widget():
+
+    @staticmethod
+    def asa_widget():
+        widget = html.Div(
             id='asa',
             children = [
             html.H4(
@@ -43,4 +46,4 @@ def asa_widget():
             'margin': '5px'
             }
             )
-    return widget
+        return widget
