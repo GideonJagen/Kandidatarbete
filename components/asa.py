@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 
 
-class Asa_widget:
+class AsaWidget:
     @staticmethod
     def asa_widget():
         widget = html.Div(

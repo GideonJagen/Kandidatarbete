@@ -2,14 +2,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 
-class Statistics_code_widget:
+class StatisticsCodeWidget:
     @staticmethod
     def statistics_code_widget():
         widget = html.Div(
             id="statistics_code_widget",
             children=[
                 html.H4("Statistikkod"),
-                Statistics_code_widget._statistics_code_dropdown(),
+                StatisticsCodeWidget._statistics_code_dropdown(),
             ],
         )
         return widget

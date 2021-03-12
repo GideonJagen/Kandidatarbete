@@ -3,7 +3,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 
 
-class Reset_and_search:
+class ResetAndSearch:
     @staticmethod
     def reset_and_search():
         widget = html.Div(
@@ -11,8 +11,8 @@ class Reset_and_search:
             children=[
                 dbc.Row(
                     children=[
-                        dbc.Col(children=[Reset_and_search._reset_filter_button()]),
-                        dbc.Col(children=[Reset_and_search._search_button()]),
+                        dbc.Col(children=[ResetAndSearch._reset_filter_button()]),
+                        dbc.Col(children=[ResetAndSearch._search_button()]),
                     ]
                 )
             ],

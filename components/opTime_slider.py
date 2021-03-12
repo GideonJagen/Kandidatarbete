@@ -2,14 +2,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 
-class OpTime_widget:
+class OpTimeWidget:
     @staticmethod
     def opTime_widget(min_time, max_time):
         widget = html.Div(
             id="opTime_widget",
             children=[
                 html.H4("Operationstid"),
-                OpTime_widget._opTime_slider(min_time, max_time),
+                OpTimeWidget._opTime_slider(min_time, max_time),
             ],
         )
         return widget
