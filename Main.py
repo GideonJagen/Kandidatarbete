@@ -2,7 +2,7 @@ import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from components.age import Age_widget
+from components.age import AgeWidget
 from components.anestesi import Anestesi_widget
 from components.asa import Asa_widget
 from components.Reset_and_search import Reset_and_search
@@ -28,7 +28,7 @@ app.layout = html.Div(
             [
                 Asa_widget.asa_widget(),
                 Anestesi_widget.anestesi_widget(),
-                Age_widget.age_widget(),
+                AgeWidget.age_widget(),
                 Kommuner_widget.kommuner_widget(),
             ]
         )
