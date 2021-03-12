@@ -4,20 +4,19 @@ import dash_html_components as html
 import pandas as pd
 
 
-class OpCode_selection():
-
+class OpCode_selection:
     @staticmethod
     def opCode_selection(opCodes):
         """
         Highest hierarcy widget of opCode_selection function
         """
         widget = html.Div(
-            id='opCode_selection',
+            id="opCode_selection",
             children=[
-                html.H4('Operationskod'),
+                html.H4("Operationskod"),
                 OpCode_selection._opCode_options(),
-                OpCode_selection._opCode_dropdown(opCodes)
-            ]
+                OpCode_selection._opCode_dropdown(opCodes),
+            ],
         )
         return widget
 
@@ -27,11 +26,11 @@ class OpCode_selection():
         Check buttons of top hierarcy widget
         """
 
-        options = ['Visa alla', 'Exkludera', "Visa endast"]
+        options = ["Visa alla", "Exkludera", "Visa endast"]
         widget = dcc.RadioItems(
-            id='opCode_options',
-            options=[{'label': opt, 'value': opt} for opt in options],
-            labelStyle={'display': 'inline-block'}
+            id="opCode_options",
+            options=[{"label": opt, "value": opt} for opt in options],
+            labelStyle={"display": "inline-block"},
         )
         return widget
 
@@ -42,9 +41,11 @@ class OpCode_selection():
         """
 
         widget = dcc.Dropdown(
-            id='opCode_dropdown',
+            id="opCode_dropdown",
             searchable=False,
-            placeholder='Välj operationskod',
-            options=[{'label': code, 'value': code} for code in opCodes]  # list builder to create dropdown options,
+            placeholder="Välj operationskod",
+            options=[
+                {"label": code, "value": code} for code in opCodes
+            ],  # list builder to create dropdown options,
         )
         return widget
