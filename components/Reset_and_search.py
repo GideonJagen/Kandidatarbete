@@ -11,8 +11,8 @@ class Reset_and_search():
         children = [
         dbc.Row(
         children=[
-        dbc.Col(children=[Reset_and_search.reset_filter_button()]),
-        dbc.Col(children=[Reset_and_search.search_button()]),
+        dbc.Col(children=[Reset_and_search._reset_filter_button()]),
+        dbc.Col(children=[Reset_and_search._search_button()]),
         ])],
         style = {
         'width' : '500px'
@@ -21,7 +21,7 @@ class Reset_and_search():
         return widget
 
     @staticmethod
-    def reset_filter_button():
+    def _reset_filter_button():
         widget = html.Button(
         'Nollställ filter',
         id='reset_filter_button',
@@ -36,7 +36,7 @@ class Reset_and_search():
 
 
     @staticmethod
-    def search_button():
+    def _search_button():
         widget = html.Button(
         'Filtrera',
         id='search_button',

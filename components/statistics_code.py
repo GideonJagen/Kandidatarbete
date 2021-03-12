@@ -9,13 +9,13 @@ class Statistics_code_widget():
             id='statistics_code_widget',
             children=[
                 html.H4('Statistikkod'),
-                Statistics_code_widget.statistics_code_dropdown()
+                Statistics_code_widget._statistics_code_dropdown()
             ]
         )
         return widget
 
     @staticmethod
-    def statistics_code_dropdown():
+    def _statistics_code_dropdown():
         codes = [
             {'label': '30 dagar', 'value': '30d'},
             {'label': '90 dagar', 'value': '90d'},

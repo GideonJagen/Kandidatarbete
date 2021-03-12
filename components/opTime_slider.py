@@ -9,13 +9,13 @@ class OpTime_widget():
             id='opTime_widget',
             children=[
                 html.H4('Operationstid'),
-                OpTime_widget.opTime_slider(min_time, max_time),
+                OpTime_widget._opTime_slider(min_time, max_time),
             ]
         )
         return widget
 
     @staticmethod
-    def opTime_slider(min_time, max_time):
+    def _opTime_slider(min_time, max_time):
         widget = dcc.RangeSlider(
             id='opTime_slider',
             min=min_time,
