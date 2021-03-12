@@ -2,6 +2,7 @@ import dash_core_components as dcc
 from components.opTime_selection.opTime_slider import opTime_widget
 from components.opCode_selection.opCode_selection import opCode_selection
 from components.statistics_code.statistics_code import statistics_code_widget
+from components.vardtyp.vardtyp import vardtyp_widget
 
 import dash_html_components as html
 
@@ -29,6 +30,7 @@ def patient_tab():
         children=[
             html.H4('David Johnsson, extremt jävla frisk'),
             statistics_code_widget(),
+            vardtyp_widget(),
         ]
     )
     return widget
