@@ -1,11 +1,15 @@
 import dash
-import dash_core_components as dcc
 import dash_html_components as html
-from tab_selection import tab_selection
 import dash_bootstrap_components as dbc
-from DataHandler import *
-from opTime_selection.opTime_slider import opTime_widget
-from opCode_selection.opCode_selection import opCode_selection
+
+from components.age import Age_widget
+from components.anestesi import Anestesi_widget
+from components.asa import Asa_widget
+from components.Reset_and_search import Reset_and_search
+from components.kommuner import Kommuner_widget
+
+from tab_selection import tab_selection
+
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -16,7 +20,20 @@ app.layout = html.Div(
     # Top of hierarcy
     id='Main',
     children=[
-        tab_selection()
+        tab_selection(),
+        Reset_and_search.reset_and_search(),
+
+        # TODO: Move this to proper place:
+        html.H1(
+            id='h1',
+            children='Plando-prototype'),
+        dbc.Col([
+            Asa_widget.asa_widget(),
+            Anestesi_widget.anestesi_widget(),
+            Age_widget.age_widget(),
+            Kommuner_widget.kommuner_widget(),
+            ]
+        )
 
         # Top
     ]
