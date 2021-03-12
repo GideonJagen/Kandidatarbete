@@ -7,9 +7,10 @@ from components.anestesi import Anestesi_widget
 from components.asa import Asa_widget
 from components.Reset_and_search import Reset_and_search
 from components.kommuner import Kommuner_widget
-
+from components.search_result import Search_result
 from tab_selection import tab_selection
-
+from components.vardtyp import Vardtyp_widget
+from components.opTime_slider import OpTime_widget
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -32,6 +33,8 @@ app.layout = html.Div(
             Anestesi_widget.anestesi_widget(),
             Age_widget.age_widget(),
             Kommuner_widget.kommuner_widget(),
+            Search_result.search_result(),
+
             ]
         )
 
@@ -39,4 +42,6 @@ app.layout = html.Div(
     ]
 )
 
+app = Search_result.search_result_callback(app)
+app = OpTime_widget.reset_opTime_callback(app)
 app.run_server(debug=True)

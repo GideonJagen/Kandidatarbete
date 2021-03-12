@@ -5,7 +5,10 @@ import pandas as pd
 
 
 class OpCode_selection():
+    STANDARD_VALUE_DD = None
+    STANDARD_VALUE_OPT = 'Visa alla'
 
+    
     @staticmethod
     def opCode_selection(opCodes):
         """
@@ -21,6 +24,8 @@ class OpCode_selection():
         )
         return widget
 
+
+
     @staticmethod
     def _opCode_options():
         """
@@ -34,6 +39,8 @@ class OpCode_selection():
             labelStyle={'display': 'inline-block'}
         )
         return widget
+
+
 
     @staticmethod
     def _opCode_dropdown(opCodes):

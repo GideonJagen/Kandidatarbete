@@ -48,3 +48,9 @@ class Reset_and_search():
         }
         )
         return widget
+
+
+
+
+    def reset_filter_callback(app):
+        pass

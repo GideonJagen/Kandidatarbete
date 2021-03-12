@@ -8,6 +8,7 @@ class Age_widget():
     def age_widget():
         widget = html.Div([
             dcc.RangeSlider(
+                id = 'age',
                 min=0,
                 max=10,
                 step=None,
