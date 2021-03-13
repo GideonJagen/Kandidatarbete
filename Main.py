@@ -26,20 +26,16 @@ app.layout = html.Div(
         tab_selection(),
         ResetAndSearch.reset_and_search(),
         # TODO: Move this to proper place:
-        html.H1(
-            id='h1',
-            children='Plando-prototype'),
-        dbc.Col([
-            AsaWidget.asa_widget(),
-            AnestesiWidget.anestesi_widget(),
-            AgeWidget.age_widget(),
-            KommunerWidget.kommuner_widget(),
-            SearchResult.search_result(),
-
-
+        html.H1(id="h1", children="Plando-prototype"),
+        dbc.Col(
+            [
+                AsaWidget.asa_widget(),
+                AnestesiWidget.anestesi_widget(),
+                AgeWidget.age_widget(),
+                KommunerWidget.kommuner_widget(),
+                SearchResult.search_result(),
             ]
         )
-
         # Top
     ],
 )

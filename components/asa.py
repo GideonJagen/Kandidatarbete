@@ -3,9 +3,10 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+
 class AsaWidget:
 
-    STANDARD_VALUE = [] #Basera på data
+    STANDARD_VALUE = []  # Basera på data
 
     @staticmethod
     def asa_widget():
@@ -51,13 +52,11 @@ class AsaWidget:
         )
         return widget
 
-
-
     @staticmethod
     def reset_asa_callback(app):
         @app.callback(
-        Output(component_id = 'asa_checklist' , component_property = 'value'),
-        Input(component_id = 'reset_filter_button' , component_property = 'n_clicks')
+            Output(component_id="asa_checklist", component_property="value"),
+            Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
             return AsaWidget.STANDARD_VALUE

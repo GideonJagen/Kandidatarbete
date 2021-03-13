@@ -4,10 +4,9 @@ import dash_html_components as html
 import pandas as pd
 
 
-class OpCodeSelection():
+class OpCodeSelection:
     STANDARD_VALUE_DD = None
-    STANDARD_VALUE_OPT = 'Visa alla'
-
+    STANDARD_VALUE_OPT = "Visa alla"
 
     @staticmethod
     def opCode_selection(opCodes):
@@ -24,8 +23,6 @@ class OpCodeSelection():
         )
         return widget
 
-
-
     @staticmethod
     def _opCode_options():
         """
@@ -39,8 +36,6 @@ class OpCodeSelection():
             labelStyle={"display": "inline-block"},
         )
         return widget
-
-
 
     @staticmethod
     def _opCode_dropdown(opCodes):
