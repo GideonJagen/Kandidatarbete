@@ -1,26 +1,25 @@
 import pandas as pd
 import time
 
-# TODO ta bort dumma kommentarer
-# TODO gör evaluering av
+# TODO Söka efter förberedelsetid?
 
-dummy_data = pd.read_csv("data.csv", sep=";")
+dummy_data = pd.read_csv("output.csv", sep=";")
 
 
-def filter_data(data, inputs=None):
-    inputs = {  # Genom att ta in ett dicitonary som detta kan man skapa kombinationer som därmed kan sökas efter specifikt, kan låta användaren skapa "genvägar"/spara filtrering för att jämföra resultat
-        "age": [0, 2],
-        "asa": ["asa1", "es"],
-    }
+def filter_data(inputs=None):
+    start_time = time.time()
+    data = dummy_data
     passed = []
     data = data.to_dict("records")
     for row in data:
         if _run_filters(inputs, row):
             passed.append(row)
+    print("---Filtering took %s seconds ---" % (time.time() - start_time))
+    return passed
 
 
 def _run_filters(inputs, row):
-    filter_functions = [_eval_age, _eval_asa]
+    filter_functions = [_eval_age, _eval_asa, _eval_op_time]
     for func in filter_functions:
         if not func(inputs, row):
             return False
@@ -47,6 +46,8 @@ def _eval_age(inputs, row):
 
 
 def _eval_asa(inputs, row):
+    if len(inputs["asa"]) == 0:  # If none selected, all are passed
+        return True
     value_map = {
         "asa1": 1,
         "asa2": 2,
@@ -56,13 +57,20 @@ def _eval_asa(inputs, row):
         "asa6": 6,
         "es": None,
     }
-
     if ("es" in inputs["asa"]) and pd.isna(row["ASAklass"]):
         return True
     passable = [value_map[input] for input in inputs["asa"]]
     return row["ASAklass"] in passable
 
 
-start_time = time.time()
-filter_data(dummy_data)
-print("--- %s seconds ---" % (time.time() - start_time))
+def _eval_op_time(inputs, row):
+    min_time = inputs["op_time"][0]
+    max_time = inputs["op_time"][1]
+    return (
+        row["KravOperationstidMinuter"] >= min_time
+        and row["KravOperationstidMinuter"] <= max_time
+    )
+
+
+def _eval_op_code(inputs, row):
+    return row["OpkortText"] in inputs["op_code"]

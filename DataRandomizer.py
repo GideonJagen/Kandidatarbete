@@ -43,6 +43,19 @@ def build_random_data(start_date, end_date, num_patients=100):
     preOp_time_demand = range(20, 105, 5)
     postOp_time_demand = range(10, 60, 5)
     op_rooms = [247, 249, 251, 253, 256]
+    vardtyp = ["Öppen vård", "Sluten vård"]
+    stat_code = ["30 dagar", "90 dagar", "6 månader", "9 månader", "1 år", ">1 år"]
+    op_codes = [
+        "NH132",
+        "SU145",
+        "LU987",
+        "NX132",
+        "SX145",
+        "LX987",
+        "ND766",
+        "QD824",
+        "ED568",
+    ]
 
     patients = []
     for i in range(
@@ -76,6 +89,9 @@ def build_random_data(start_date, end_date, num_patients=100):
                 "TotaltidStart": "{} {} {}".format(
                     booked_date, day_of_week, start_time
                 ),
+                "Vårdform_text": random.choice(vardtyp),
+                "Statistikkod": random.choice(stat_code),
+                "OpkortText": random.choice(op_codes),
             }
             patients.append(patient)
 
@@ -96,13 +112,16 @@ def build_random_data(start_date, end_date, num_patients=100):
                 "Veckodag": None,
                 "Starttimme": None,
                 "TotaltidStart": None,
+                "Vårdform_text": random.choice(vardtyp),
+                "Statistikkod": random.choice(stat_code),
+                "OpkortText": random.choice(op_codes),
             }
             patients.append(patient)
 
     return patients
 
 
-data = build_random_data("2018-01-01", "2018-10-10", num_patients=100)
+data = build_random_data("2018-01-01", "2018-10-10", num_patients=3000)
 df = pd.DataFrame.from_dict(data)
 
 
@@ -113,6 +132,4 @@ def days_since_booking(booked_date):
     return (today - booked_date).days
 
 
-print(days_since_booking("2018-01-01"))
-
-# df.to_excel("output.xlsx")
+df.to_csv("output.csv", sep=";")
