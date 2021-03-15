@@ -5,6 +5,9 @@ import pandas as pd
 
 
 class OpCodeSelection:
+    STANDARD_VALUE_DD = None
+    STANDARD_VALUE_OPT = "Visa alla"
+
     @staticmethod
     def opCode_selection(opCodes):
         """

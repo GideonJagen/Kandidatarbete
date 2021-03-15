@@ -1,8 +1,11 @@
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 
 
 class StatisticsCodeWidget:
+    STANDARD_VALUE = []
+
     @staticmethod
     def statistics_code_widget():
         widget = html.Div(
@@ -32,3 +35,14 @@ class StatisticsCodeWidget:
             multi=True,
         )
         return dropdown
+
+    @staticmethod
+    def add_statistics_code_callback(app):
+        @app.callback(
+            Output(component_id="statistics_dropdown", component_property="value"),
+            Input(component_id="reset_filter_button", component_property="n_clicks"),
+        )
+        def reset_opTime(n_clicks):
+            return StatisticsCodeWidget.STANDARD_VALUE
+
+        return app

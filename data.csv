@@ -1,4 +1,4 @@
-﻿;Behandlingsnr;Anmälningstidpunkt;SistaOpTidpunkt;Opkategori_text;Prioritet_dagar;ASAklass;KravOperationstidMinuter;KravFörberedelsetidMinuter;KravtidEfterMinuter;De_PlaneradOpsal_FK;PlaneradStartOpsalTidpunkt;PatientÅlderVidOp;Veckodag;Starttimme;TotaltidStart
+﻿Behandlingsnr;Anmälningstidpunkt;SistaOpTidpunkt;Opkategori_text;Prioritet_dagar;ASAklass;KravOperationstidMinuter;KravFörberedelsetidMinuter;KravtidEfterMinuter;De_PlaneradOpsal_FK;PlaneradStartOpsalTidpunkt;PatientÅlderVidOp;Veckodag;Starttimme;TotaltidStart
 0;96559909;2018-04-26 00:00:00;-1;Elektiv;7;2;70;30;50;256;2018-07-11 08:25:00;74;3;07:50:00;2018-04-26 00:00:00 3 07:50:00
 1;68669403;2018-02-01 00:00:00;-1;Elektiv;7;2;25;75;25;249;2018-03-09 14:55:00;98;3;14:50:00;2018-02-01 00:00:00 3 14:50:00
 2;13209341;2018-08-30 00:00:00;-1;Akut;7;2;105;65;10;-1;;29;;;

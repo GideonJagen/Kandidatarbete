@@ -1,9 +1,12 @@
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 
 
 class VardtypWidget:
+    STANDARD_VALUE = "all"
+
     @staticmethod
     def vardtyp_widget():
         widget = html.Div(
@@ -44,3 +47,14 @@ class VardtypWidget:
             placeholder="Välj Vårdtyp",
         )
         return widget
+
+    @staticmethod
+    def add_vardtyp_callback(app):
+        @app.callback(
+            Output(component_id="vardtyp_radiobuttons", component_property="value"),
+            Input(component_id="reset_filter_button", component_property="n_clicks"),
+        )
+        def reset_opTime(n_clicks):
+            return VardtypWidget.STANDARD_VALUE
+
+        return app
