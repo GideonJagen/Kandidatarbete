@@ -33,7 +33,7 @@ class KommunerWidget:
         return widget
 
     @staticmethod
-    def reset_kommuner_callback(app):
+    def add_kommuner_callback(app):
         @app.callback(
             Output(component_id="kommuner_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),

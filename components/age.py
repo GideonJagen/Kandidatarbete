@@ -24,7 +24,7 @@ class AgeWidget:
         return widget
 
     @staticmethod
-    def reset_age_callback(app):
+    def add_age_callback(app):
         @app.callback(
             Output(component_id="age", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),

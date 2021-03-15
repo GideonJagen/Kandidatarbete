@@ -3,6 +3,8 @@ import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
 
+# TODO Make callback return a dictionary with inputs
+
 
 class SearchResult:
     @staticmethod
