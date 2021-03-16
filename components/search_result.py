@@ -2,7 +2,7 @@ import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
-from DataHandler import filter_data, dummy_data
+from DataHandler import filter_data, dummy_data, filter_vectorized
 
 # TODO Make callback return a dictionary with inputs
 
@@ -61,7 +61,7 @@ class SearchResult:
             op_time,
             age,
             anesthesia,
-            statCode,
+            stat_code,
             area,
             vardtyp,
             op_code,
@@ -72,26 +72,15 @@ class SearchResult:
                 "asa": asa,
                 "op_time": op_time,
                 "op_code": op_code,
+                "stat_code": stat_code,
+                "anesthesia": anesthesia,
+                "area": area,
+                "vardtyp": vardtyp,
             }
             ctx = dash.callback_context
             if ctx.triggered[0]["prop_id"] == "search_button.n_clicks":
-                print(
-                    "ASA-klass: {} , Operationstid: {} , Ålder: {} ,\
-                    Anestesi: {} , Statistikkod: {} , Kommun: {} , Vårdtyp: {} ,\
-                            Operationskod-val: {}".format(
-                        asa,
-                        op_time,
-                        age,
-                        anesthesia,
-                        statCode,
-                        area,
-                        vardtyp,
-                        op_code,
-                    )
-                )
-
                 # TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary.
-                return filter_data(inputs)
-            return filter_data(inputs)
+                return filter_vectorized(inputs)
+            return filter_vectorized(inputs)
 
         return app

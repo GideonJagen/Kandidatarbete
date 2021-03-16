@@ -5,7 +5,8 @@ from dash.dependencies import Input, Output
 
 
 class AgeWidget:
-    STANDARD_VALUE = [0, 10]
+    MIN_AGE = 0
+    MAX_AGE = 150  # Not the actual value, this has to be fixed, magic number
 
     @staticmethod
     def age_widget():
@@ -13,11 +14,16 @@ class AgeWidget:
             [
                 dcc.RangeSlider(
                     id="age",
-                    min=0,
-                    max=10,
+                    min=AgeWidget.MIN_AGE,
+                    max=AgeWidget.MAX_AGE,
                     step=None,
-                    marks={0: "0", 2: "16", 8: "80", 10: "max"},
-                    value=[0, 10],
+                    marks={
+                        AgeWidget.MIN_AGE: "0",
+                        16: "16",
+                        80: "80",
+                        AgeWidget.MAX_AGE: "max",
+                    },
+                    value=[AgeWidget.MIN_AGE, AgeWidget.MAX_AGE],
                 )
             ]
         )
@@ -30,6 +36,6 @@ class AgeWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return AgeWidget.STANDARD_VALUE
+            return [AgeWidget.MIN_AGE, AgeWidget.MAX_AGE]
 
         return app

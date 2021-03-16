@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+import numpy as np
 
 # TODO Söka efter förberedelsetid?
 
@@ -72,5 +73,35 @@ def _eval_op_time(inputs, row):
     )
 
 
-def _eval_op_code(inputs, row):
-    return row["OpkortText"] in inputs["op_code"]
+def filter_vectorized(inputs):
+    start_time = time.time()
+    df = dummy_data
+    print(inputs)
+    filtered = np.where(
+        (df["PatientÅlderVidOp"] >= inputs["age"][0])
+        & (df["PatientÅlderVidOp"] <= inputs["age"][1])  # Filter age lower bound
+        & (  # Filter age upper bound
+            (df["ASAklass"].isin(inputs["asa"]) if len(inputs["asa"]) > 0 else True)
+            | (  # Filter ASA class
+                df["ASAklass"].isna() if (-1 in inputs["asa"]) else False
+            )
+        )
+        & (df["KravOperationstidMinuter"] >= inputs["op_time"][0])  # Filter ASA class
+        & (  # Filter Operationstid lower bound
+            df["KravOperationstidMinuter"] <= inputs["op_time"][1]
+        )
+        & (  # Filter Operationstid upper bound
+            df["OpkortText"].isin(inputs["op_code"])
+            if len(inputs["op_code"]) > 0
+            else True
+        )
+        & (  # Filter operationskod
+            df["Statistikkod"].isin(inputs["stat_code"])
+            if len(inputs["stat_code"]) > 0
+            else True
+        )  # Filter statistikkod
+    )
+
+    data = df.iloc[filtered].to_dict("records")
+    print("---Filtering took %s seconds ---" % (time.time() - start_time))
+    return data

@@ -47,6 +47,7 @@ class OpCodeSelection:
             id="opCode_dropdown",
             placeholder="Välj operationskod",
             multi=True,
+            value=[],
             options=[
                 {"label": code, "value": code} for code in opCodes
             ],  # list builder to create dropdown options,
