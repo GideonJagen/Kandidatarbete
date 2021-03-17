@@ -47,7 +47,17 @@ def operation_tab():
         children=[
             OpTimeWidget.opTime_widget(5, 120),
             OpCodeSelection.opCode_selection(
-                ["NH132", "SU145", "LU987", "NX132", "SX145", "LX987"]
+                [
+                    "NH132",
+                    "SU145",
+                    "LU987",
+                    "NX132",
+                    "SX145",
+                    "LX987",
+                    "ND766",
+                    "QD824",
+                    "ED568",
+                ]
             ),
         ],
     )

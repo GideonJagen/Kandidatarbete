@@ -11,12 +11,13 @@ class ResetAndSearch:
             children=[
                 dbc.Row(
                     children=[
+                        html.H4("*Uppdateras utan filter knappen för tillfället*"),
                         dbc.Col(children=[ResetAndSearch._reset_filter_button()]),
                         dbc.Col(children=[ResetAndSearch._search_button()]),
                     ]
                 )
             ],
-            style={"width": "500px"},
+            style={"width": "800px"},
         )
         return widget
 

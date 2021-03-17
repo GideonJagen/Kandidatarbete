@@ -25,13 +25,13 @@ class AsaWidget:
                 dcc.Checklist(
                     id="asa_checklist",
                     options=[
-                        {"label": "ASA 1", "value": "asa1"},
-                        {"label": "ASA 2", "value": "asa2"},
-                        {"label": "ASA 3", "value": "asa3"},
-                        {"label": "ASA 4", "value": "asa4"},
-                        {"label": "ASA 5", "value": "asa5"},
-                        {"label": "ASA 6", "value": "asa6"},
-                        {"label": "Ej specificerat", "value": "es"},
+                        {"label": "ASA 1", "value": 1},
+                        {"label": "ASA 2", "value": 2},
+                        {"label": "ASA 3", "value": 3},
+                        {"label": "ASA 4", "value": 4},
+                        {"label": "ASA 5", "value": 5},
+                        {"label": "ASA 6", "value": 6},
+                        {"label": "Ej specificerat", "value": -1},
                     ],
                     labelStyle={"display": "inline-block"},
                     style={

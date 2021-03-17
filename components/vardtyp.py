@@ -3,6 +3,8 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+# Döpa om till vårdform, som det heter i datan
+
 
 class VardtypWidget:
     STANDARD_VALUE = "all"

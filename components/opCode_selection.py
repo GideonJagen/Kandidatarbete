@@ -17,7 +17,7 @@ class OpCodeSelection:
             id="opCode_selection",
             children=[
                 html.H4("Operationskod"),
-                OpCodeSelection._opCode_options(),
+                # OpCodeSelection._opCode_options(),
                 OpCodeSelection._opCode_dropdown(opCodes),
             ],
         )
@@ -45,8 +45,9 @@ class OpCodeSelection:
 
         widget = dcc.Dropdown(
             id="opCode_dropdown",
-            searchable=False,
             placeholder="Välj operationskod",
+            multi=True,
+            value=[],
             options=[
                 {"label": code, "value": code} for code in opCodes
             ],  # list builder to create dropdown options,

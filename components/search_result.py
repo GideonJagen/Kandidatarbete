@@ -2,6 +2,7 @@ import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
+from DataHandler import filter_data, dummy_data, filter_vectorized
 
 # TODO Make callback return a dictionary with inputs
 
@@ -51,29 +52,35 @@ class SearchResult:
             Input(component_id="statistics_dropdown", component_property="value"),
             Input(component_id="kommuner_radiobuttons", component_property="value"),
             Input(component_id="vardtyp_radiobuttons", component_property="value"),
-            Input(component_id="opCode_options", component_property="value"),
+            Input(component_id="opCode_dropdown", component_property="value"),
+            Input(component_id="search_result", component_property="data"),
         )
         def update_data(
-            button, asa, opTime, age, anesthesia, statCode, area, vardtyp, opCode_option
+            button,
+            asa,
+            op_time,
+            age,
+            anesthesia,
+            stat_code,
+            area,
+            vardtyp,
+            op_code,
+            current_data,
         ):
+            inputs = {  # Genom att ta in ett dicitonary som detta kan man skapa kombinationer som därmed kan sökas efter specifikt, kan låta användaren skapa "genvägar"/spara filtrering för att jämföra resultat
+                "age": {"min": age[0], "max": age[1]},
+                "asa": asa,
+                "op_time": {"min": op_time[0], "max": op_time[1]},
+                "op_code": op_code,
+                "stat_code": stat_code,
+                "anesthesia": anesthesia,
+                "area": area,
+                "vardtyp": vardtyp,
+            }
             ctx = dash.callback_context
             if ctx.triggered[0]["prop_id"] == "search_button.n_clicks":
-                print(
-                    "ASA-klass: {} , Operationstid: {} , Ålder: {} ,\
-                Anestesi: {} , Statistikkod: {} , Kommun: {} , Vårdtyp: {} ,\
-                        Operationskod-val: {}".format(
-                        asa,
-                        opTime,
-                        age,
-                        anesthesia,
-                        statCode,
-                        area,
-                        vardtyp,
-                        opCode_option,
-                    )
-                )
-
-            # TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary.
-            return None
+                # TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary.
+                return filter_vectorized(inputs)
+            return filter_vectorized(inputs)
 
         return app

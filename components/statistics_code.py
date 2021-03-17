@@ -20,12 +20,12 @@ class StatisticsCodeWidget:
     @staticmethod
     def _statistics_code_dropdown():
         codes = [
-            {"label": "30 dagar", "value": "30d"},
-            {"label": "90 dagar", "value": "90d"},
-            {"label": "6 månader", "value": "6m"},
-            {"label": "9 månader", "value": "9m"},
-            {"label": "1 år", "value": "1å"},
-            {"label": ">1 år", "value": ">1å"},
+            {"label": "30 dagar", "value": "30 dagar"},
+            {"label": "90 dagar", "value": "90 dagar"},
+            {"label": "6 månader", "value": "6 månader"},
+            {"label": "9 månader", "value": "9 månader"},
+            {"label": "1 år", "value": "1 år"},
+            {"label": ">1 år", "value": ">1 år"},
         ]
         dropdown = dcc.Dropdown(
             id="statistics_dropdown",
