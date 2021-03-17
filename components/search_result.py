@@ -68,9 +68,9 @@ class SearchResult:
             current_data,
         ):
             inputs = {  # Genom att ta in ett dicitonary som detta kan man skapa kombinationer som därmed kan sökas efter specifikt, kan låta användaren skapa "genvägar"/spara filtrering för att jämföra resultat
-                "age": age,
+                "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
-                "op_time": op_time,
+                "op_time": {"min": op_time[0], "max": op_time[1]},
                 "op_code": op_code,
                 "stat_code": stat_code,
                 "anesthesia": anesthesia,
