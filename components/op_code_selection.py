@@ -21,7 +21,7 @@ class OpCodeSelection:
     ]  # Made up for testing purposes
 
     @staticmethod
-    def opCode_selection():
+    def op_code_selection():
         """
         Highest hierarcy widget of opCode_selection function
         """
@@ -30,13 +30,13 @@ class OpCodeSelection:
             children=[
                 html.H4("Operationskod"),
                 # OpCodeSelection._opCode_options(),
-                OpCodeSelection._opCode_dropdown(),
+                OpCodeSelection._op_code_dropdown(),
             ],
         )
         return widget
 
     @staticmethod
-    def _opCode_options():
+    def _op_code_options():
         """
         Check buttons of top hierarcy widget
         """
@@ -50,7 +50,7 @@ class OpCodeSelection:
         return widget
 
     @staticmethod
-    def _opCode_dropdown():
+    def _op_code_dropdown():
         """
         Dropdown list of top hierarcy widget
         """

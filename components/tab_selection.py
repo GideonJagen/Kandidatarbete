@@ -1,7 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 
-from components.opCode_selection import OpCodeSelection
+from components.op_code_selection import OpCodeSelection
 from components.opTime_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.vardtyp import VardtypWidget
@@ -88,7 +88,7 @@ class TabSelectionWidget:
                     },
                     children=[
                         OpTimeWidget.opTime_widget(5, 120),
-                        OpCodeSelection.opCode_selection(),
+                        OpCodeSelection.op_code_selection(),
                     ],
                 )
             ],

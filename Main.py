@@ -14,7 +14,7 @@ from components.tab_selection import TabSelectionWidget
 from components.vardtyp import VardtypWidget
 from components.opTime_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
-from components.opCode_selection import OpCodeSelection
+from components.op_code_selection import OpCodeSelection
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
