@@ -11,7 +11,8 @@ class AgeWidget:
     @staticmethod
     def age_widget():
         widget = html.Div(
-            [
+            children=[
+                html.H4("Ålder"),
                 dcc.RangeSlider(
                     id="age",
                     min=AgeWidget.MIN_AGE,
@@ -24,7 +25,7 @@ class AgeWidget:
                         AgeWidget.MAX_AGE: "max",
                     },
                     value=[AgeWidget.MIN_AGE, AgeWidget.MAX_AGE],
-                )
+                ),
             ]
         )
         return widget

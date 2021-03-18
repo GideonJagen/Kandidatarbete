@@ -6,18 +6,25 @@ import dash_bootstrap_components as dbc
 class ResetAndSearch:
     @staticmethod
     def reset_and_search():
-        widget = html.Div(
+        widget = dbc.Row(
             id="reset_and_search",
             children=[
-                dbc.Row(
+                html.Div(
+                    style={"width": "800px", "backgroundColor": "#D1E5F0"},
                     children=[
                         html.H4("*Uppdateras utan filter knappen för tillfället*"),
-                        dbc.Col(children=[ResetAndSearch._reset_filter_button()]),
-                        dbc.Col(children=[ResetAndSearch._search_button()]),
-                    ]
+                        dbc.Row(
+                            children=[
+                                dbc.Col(
+                                    children=[ResetAndSearch._reset_filter_button()]
+                                ),
+                                dbc.Col(children=[ResetAndSearch._search_button()]),
+                            ]
+                        ),
+                    ],
                 )
             ],
-            style={"width": "800px"},
+            style={"width": "100%", "backgroundColor": "#D1E5F0"},
         )
         return widget
 
