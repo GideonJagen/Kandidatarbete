@@ -2,7 +2,7 @@ import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
-from DataHandler import filter_data, dummy_data, filter_vectorized
+from data_handler import DataHandler
 
 # TODO Make callback return a dictionary with inputs
 
@@ -29,12 +29,22 @@ class SearchResult:
         ]
 
         widget = html.Div(
-            style={},
+            style={"height": "800px"},
             children=[
                 dash_table.DataTable(
                     id="search_result",
+                    page_size=15,
+                    style_table={"height": "500px", "overflowY": "auto"},
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
+                    style_data_conditional=[
+                        {
+                            "if": {
+                                "filter_query": "{Humidity} > 19 && {Humidity} < 41",
+                                "column_id": "Humidity",
+                            }
+                        }
+                    ],
                 ),
             ],
         )
@@ -80,7 +90,7 @@ class SearchResult:
             ctx = dash.callback_context
             if ctx.triggered[0]["prop_id"] == "search_button.n_clicks":
                 # TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary.
-                return filter_vectorized(inputs)
-            return filter_vectorized(inputs)
+                return DataHandler.filter_vectorized(inputs)
+            return DataHandler.filter_vectorized(inputs)
 
         return app

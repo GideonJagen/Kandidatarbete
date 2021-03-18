@@ -28,7 +28,7 @@ class KommunerWidget:
             id="kommuner_radiobuttons",
             options=options,
             labelStyle={"display": "block"},
-            value=STANDARD_VALUE,
+            value=KommunerWidget.STANDARD_VALUE,
         )
         return widget
 

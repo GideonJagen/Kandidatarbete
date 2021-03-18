@@ -1,69 +1,96 @@
 import dash_core_components as dcc
 import dash_html_components as html
 
-from components.opCode_selection import OpCodeSelection
-from components.opTime_slider import OpTimeWidget
+from components.op_code_selection import OpCodeSelection
+from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.vardtyp import VardtypWidget
+from components.age import AgeWidget
+from components.anestesi import AnestesiWidget
+from components.asa import AsaWidget
+from components.kommuner import KommunerWidget
+import dash_bootstrap_components as dbc
 
 
-def tab_selection():
-    """
-    Top of tab hierarcy, contains all tabs
-    """
-    widget = html.Div(
-        children=[
-            dcc.Tabs(
-                id="tabs_selection",
-                value=None,
-                children=[
-                    patient_tab(),
-                    anesthesia_tab(),
-                    operation_tab(),
-                ],
-            )
-        ]
-    )
-    return widget
+class TabSelectionWidget:
+    @staticmethod
+    def tab_selection():
+        """
+        Top of tab hierarcy, contains all tabs
+        """
+        widget = html.Div(
+            children=[
+                dcc.Tabs(
+                    style={"width": "30%"},
+                    id="tabs_selection",
+                    value="patient_tab",
+                    children=[
+                        TabSelectionWidget._patient_tab(),
+                        TabSelectionWidget._operation_tab(),
+                    ],
+                )
+            ]
+        )
+        return widget
 
+    @staticmethod
+    def _patient_tab():
+        widget = dcc.Tab(
+            id="patient_tab",
+            label="Patient",
+            value="patient_tab",
+            children=[
+                html.Div(
+                    id="patient_div",
+                    style={
+                        "height": "400px",
+                        "width": "100%",
+                    },
+                    children=[
+                        dbc.Row(
+                            style={"height": "400px", "backgroundColor": "#D1E5F0"},
+                            children=[
+                                dbc.Col(
+                                    children=[
+                                        AgeWidget.age_widget(),
+                                        StatisticsCodeWidget.statistics_code_widget(),
+                                        AsaWidget.asa_widget(),
+                                    ]
+                                ),
+                                dbc.Col(
+                                    children=[
+                                        VardtypWidget.vardtyp_widget(),
+                                        KommunerWidget.kommuner_widget(),
+                                        AnestesiWidget.anestesi_widget(),
+                                    ]
+                                ),
+                            ],
+                        )
+                    ],
+                )
+            ],
+        )
+        return widget
 
-def patient_tab():
-    widget = dcc.Tab(
-        id="patient_tab",
-        label="Patient",
-        children=[
-            html.H4("David Johnsson, extremt jävla frisk"),
-            StatisticsCodeWidget.statistics_code_widget(),
-            VardtypWidget.vardtyp_widget(),
-        ],
-    )
-    return widget
-
-
-def operation_tab():
-    widget = dcc.Tab(
-        id="operation_tab",
-        label="Operation",
-        children=[
-            OpTimeWidget.opTime_widget(5, 120),
-            OpCodeSelection.opCode_selection(
-                [
-                    "NH132",
-                    "SU145",
-                    "LU987",
-                    "NX132",
-                    "SX145",
-                    "LX987",
-                    "ND766",
-                    "QD824",
-                    "ED568",
-                ]
-            ),
-        ],
-    )
-    return widget
-
-
-def anesthesia_tab():
-    widget = dcc.Tab(id="anesthesia_tab", label="Anestesi", children=[])
-    return widget
+    @staticmethod
+    def _operation_tab():
+        widget = dcc.Tab(
+            id="operation_tab",
+            label="Operation",
+            value="operation_tab",
+            children=[
+                html.Div(
+                    id="operation_div",
+                    style={
+                        "height": "400px",
+                        "width": "100%",
+                        "backgroundColor": "#D1E5F0",
+                    },
+                    children=[
+                        OpTimeWidget.op_time_widget(5, 120),
+                        OpCodeSelection.op_code_selection(),
+                    ],
+                )
+            ],
+        )
+        return widget
