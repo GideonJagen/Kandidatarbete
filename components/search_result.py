@@ -37,6 +37,14 @@ class SearchResult:
                     style_table={"height": "500px", "overflowY": "auto"},
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
+                    style_data_conditional=[
+                        {
+                            "if": {
+                                "filter_query": "{Humidity} > 19 && {Humidity} < 41",
+                                "column_id": "Humidity",
+                            }
+                        }
+                    ],
                 ),
             ],
         )

@@ -2,7 +2,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 from components.op_code_selection import OpCodeSelection
-from components.opTime_slider import OpTimeWidget
+from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.vardtyp import VardtypWidget
 from components.age import AgeWidget
@@ -87,7 +87,7 @@ class TabSelectionWidget:
                         "backgroundColor": "#D1E5F0",
                     },
                     children=[
-                        OpTimeWidget.opTime_widget(5, 120),
+                        OpTimeWidget.op_time_widget(5, 120),
                         OpCodeSelection.op_code_selection(),
                     ],
                 )
