@@ -19,7 +19,7 @@ from data_handler import DataHandler
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
-DataHandler.init_data()
+DataHandler.init_data()  # Should be done by the import data widget
 app = dash.Dash(external_stylesheets=[dbc.themes.GRID])  # create Dash object
 app.layout = html.Div(
     # Top of hierarcy

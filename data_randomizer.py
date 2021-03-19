@@ -129,14 +129,6 @@ def days_since_booking(booked_date):
     return (today - booked_date).days
 
 
-def prio_days_left(booked_date, prio_days):
-    today = datetime.date.today()
-    year, month, day = str(booked_date).split(sep="-")
-    booked_date = datetime.date(int(year), int(month), int(day.split(" ")[0]))
-    critical_date = booked_date + timedelta(prio_days)
-    return (critical_date - today).days
-
-
 data = build_random_data("2020-10-01", "2021-10-20", num_patients=3000)
 df = pd.DataFrame.from_dict(data)
 df.to_csv("output.csv", sep=";")

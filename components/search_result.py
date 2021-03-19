@@ -39,13 +39,13 @@ class SearchResult:
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} < 30",
+                                "filter_query": "{dagar_till_kritisk} < 30",  # Change to desired value
                             },
                             "backgroundColor": "#EE7733",
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} < 3",
+                                "filter_query": "{dagar_till_kritisk} < 3",  # Change to desired value
                             },
                             "backgroundColor": "#CC3311",
                         },
