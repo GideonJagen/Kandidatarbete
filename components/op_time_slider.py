@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
 
@@ -12,7 +13,10 @@ class OpTimeWidget:
             id="opTime_widget",
             children=[
                 html.H4("Operationstid"),
-                OpTimeWidget._op_time_slider(min_time, max_time),
+                dbc.Col(
+                    [OpTimeWidget._op_time_slider(min_time, max_time)],
+                    style={"width": "50%"},
+                ),
             ],
         )
         return widget
@@ -23,7 +27,10 @@ class OpTimeWidget:
             id="opTime_slider",
             min=min_time,
             max=max_time,
-            marks={i: "{}min".format(i) for i in range(min_time, max_time + 5, 5)},
+            marks={
+                i: "{}min".format(i) if (i == min_time or i == max_time) else f"{i}"
+                for i in range(min_time, max_time + 5, 5)
+            },
             value=OpTimeWidget.STANDARD_VALUE,
             step=5,
         )

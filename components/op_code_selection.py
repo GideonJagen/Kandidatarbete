@@ -30,7 +30,7 @@ class OpCodeSelection:
             children=[
                 html.H4("Operationskod"),
                 # OpCodeSelection._opCode_options(),
-                OpCodeSelection._op_code_dropdown(),
+                dbc.Col([OpCodeSelection._op_code_dropdown()], style={"width": "50%"}),
             ],
         )
         return widget

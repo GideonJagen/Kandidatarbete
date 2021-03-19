@@ -31,7 +31,7 @@ class ResetAndSearch:
     @staticmethod
     def _reset_filter_button():
         widget = html.Button(
-            "Nollställ filter",
+            "Återställ",
             id="reset_filter_button",
             style={
                 "width": "200px",
