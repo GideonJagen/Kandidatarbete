@@ -43,12 +43,12 @@ class TabSelectionWidget:
                 html.Div(
                     id="patient_div",
                     style={
-                        "height": "400px",
+                        "height": "350px",
                         "width": "100%",
                     },
                     children=[
                         dbc.Row(
-                            style={"height": "400px", "backgroundColor": "#D1E5F0"},
+                            style={"backgroundColor": "#D1E5F0"},
                             children=[
                                 dbc.Col(
                                     children=[
@@ -82,7 +82,7 @@ class TabSelectionWidget:
                 html.Div(
                     id="operation_div",
                     style={
-                        "height": "400px",
+                        "height": "200px",
                         "width": "100%",
                         "backgroundColor": "#D1E5F0",
                     },

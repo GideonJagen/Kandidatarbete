@@ -17,9 +17,9 @@ class AsaWidget:
                     id="asa_h4",
                     children="ASA-klass",
                     style={
-                        "borderWidth": "1px",
-                        "borderStyle": "solid",
-                        "margin": "0px",
+                        # "borderWidth": "1px",
+                        # "borderStyle": "solid",
+                        # "margin": "0px",
                     },
                 ),
                 dcc.Checklist(
@@ -36,18 +36,18 @@ class AsaWidget:
                     labelStyle={"display": "inline-block"},
                     style={
                         "width": "100%",
-                        "borderWidth": "1px",
-                        "borderStyle": "solid",
-                        "margin": "0px",
+                        # "borderWidth": "1px",
+                        # "borderStyle": "solid",
+                        # "margin": "0px",
                     },
                 ),
             ],
             style={
                 "width": "15%",
-                "borderWidth": "1px",
-                "borderStyle": "solid",
-                "textAlign": "center",
-                "margin": "5px",
+                # "borderWidth": "1px",
+                # "borderStyle": "solid",
+                # "textAlign": "center",
+                # "margin": "5px",
             },
         )
         return widget

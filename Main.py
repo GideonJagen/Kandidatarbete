@@ -15,20 +15,21 @@ from components.vardtyp import VardtypWidget
 from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.op_code_selection import OpCodeSelection
+from data_handler import DataHandler
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
-
+DataHandler.init_data()  # Should be done by the import data widget
 app = dash.Dash(external_stylesheets=[dbc.themes.GRID])  # create Dash object
 app.layout = html.Div(
     # Top of hierarcy
     id="Main",
     style={"backgroundColor": "#F7F7F7"},
     children=[
+        html.H1(id="h1", children="Plando-prototype"),
         TabSelectionWidget.tab_selection(),
         ResetAndSearch.reset_and_search(),
         # TODO: Move this to proper place:
-        html.H1(id="h1", children="Plando-prototype"),
         dbc.Col(
             [
                 SearchResult.search_result(),

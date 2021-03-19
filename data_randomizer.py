@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
 import random
+from datetime import timedelta
 
 
 def gen_weekday_range(start, end):
@@ -121,10 +122,6 @@ def build_random_data(start_date, end_date, num_patients=100):
     return patients
 
 
-data = build_random_data("2018-01-01", "2018-10-10", num_patients=3000)
-df = pd.DataFrame.from_dict(data)
-
-
 def days_since_booking(booked_date):
     today = datetime.date.today()
     year, month, day = booked_date.split(sep="-")
@@ -132,4 +129,6 @@ def days_since_booking(booked_date):
     return (today - booked_date).days
 
 
+data = build_random_data("2020-10-01", "2021-10-20", num_patients=3000)
+df = pd.DataFrame.from_dict(data)
 df.to_csv("output.csv", sep=";")

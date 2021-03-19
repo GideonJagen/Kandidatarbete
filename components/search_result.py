@@ -3,6 +3,7 @@ import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
 from data_handler import DataHandler
+import dash_bootstrap_components as dbc
 
 # TODO Make callback return a dictionary with inputs
 
@@ -13,19 +14,13 @@ class SearchResult:
         cols = [
             "Behandlingsnr",
             "Anmälningstidpunkt",
-            "SistaOpTidpunkt",
-            "Opkategori_text",
             "Prioritet_dagar",
             "ASAklass",
             "KravOperationstidMinuter",
             "KravFörberedelsetidMinuter",
             "KravtidEfterMinuter",
-            "De_PlaneradOpsal_FK",
-            "PlaneradStartOpsalTidpunkt",
             "PatientÅlderVidOp",
-            "Veckodag",
-            "Starttimme",
-            "TotaltidStart",
+            "dagar_till_kritisk",
         ]
 
         widget = html.Div(
@@ -37,13 +32,23 @@ class SearchResult:
                     style_table={"height": "500px", "overflowY": "auto"},
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
+                    sort_action="native",
                     style_data_conditional=[
                         {
+                            "backgroundColor": "#FFFFFF",
+                        },
+                        {
                             "if": {
-                                "filter_query": "{Humidity} > 19 && {Humidity} < 41",
-                                "column_id": "Humidity",
-                            }
-                        }
+                                "filter_query": "{dagar_till_kritisk} < 30",  # Change to desired value
+                            },
+                            "backgroundColor": "#EE7733",
+                        },
+                        {
+                            "if": {
+                                "filter_query": "{dagar_till_kritisk} < 3",  # Change to desired value
+                            },
+                            "backgroundColor": "#CC3311",
+                        },
                     ],
                 ),
             ],
