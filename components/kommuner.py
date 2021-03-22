@@ -12,7 +12,7 @@ class KommunerWidget:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kommuner"),
-                KommunerWidget._kommuner_radiobuttons(),
+                dbc.Col(KommunerWidget._kommuner_radiobuttons()),
             ],
         )
         return widget
@@ -23,10 +23,10 @@ class KommunerWidget:
             {"label": "Hela VGR", "value": "all"},
             {"label": "Kranskommuner", "value": "close"},
         ]
+
         widget = dbc.RadioItems(
             id="kommuner_radiobuttons",
             options=options,
-            labelStyle={"display": "block"},
             value=KommunerWidget.STANDARD_VALUE,
         )
         return widget
