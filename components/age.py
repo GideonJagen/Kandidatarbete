@@ -10,9 +10,9 @@ class AgeWidget:
 
     @staticmethod
     def age_widget():
-        widget = html.Div(
-            children=[
-                html.H4("Ålder"),
+        widget = dbc.FormGroup(
+            [
+                dbc.Label("Ålder"),
                 dcc.RangeSlider(
                     id="age",
                     min=AgeWidget.MIN_AGE,
