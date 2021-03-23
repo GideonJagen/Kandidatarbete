@@ -14,20 +14,17 @@ from components.kommuner import KommunerWidget
 
 class TabSelectionWidget:
     @staticmethod
-    def tab_selection():
+    def filter_tabs():
         """
         Top of tab hierarcy, contains all tabs
         """
         widget = html.Div(
-            children=[
-                dcc.Tabs(
-                    style={"width": "30%"},
-                    id="tabs_selection",
-                    value="patient_tab",
-                    children=[
-                        TabSelectionWidget._patient_tab(),
-                        TabSelectionWidget._operation_tab(),
-                    ],
+            [
+                dbc.Tabs(
+                    [
+                        dbc.Tab(TabSelectionWidget._patient_tab(), label="Patient"),
+                        dbc.Tab(TabSelectionWidget._operation_tab(), label="Operation"),
+                    ]
                 )
             ]
         )
@@ -51,29 +48,19 @@ class TabSelectionWidget:
             ]
         )
 
-        tab = dbc.Tab(
+        card = dbc.Card(
             dbc.Row([filter_col_a, filter_col_b]),
-            label="Patient",
         )
-        return tab
+        return card
 
     @staticmethod
     def _operation_tab():
-        widget = dbc.Tab(
-            label="Operation",
-            children=[
-                html.Div(
-                    id="operation_div",
-                    style={
-                        "height": "200px",
-                        "width": "100%",
-                        "backgroundColor": "#D1E5F0",
-                    },
-                    children=[
-                        OpTimeWidget.op_time_widget(5, 120),
-                        OpCodeSelection.op_code_selection(),
-                    ],
-                )
-            ],
+        filter_col_a = dbc.Col(
+            [
+                OpTimeWidget.op_time_widget(5, 120),
+                OpCodeSelection.op_code_selection(),
+            ]
         )
-        return widget
+
+        card = dbc.Card([dbc.Row([filter_col_a])])
+        return card
