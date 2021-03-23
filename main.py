@@ -27,12 +27,10 @@ app.layout = html.Div(
     style={"backgroundColor": "#F7F7F7"},
     children=[
         html.H1(id="h1", children="Plando-prototype"),
-        # TabSelectionWidget.filter_tabs(),
-        TabSelectionWidget.filter_tabs(),
-        ResetAndSearch.reset_and_search(),
-        # TODO: Move this to proper place:
         dbc.Col(
             [
+                TabSelectionWidget.filter_tabs(),
+                ResetAndSearch.reset_and_search(),
                 SearchResult.search_result(),
             ]
         )
