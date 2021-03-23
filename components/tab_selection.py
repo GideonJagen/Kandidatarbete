@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 
 from components.op_code_selection import OpCodeSelection
 from components.op_time_slider import OpTimeWidget
@@ -9,7 +10,6 @@ from components.age import AgeWidget
 from components.anestesi import AnestesiWidget
 from components.asa import AsaWidget
 from components.kommuner import KommunerWidget
-import dash_bootstrap_components as dbc
 
 
 class TabSelectionWidget:
@@ -35,49 +35,32 @@ class TabSelectionWidget:
 
     @staticmethod
     def _patient_tab():
-        widget = dcc.Tab(
-            id="patient_tab",
-            label="Patient",
-            value="patient_tab",
-            children=[
-                html.Div(
-                    id="patient_div",
-                    style={
-                        "height": "350px",
-                        "width": "100%",
-                    },
-                    children=[
-                        dbc.Row(
-                            style={"backgroundColor": "#D1E5F0"},
-                            children=[
-                                dbc.Col(
-                                    children=[
-                                        AgeWidget.age_widget(),
-                                        StatisticsCodeWidget.statistics_code_widget(),
-                                        AsaWidget.asa_widget(),
-                                    ]
-                                ),
-                                dbc.Col(
-                                    children=[
-                                        VardtypWidget.vardtyp_widget(),
-                                        KommunerWidget.kommuner_widget(),
-                                        AnestesiWidget.anestesi_widget(),
-                                    ]
-                                ),
-                            ],
-                        )
-                    ],
-                )
-            ],
+        filter_col_a = dbc.Col(
+            [
+                VardtypWidget.vardtyp_widget(),
+                KommunerWidget.kommuner_widget(),
+                AnestesiWidget.anestesi_widget(),
+            ]
         )
-        return widget
+
+        filter_col_b = dbc.Col(
+            [
+                AgeWidget.age_widget(),
+                StatisticsCodeWidget.statistics_code_widget(),
+                AsaWidget.asa_widget(),
+            ]
+        )
+
+        tab = dbc.Tab(
+            dbc.Row([filter_col_a, filter_col_b]),
+            label="Patient",
+        )
+        return tab
 
     @staticmethod
     def _operation_tab():
-        widget = dcc.Tab(
-            id="operation_tab",
+        widget = dbc.Tab(
             label="Operation",
-            value="operation_tab",
             children=[
                 html.Div(
                     id="operation_div",

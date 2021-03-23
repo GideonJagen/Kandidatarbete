@@ -28,6 +28,8 @@ class StatisticsCodeWidget:
             {"label": "1 år", "value": "1 år"},
             {"label": ">1 år", "value": ">1 år"},
         ]
+
+        # TODO: Replace this dropdown with a dbc component, if there's a suitable replacement
         dropdown = dcc.Dropdown(
             id="statistics_dropdown",
             options=codes,
