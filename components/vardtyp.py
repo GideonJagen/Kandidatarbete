@@ -12,7 +12,7 @@ class VardtypWidget:
     @staticmethod
     def vardtyp_widget():
         widget = dbc.FormGroup(
-            [dbc.Label("Vårdtyp"), dbc.Col(VardtypWidget._vardtyp_radiobuttons())]
+            [dbc.Label("Vårdtyp"), VardtypWidget._vardtyp_radiobuttons()]
         )
         return widget
 

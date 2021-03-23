@@ -12,7 +12,7 @@ class KommunerWidget:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kommuner"),
-                dbc.Col(KommunerWidget._kommuner_radiobuttons()),
+                KommunerWidget._kommuner_radiobuttons(),
             ],
         )
         return widget

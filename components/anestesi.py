@@ -10,19 +10,22 @@ class AnestesiWidget:
     @staticmethod
     def anestesi_widget():
         widget = dbc.FormGroup(
-            children=[
-                dbc.Label("Anestesibedömning"),
-                dbc.Checklist(
-                    id="anestesi_checklist",
-                    options=[
-                        {"label": "Ej klar", "value": "ek"},
-                        {"label": "Påbörjad", "value": "pb"},
-                        {"label": "Klar", "value": "klar"},
-                    ],
-                ),
-            ]
+            [dbc.Label("Anestesibedömning"), AnestesiWidget._anestesi_checklist()]
         )
         return widget
+
+    @staticmethod
+    def _anestesi_checklist():
+        checklist = dbc.Checklist(
+            options=[
+                {"label": "Ej klar", "value": "ek"},
+                {"label": "Påbörjad", "value": "pb"},
+                {"label": "Klar", "value": "klar"},
+            ],
+            id="anestesi_checklist",
+        )
+
+        return checklist
 
     @staticmethod
     def add_anestesi_callback(app):
