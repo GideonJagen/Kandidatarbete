@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
 
@@ -8,10 +9,10 @@ class StatisticsCodeWidget:
 
     @staticmethod
     def statistics_code_widget():
-        widget = html.Div(
+        widget = dbc.FormGroup(
             id="statistics_code_widget",
             children=[
-                html.H4("Statistikkod"),
+                dbc.Label("Statistikkod"),
                 StatisticsCodeWidget._statistics_code_dropdown(),
             ],
         )
@@ -27,6 +28,8 @@ class StatisticsCodeWidget:
             {"label": "1 år", "value": "1 år"},
             {"label": ">1 år", "value": ">1 år"},
         ]
+
+        # TODO: Replace this dropdown with a dbc component, if there's a suitable replacement
         dropdown = dcc.Dropdown(
             id="statistics_dropdown",
             options=codes,

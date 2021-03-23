@@ -9,10 +9,9 @@ class KommunerWidget:
 
     @staticmethod
     def kommuner_widget():
-        widget = html.Div(
-            id="Antal kommuner?",
+        widget = dbc.FormGroup(
             children=[
-                html.H4("Kommuner"),
+                dbc.Label("Kommuner"),
                 KommunerWidget._kommuner_radiobuttons(),
             ],
         )
@@ -24,10 +23,10 @@ class KommunerWidget:
             {"label": "Hela VGR", "value": "all"},
             {"label": "Kranskommuner", "value": "close"},
         ]
-        widget = dcc.RadioItems(
+
+        widget = dbc.RadioItems(
             id="kommuner_radiobuttons",
             options=options,
-            labelStyle={"display": "block"},
             value=KommunerWidget.STANDARD_VALUE,
         )
         return widget

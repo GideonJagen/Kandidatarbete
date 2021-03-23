@@ -11,13 +11,8 @@ class VardtypWidget:
 
     @staticmethod
     def vardtyp_widget():
-        widget = html.Div(
-            id="vardtyp",
-            children=[
-                html.H4("Vårdtyp"),
-                VardtypWidget._vardtyp_radiobuttons(),
-                # Vardtyp_widget._varvardtyp_dropdown(),
-            ],
+        widget = dbc.FormGroup(
+            [dbc.Label("Vårdtyp"), VardtypWidget._vardtyp_radiobuttons()]
         )
         return widget
 
@@ -28,7 +23,7 @@ class VardtypWidget:
             {"label": "Slutenvård", "value": "closed"},
             {"label": "Visa alla", "value": "all"},
         ]
-        widget = dcc.RadioItems(
+        widget = dbc.RadioItems(
             id="vardtyp_radiobuttons",
             options=options,
             labelStyle={"display": "block"},
@@ -37,7 +32,7 @@ class VardtypWidget:
         return widget
 
     @staticmethod
-    def _vardtyp_dropdown(self):
+    def _vardtyp_dropdown():
         options = [
             {"label": "Öppenvård", "value": "open"},
             {"label": "Slutenvård", "value": "closed"},

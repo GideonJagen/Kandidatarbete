@@ -10,19 +10,12 @@ class AsaWidget:
 
     @staticmethod
     def asa_widget():
-        widget = html.Div(
-            id="asa",
+        widget = dbc.FormGroup(
             children=[
-                html.H4(
-                    id="asa_h4",
+                dbc.Label(
                     children="ASA-klass",
-                    style={
-                        # "borderWidth": "1px",
-                        # "borderStyle": "solid",
-                        # "margin": "0px",
-                    },
                 ),
-                dcc.Checklist(
+                dbc.Checklist(
                     id="asa_checklist",
                     options=[
                         {"label": "ASA 1", "value": 1},
@@ -34,21 +27,8 @@ class AsaWidget:
                         {"label": "Ej specificerat", "value": -1},
                     ],
                     labelStyle={"display": "inline-block"},
-                    style={
-                        "width": "100%",
-                        # "borderWidth": "1px",
-                        # "borderStyle": "solid",
-                        # "margin": "0px",
-                    },
                 ),
             ],
-            style={
-                "width": "15%",
-                # "borderWidth": "1px",
-                # "borderStyle": "solid",
-                # "textAlign": "center",
-                # "margin": "5px",
-            },
         )
         return widget
 
