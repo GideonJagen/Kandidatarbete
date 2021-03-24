@@ -20,15 +20,15 @@ class DataHandler:
         # Add the conditions to the list of conditions
         conditions.extend(
             (
-                # Är op patients ålder i rätt intervall?
+                # Check if patient is in right age interval
                 DataHandler.df["PatientÅlderVidOp"].isin(
                     range(inputs["age"]["min"], inputs["age"]["max"])
                 ),
-                # Är op tidsåtgång i rätt intervall?
+                # Check if patient is in right time interval
                 DataHandler.df["KravOperationstidMinuter"].isin(
                     range(inputs["op_time"]["min"], inputs["op_time"]["max"])
                 ),
-                # Är op ASA klass en match?
+                # Check if patient is in right ASA class
                 (
                     DataHandler.df["ASAklass"].isin(inputs["asa"])
                     if inputs["asa"]
@@ -39,11 +39,11 @@ class DataHandler:
                     if (-1 in inputs["asa"])
                     else False
                 ),
-                # Har op matchande statistikkod?
+                # Check if operation has matching statistcal code
                 DataHandler.df["Statistikkod"].isin(inputs["stat_code"])
                 if inputs["stat_code"]
                 else True,
-                # Har op matchande operationskod?
+                # Check if operation has matching operation code
                 DataHandler.df["OpkortText"].isin(inputs["op_code"])
                 if inputs["op_code"]
                 else True,
