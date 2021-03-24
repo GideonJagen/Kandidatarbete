@@ -16,6 +16,7 @@ from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.op_code_selection import OpCodeSelection
 from data_handler import DataHandler
+from components.upload import UploadWidget
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -27,6 +28,7 @@ app.layout = html.Div(
     style={"backgroundColor": "#F7F7F7"},
     children=[
         html.H1(id="h1", children="Plando-prototype"),
+        UploadWidget.upload_widget(),  # TODO Hitta bättre plats
         dbc.Col(
             [
                 TabSelectionWidget.filter_tabs(),
