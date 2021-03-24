@@ -82,7 +82,9 @@ class SearchResult:
             op_code,
             current_data,
         ):
-            inputs = {  # Genom att ta in ett dicitonary som detta kan man skapa kombinationer som därmed kan sökas efter specifikt, kan låta användaren skapa "genvägar"/spara filtrering för att jämföra resultat
+            # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
+            # Might let the user create "shortcuts"/save filters to compare results
+            inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
                 "op_time": {"min": op_time[0], "max": op_time[1]},
@@ -94,7 +96,7 @@ class SearchResult:
             }
             ctx = dash.callback_context
             if ctx.triggered[0]["prop_id"] == "search_button.n_clicks":
-                # TODO, Baserat på inputs ska vi filtrera och returnera data i form av dictionary.
+                # TODO, Filter and return data in dictionaries based on the input
                 return DataHandler.filter_vectorized(inputs)
             return DataHandler.filter_vectorized(inputs)
 
