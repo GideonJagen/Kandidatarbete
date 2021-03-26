@@ -11,7 +11,7 @@ from components.reset_and_search import ResetAndSearch
 from components.kommuner import KommunerWidget
 from components.search_result import SearchResult
 from components.tab_selection import TabSelectionWidget
-from components.vardtyp import VardtypWidget
+from components.vardform import VardformWidget
 from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.op_code_selection import OpCodeSelection
@@ -40,7 +40,7 @@ app.layout = html.Div(
 
 app = SearchResult.search_result_callback(app)
 app = OpTimeWidget.add_op_time_callback(app)
-app = VardtypWidget.add_vardtyp_callback(app)
+app = VardformWidget.add_vardform_callback(app)
 app = StatisticsCodeWidget.add_statistics_code_callback(app)
 app = AsaWidget.add_asa_callback(app)
 app = KommunerWidget.add_kommuner_callback(app)

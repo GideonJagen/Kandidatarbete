@@ -22,8 +22,6 @@ class AsaWidget:
                         {"label": "ASA 2", "value": 2},
                         {"label": "ASA 3", "value": 3},
                         {"label": "ASA 4", "value": 4},
-                        {"label": "ASA 5", "value": 5},
-                        {"label": "ASA 6", "value": 6},
                         {"label": "Ej specificerat", "value": -1},
                     ],
                     labelStyle={"display": "inline-block"},
