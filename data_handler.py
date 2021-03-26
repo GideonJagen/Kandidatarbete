@@ -22,11 +22,11 @@ class DataHandler:
             (
                 # Är op patients ålder i rätt intervall?
                 DataHandler.df["PatientÅlderVidOp"].isin(
-                    range(inputs["age"]["min"], inputs["age"]["max"]+1)
+                    range(inputs["age"]["min"], inputs["age"]["max"] + 1)
                 ),
                 # Är op tidsåtgång i rätt intervall?
                 DataHandler.df["KravOperationstidMinuter"].isin(
-                    range(inputs["op_time"]["min"], inputs["op_time"]["max"]+1)
+                    range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
                 ),
                 # Är op ASA klass en match?
                 (
@@ -47,7 +47,6 @@ class DataHandler:
                 DataHandler.df["OpkortText"].isin(inputs["op_code"])
                 if inputs["op_code"]
                 else True,
-
                 DataHandler.df["Vårdform_text"].isin([inputs["vardform"]])
                 if inputs["vardform"] and inputs["vardform"] != "all"
                 else True,
