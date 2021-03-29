@@ -66,7 +66,7 @@ class SearchResult:
             Input(component_id="anestesi_checklist", component_property="value"),
             Input(component_id="statistics_dropdown", component_property="value"),
             Input(component_id="kommuner_radiobuttons", component_property="value"),
-            Input(component_id="vardtyp_radiobuttons", component_property="value"),
+            Input(component_id="vardform_radiobuttons", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="search_result", component_property="data"),
         )
@@ -78,7 +78,7 @@ class SearchResult:
             anesthesia,
             stat_code,
             area,
-            vardtyp,
+            vardform,
             op_code,
             current_data,
         ):
@@ -92,7 +92,7 @@ class SearchResult:
                 "stat_code": stat_code,
                 "anesthesia": anesthesia,
                 "area": area,
-                "vardtyp": vardtyp,
+                "vardform": vardform,
             }
             ctx = dash.callback_context
             if ctx.triggered[0]["prop_id"] == "search_button.n_clicks":

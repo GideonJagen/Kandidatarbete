@@ -17,7 +17,7 @@ class AgeWidget:
                     id="age",
                     min=AgeWidget.MIN_AGE,
                     max=AgeWidget.MAX_AGE,
-                    step=None,
+                    step=1,
                     marks={
                         AgeWidget.MIN_AGE: "0",
                         16: "16",

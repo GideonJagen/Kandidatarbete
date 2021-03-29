@@ -6,25 +6,25 @@ from dash.dependencies import Input, Output
 # Döpa om till vårdform, som det heter i datan
 
 
-class VardtypWidget:
+class VardformWidget:
     STANDARD_VALUE = "all"
 
     @staticmethod
-    def vardtyp_widget():
+    def vardform_widget():
         widget = dbc.FormGroup(
-            [dbc.Label("Vårdtyp"), VardtypWidget._vardtyp_radiobuttons()]
+            [dbc.Label("Vårdform"), VardformWidget._vardform_radiobuttons()]
         )
         return widget
 
     @staticmethod
-    def _vardtyp_radiobuttons():
+    def _vardform_radiobuttons():
         options = [
-            {"label": "Öppenvård", "value": "open"},
-            {"label": "Slutenvård", "value": "closed"},
+            {"label": "Öppenvård", "value": "Öppen vård"},
+            {"label": "Slutenvård", "value": "Sluten vård"},
             {"label": "Visa alla", "value": "all"},
         ]
         widget = dbc.RadioItems(
-            id="vardtyp_radiobuttons",
+            id="vardform_radiobuttons",
             options=options,
             labelStyle={"display": "block"},
             value="all",
@@ -32,26 +32,26 @@ class VardtypWidget:
         return widget
 
     @staticmethod
-    def _vardtyp_dropdown():
+    def _vardform_dropdown():
         options = [
             {"label": "Öppenvård", "value": "open"},
             {"label": "Slutenvård", "value": "closed"},
             {"label": "Visa alla", "value": "all"},
         ]
         widget = dcc.Dropdown(
-            id="vardtyp_dropdown",
+            id="vardform_dropdown",
             options=options,
-            placeholder="Välj Vårdtyp",
+            placeholder="Välj Vårdform",
         )
         return widget
 
     @staticmethod
-    def add_vardtyp_callback(app):
+    def add_vardform_callback(app):
         @app.callback(
-            Output(component_id="vardtyp_radiobuttons", component_property="value"),
+            Output(component_id="vardform_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return VardtypWidget.STANDARD_VALUE
+            return VardformWidget.STANDARD_VALUE
 
         return app

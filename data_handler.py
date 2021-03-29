@@ -22,11 +22,11 @@ class DataHandler:
             (
                 # Check if patient is in right age interval
                 DataHandler.df["PatientÅlderVidOp"].isin(
-                    range(inputs["age"]["min"], inputs["age"]["max"])
+                    range(inputs["age"]["min"], inputs["age"]["max"] + 1)
                 ),
                 # Check if patient is in right time interval
                 DataHandler.df["KravOperationstidMinuter"].isin(
-                    range(inputs["op_time"]["min"], inputs["op_time"]["max"])
+                    range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
                 ),
                 # Check if patient is in right ASA class
                 (
@@ -46,6 +46,9 @@ class DataHandler:
                 # Check if operation has matching operation code
                 DataHandler.df["OpkortText"].isin(inputs["op_code"])
                 if inputs["op_code"]
+                else True,
+                DataHandler.df["Vårdform_text"].isin([inputs["vardform"]])
+                if inputs["vardform"] and inputs["vardform"] != "all"
                 else True,
             )
         )
