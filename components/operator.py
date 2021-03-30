@@ -23,7 +23,7 @@ class OperatorWidget:
                 dbc.Label("Operatör"),
                 OperatorWidget._operator_radiobuttons(),
                 # OperatorWidget._operator_dropdown(),
-                OperatorWidget._operator_dropdown_and_checkbox()
+                OperatorWidget._operator_dropdown_and_checkbox(),
             ],
         )
         return widget
@@ -66,16 +66,14 @@ class OperatorWidget:
     def _no_operator_checkbox():
         component = dbc.FormGroup(
             [
-                dbc.Checkbox(
-                    id="standalone-checkbox", className="form-check-input"
-                ),
+                dbc.Checkbox(id="standalone-checkbox", className="form-check-input"),
                 dbc.Label(
                     "This is a checkbox",
                     html_for="standalone-checkbox",
                     className="form-check-label",
-                )
+                ),
             ],
-            check=True
+            check=True,
         )
         return component
 
@@ -84,7 +82,7 @@ class OperatorWidget:
         component = dbc.FormGroup(
             [
                 OperatorWidget._operator_dropdown(),
-                OperatorWidget._no_operator_checkbox()
+                OperatorWidget._no_operator_checkbox(),
             ]
         )
         return component
