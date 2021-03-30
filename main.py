@@ -17,6 +17,7 @@ from components.statistics_code import StatisticsCodeWidget
 from components.op_code_selection import OpCodeSelection
 from data_handler import DataHandler
 from components.upload import UploadWidget
+from components.operator import OperatorWidget
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -49,4 +50,5 @@ app = KommunerWidget.add_kommuner_callback(app)
 app = AgeWidget.add_age_callback(app)
 app = AnestesiWidget.add_anestesi_callback(app)
 app = OpCodeSelection.add_op_code_callback(app)
+app = OperatorWidget.add_operator_callback(app)
 app.run_server(debug=True)
