@@ -20,7 +20,7 @@ class SearchResult:
             "KravFörberedelsetidMinuter",
             "KravtidEfterMinuter",
             "PatientÅlderVidOp",
-            "dagar_till_kritisk",
+            "dagar_till_kritisk",  # change name of column
         ]
 
         widget = html.Div(
@@ -59,7 +59,7 @@ class SearchResult:
     def search_result_callback(app):
         @app.callback(
             Output(component_id="search_result", component_property="data"),
-            Input(component_id="search_button", component_property="n_clicks"),
+            Output(component_id="number patients", component_property="children"),
             Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
@@ -68,10 +68,8 @@ class SearchResult:
             Input(component_id="kommuner_radiobuttons", component_property="value"),
             Input(component_id="vardform_radiobuttons", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
-            Input(component_id="search_result", component_property="data"),
         )
         def update_data(
-            button,
             asa,
             op_time,
             age,
@@ -80,7 +78,6 @@ class SearchResult:
             area,
             vardform,
             op_code,
-            current_data,
         ):
             # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
@@ -94,10 +91,7 @@ class SearchResult:
                 "area": area,
                 "vardform": vardform,
             }
-            ctx = dash.callback_context
-            if ctx.triggered[0]["prop_id"] == "search_button.n_clicks":
-                # TODO, Filter and return data in dictionaries based on the input
-                return DataHandler.filter_vectorized(inputs)
-            return DataHandler.filter_vectorized(inputs)
+            result = DataHandler.filter_data(inputs)
+            return result["data"], result["number patients"]
 
         return app

@@ -16,7 +16,7 @@ class DataHandler:
         Make that each of the inputs values are handled as individual conditions
         """
         conditions = []
-
+        print(len(DataHandler.df.values.tolist()))
         # Add the conditions to the list of conditions
         conditions.extend(
             (
@@ -56,16 +56,15 @@ class DataHandler:
         return conditions
 
     @staticmethod
-    def filter_vectorized(inputs) -> pd.DataFrame:
+    def _filter_vectorized(inputs) -> pd.DataFrame:
         start_time = time.time()
         print(inputs)
 
         conditions = DataHandler._filter_conditions(inputs)
-
         filtered = np.where(reduce(lambda a, b: a & b, conditions))
-
         data = DataHandler.df.iloc[filtered].to_dict("records")
         print("---Filtering took %s seconds ---" % (time.time() - start_time))
+
         return data
 
     @staticmethod
@@ -93,3 +92,16 @@ class DataHandler:
             ),
             axis=1,
         )
+
+    @staticmethod
+    def filter_data(inputs) -> dict:
+        # By returning a dictionary like this we could scale easily if we wanted
+        # to calculate statistics or some other values from the data to other widgets or something
+
+        data = DataHandler._filter_vectorized(inputs)
+        filter_result = {}
+        filter_result["data"] = data
+        filter_result[
+            "number patients"
+        ] = f"Antal patienter: {len(data)} / {len(DataHandler.df.values.tolist())}"  # refactor string when import data functionality is added
+        return filter_result
