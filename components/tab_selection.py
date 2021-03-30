@@ -10,6 +10,7 @@ from components.age import AgeWidget
 from components.anestesi import AnestesiWidget
 from components.asa import AsaWidget
 from components.kommuner import KommunerWidget
+from components.operator import OperatorWidget
 
 
 class TabSelectionWidget:
@@ -59,6 +60,7 @@ class TabSelectionWidget:
             [
                 OpTimeWidget.op_time_widget(5, 120),
                 OpCodeSelection.op_code_selection(),
+                OperatorWidget.operator_widget(),
             ]
         )
 
