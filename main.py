@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 from components.age import AgeWidget
 from components.anestesi import AnestesiWidget
 from components.asa import AsaWidget
-from components.reset_and_search import ResetAndSearch
+from components.reset_filter_button import ResetFilterButton
 from components.kommuner import KommunerWidget
 from components.search_result import SearchResult
 from components.tab_selection import TabSelectionWidget
@@ -18,6 +18,7 @@ from components.op_code_selection import OpCodeSelection
 from data_handler import DataHandler
 from components.upload import UploadWidget
 from components.operator import OperatorWidget
+from components.number_patients import NumberPatients
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -33,7 +34,8 @@ app.layout = html.Div(
         dbc.Col(
             [
                 TabSelectionWidget.filter_tabs(),
-                ResetAndSearch.reset_and_search(),
+                ResetFilterButton.reset_filter_button(),
+                NumberPatients.number_patients(),
                 SearchResult.search_result(),
             ]
         )
