@@ -22,7 +22,8 @@ class OperatorWidget:
             children=[
                 dbc.Label("Operatör"),
                 OperatorWidget._operator_radiobuttons(),
-                OperatorWidget._operator_dropdown(),
+                # OperatorWidget._operator_dropdown(),
+                OperatorWidget._operator_dropdown_and_checkbox()
             ],
         )
         return widget
@@ -44,7 +45,6 @@ class OperatorWidget:
 
     @staticmethod
     def _operator_dropdown():
-
         widget = html.Div(
             [
                 dcc.Dropdown(
@@ -56,11 +56,38 @@ class OperatorWidget:
                         {"label": operator, "value": operator}
                         for operator in OperatorWidget.STANDARD_OPERATORS
                     ],
-                    style={"display": "block"},
+                    style={"display": "block", "min-width": "200"},
                 )
             ]
         )
         return widget
+
+    @staticmethod
+    def _no_operator_checkbox():
+        component = dbc.FormGroup(
+            [
+                dbc.Checkbox(
+                    id="standalone-checkbox", className="form-check-input"
+                ),
+                dbc.Label(
+                    "This is a checkbox",
+                    html_for="standalone-checkbox",
+                    className="form-check-label",
+                )
+            ],
+            check=True
+        )
+        return component
+
+    @staticmethod
+    def _operator_dropdown_and_checkbox():
+        component = dbc.FormGroup(
+            [
+                OperatorWidget._operator_dropdown(),
+                OperatorWidget._no_operator_checkbox()
+            ]
+        )
+        return component
 
     @staticmethod
     def add_operator_callbacks(app):
