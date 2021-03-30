@@ -63,7 +63,14 @@ class OperatorWidget:
         return widget
 
     @staticmethod
-    def add_operator_callback(app):
+    def add_operator_callbacks(app):
+        app = OperatorWidget.reset_operator_ri_callback(app)
+        app = OperatorWidget.reset_operator_dd_callback(app)
+        app = OperatorWidget.show_hide_element_callback(app)
+        return app
+
+    @staticmethod
+    def reset_operator_ri_callback(app):
         @app.callback(
             Output(component_id="operator_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
@@ -71,6 +78,10 @@ class OperatorWidget:
         def reset_operator_ri(n_clicks):
             return OperatorWidget.STANDARD_VALUE_RI
 
+        return app
+
+    @staticmethod
+    def reset_operator_dd_callback(app):
         @app.callback(
             Output(component_id="operator_dropdown", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
@@ -79,6 +90,10 @@ class OperatorWidget:
             if visibility_state == "all" or visibility_state == "blank":
                 return OperatorWidget.STANDARD_VALUE_DD
 
+        return app
+
+    @staticmethod
+    def show_hide_element_callback(app):
         @app.callback(
             Output(component_id="operator_dropdown", component_property="style"),
             Input(component_id="operator_radiobuttons", component_property="value"),
