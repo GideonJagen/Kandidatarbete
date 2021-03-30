@@ -91,7 +91,7 @@ class SearchResult:
                 "area": area,
                 "vardform": vardform,
             }
-            result = DataHandler.filter_data(inputs)
+            result = DataHandler.search_data(inputs)
             return result["data"], result["number patients"]
 
         return app

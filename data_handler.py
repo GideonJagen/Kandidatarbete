@@ -94,14 +94,14 @@ class DataHandler:
         )
 
     @staticmethod
-    def filter_data(inputs) -> dict:
+    def search_data(inputs) -> dict:
         # By returning a dictionary like this we could scale easily if we wanted
         # to calculate statistics or some other values from the data to other widgets or something
 
-        data = DataHandler._filter_vectorized(inputs)
-        filter_result = {}
-        filter_result["data"] = data
-        filter_result[
+        filtered_data = DataHandler._filter_vectorized(inputs)
+        search_result = {}
+        search_result["data"] = filtered_data
+        search_result[
             "number patients"
-        ] = f"Antal patienter: {len(data)} / {len(DataHandler.df.values.tolist())}"  # refactor string when import data functionality is added
-        return filter_result
+        ] = f"Antal patienter: {len(filtered_data)} / {len(DataHandler.df.values.tolist())}"  # refactor string when import data functionality is added
+        return search_result
