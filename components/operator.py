@@ -44,7 +44,6 @@ class OperatorWidget:
 
     @staticmethod
     def _operator_dropdown():
-
         widget = html.Div(
             [
                 dcc.Dropdown(

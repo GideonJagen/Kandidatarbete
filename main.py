@@ -8,10 +8,10 @@ from components.age import AgeWidget
 from components.anestesi import AnestesiWidget
 from components.asa import AsaWidget
 from components.reset_filter_button import ResetFilterButton
-from components.kommuner import KommunerWidget
+from components.municipalities import MunicipalitiesWidget
 from components.search_result import SearchResult
 from components.tab_selection import TabSelectionWidget
-from components.vardform import VardformWidget
+from components.caretype import CaretypeWidget
 from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.op_code_selection import OpCodeSelection
@@ -45,10 +45,10 @@ app.layout = html.Div(
 
 app = SearchResult.search_result_callback(app)
 app = OpTimeWidget.add_op_time_callback(app)
-app = VardformWidget.add_vardform_callback(app)
+app = CaretypeWidget.add_caretype_callback(app)
 app = StatisticsCodeWidget.add_statistics_code_callback(app)
 app = AsaWidget.add_asa_callback(app)
-app = KommunerWidget.add_kommuner_callback(app)
+app = MunicipalitiesWidget.add_municipalities_callback(app)
 app = AgeWidget.add_age_callback(app)
 app = AnestesiWidget.add_anestesi_callback(app)
 app = OpCodeSelection.add_op_code_callback(app)

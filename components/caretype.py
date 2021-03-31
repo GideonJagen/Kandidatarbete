@@ -6,18 +6,18 @@ from dash.dependencies import Input, Output
 # Döpa om till vårdform, som det heter i datan
 
 
-class VardformWidget:
+class CaretypeWidget:
     STANDARD_VALUE = "all"
 
     @staticmethod
-    def vardform_widget():
+    def caretype_widget():
         widget = dbc.FormGroup(
-            [dbc.Label("Vårdform"), VardformWidget._vardform_radiobuttons()]
+            [dbc.Label("Vårdform"), CaretypeWidget._caretype_radiobuttons()]
         )
         return widget
 
     @staticmethod
-    def _vardform_radiobuttons():
+    def _caretype_radiobuttons():
         options = [
             {"label": "Öppenvård", "value": "Öppen vård"},
             {"label": "Slutenvård", "value": "Sluten vård"},
@@ -32,26 +32,12 @@ class VardformWidget:
         return widget
 
     @staticmethod
-    def _vardform_dropdown():
-        options = [
-            {"label": "Öppenvård", "value": "open"},
-            {"label": "Slutenvård", "value": "closed"},
-            {"label": "Visa alla", "value": "all"},
-        ]
-        widget = dcc.Dropdown(
-            id="vardform_dropdown",
-            options=options,
-            placeholder="Välj Vårdform",
-        )
-        return widget
-
-    @staticmethod
-    def add_vardform_callback(app):
+    def add_caretype_callback(app):
         @app.callback(
             Output(component_id="vardform_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return VardformWidget.STANDARD_VALUE
+            return CaretypeWidget.STANDARD_VALUE
 
         return app

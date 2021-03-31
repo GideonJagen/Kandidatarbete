@@ -4,21 +4,21 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-class KommunerWidget:
+class MunicipalitiesWidget:
     STANDARD_VALUE = "all"
 
     @staticmethod
-    def kommuner_widget():
+    def municipalities_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kommuner"),
-                KommunerWidget._kommuner_radiobuttons(),
+                MunicipalitiesWidget._municipalities_radiobuttons(),
             ],
         )
         return widget
 
     @staticmethod
-    def _kommuner_radiobuttons():
+    def _municipalities_radiobuttons():
         options = [
             {"label": "Hela VGR", "value": "all"},
             {"label": "Kranskommuner", "value": "close"},
@@ -27,17 +27,17 @@ class KommunerWidget:
         widget = dbc.RadioItems(
             id="kommuner_radiobuttons",
             options=options,
-            value=KommunerWidget.STANDARD_VALUE,
+            value=MunicipalitiesWidget.STANDARD_VALUE,
         )
         return widget
 
     @staticmethod
-    def add_kommuner_callback(app):
+    def add_municipalities_callback(app):
         @app.callback(
             Output(component_id="kommuner_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return KommunerWidget.STANDARD_VALUE
+            return MunicipalitiesWidget.STANDARD_VALUE
 
         return app

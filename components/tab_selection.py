@@ -5,11 +5,11 @@ import dash_bootstrap_components as dbc
 from components.op_code_selection import OpCodeSelection
 from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
-from components.vardform import VardformWidget
+from components.caretype import CaretypeWidget
 from components.age import AgeWidget
 from components.anestesi import AnestesiWidget
 from components.asa import AsaWidget
-from components.kommuner import KommunerWidget
+from components.municipalities import MunicipalitiesWidget
 from components.operator import OperatorWidget
 
 
@@ -35,8 +35,8 @@ class TabSelectionWidget:
     def _patient_tab():
         filter_col_a = dbc.Col(
             [
-                VardformWidget.vardform_widget(),
-                KommunerWidget.kommuner_widget(),
+                CaretypeWidget.caretype_widget(),
+                MunicipalitiesWidget.municipalities_component(),
                 AnestesiWidget.anestesi_widget(),
             ]
         )
