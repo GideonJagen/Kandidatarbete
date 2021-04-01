@@ -25,13 +25,9 @@ class OpCodeSelection:
         """
         Highest hierarcy widget of opCode_selection function
         """
-        widget = html.Div(
+        widget = dbc.FormGroup(
             id="opCode_selection",
-            children=[
-                html.H4("Operationskod"),
-                # OpCodeSelection._opCode_options(),
-                dbc.Col([OpCodeSelection._op_code_dropdown()], style={"width": "50%"}),
-            ],
+            children=[dbc.Label("Operationskod"), OpCodeSelection._op_code_dropdown()],
         )
         return widget
 
@@ -42,7 +38,7 @@ class OpCodeSelection:
         """
 
         options = ["Visa alla", "Exkludera", "Visa endast"]
-        widget = dcc.RadioItems(
+        widget = dbc.RadioItems(
             id="opCode_options",
             options=[{"label": opt, "value": opt} for opt in options],
             labelStyle={"display": "inline-block"},

@@ -9,16 +9,15 @@ class OpTimeWidget:
 
     @staticmethod
     def op_time_widget(min_time, max_time):
-        widget = html.Div(
+
+        widget = dbc.FormGroup(
             id="opTime_widget",
             children=[
-                html.H4("Operationstid"),
-                dbc.Col(
-                    [OpTimeWidget._op_time_slider(min_time, max_time)],
-                    style={"width": "50%"},
-                ),
+                dbc.Label("Operationstid"),
+                OpTimeWidget._op_time_slider(min_time, max_time),
             ],
         )
+
         return widget
 
     @staticmethod
