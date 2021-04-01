@@ -19,6 +19,7 @@ from data_handler import DataHandler
 from components.upload import UploadWidget
 from components.operator import OperatorWidget
 from components.number_patients import NumberPatients
+from components.sidebar import SideBar
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -29,6 +30,7 @@ app.layout = html.Div(
     id="Main",
     style={"backgroundColor": "#F7F7F7"},
     children=[
+        SideBar.sidebar_component(),
         html.H1(id="h1", children="Plando-prototype"),
         UploadWidget.upload_widget(),  # TODO Hitta bättre plats
         dbc.Col(
