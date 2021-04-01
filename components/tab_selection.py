@@ -2,15 +2,15 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from components.op_code_selection import OpCodeSelection
-from components.op_time_slider import OpTimeWidget
-from components.statistics_code import StatisticsCodeWidget
-from components.caretype import CaretypeWidget
-from components.age import AgeWidget
-from components.anestesi import AnestesiWidget
-from components.asa import AsaWidget
-from components.municipalities import MunicipalitiesWidget
-from components.operator import OperatorWidget
+from components.op_code_selection import OpCode
+from components.op_time_slider import OpTime
+from components.statistics_code import StatisticsCode
+from components.caretype import Caretype
+from components.age import Age
+from components.anestesi import Anaesthetic
+from components.asa import Asa
+from components.municipalities import Municipalities
+from components.operator import Operator
 
 
 class TabSelectionWidget:
@@ -35,17 +35,17 @@ class TabSelectionWidget:
     def _patient_tab():
         filter_col_a = dbc.Col(
             [
-                CaretypeWidget.caretype_widget(),
-                MunicipalitiesWidget.municipalities_component(),
-                AnestesiWidget.anestesi_widget(),
+                Caretype.caretype_widget(),
+                Municipalities.municipalities_component(),
+                Anaesthetic.anaesthetic_widget(),
             ]
         )
 
         filter_col_b = dbc.Col(
             [
-                AgeWidget.age_widget(),
-                StatisticsCodeWidget.statistics_code_widget(),
-                AsaWidget.asa_widget(),
+                Age.age_widget(),
+                StatisticsCode.statistics_code_widget(),
+                Asa.asa_widget(),
             ]
         )
 
@@ -58,9 +58,9 @@ class TabSelectionWidget:
     def _operation_tab():
         filter_col_a = dbc.Col(
             [
-                OpTimeWidget.op_time_widget(5, 120),
-                OpCodeSelection.op_code_selection(),
-                OperatorWidget.operator_widget(),
+                OpTime.op_time_widget(5, 120),
+                OpCode.op_code_selection(),
+                Operator.operator_widget(),
             ]
         )
 

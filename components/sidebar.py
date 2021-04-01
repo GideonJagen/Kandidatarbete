@@ -1,15 +1,15 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-from components.op_code_selection import OpCodeSelection
-from components.op_time_slider import OpTimeWidget
-from components.statistics_code import StatisticsCodeWidget
-from components.caretype import CaretypeWidget
-from components.age import AgeWidget
-from components.anestesi import AnestesiWidget
-from components.asa import AsaWidget
-from components.municipalities import MunicipalitiesWidget
-from components.operator import OperatorWidget
+from components.op_code_selection import OpCode
+from components.op_time_slider import OpTime
+from components.statistics_code import StatisticsCode
+from components.caretype import Caretype
+from components.age import Age
+from components.anestesi import Anaesthetic
+from components.asa import Asa
+from components.municipalities import Municipalities
+from components.operator import Operator
 
 
 class SideBar:
@@ -50,15 +50,15 @@ class SideBar:
     def _filter_form():
         component = dbc.Form(
             children=[
-                CaretypeWidget.caretype_widget(),
-                MunicipalitiesWidget.municipalities_component(),
-                AnestesiWidget.anestesi_widget(),
-                AgeWidget.age_widget(),
-                StatisticsCodeWidget.statistics_code_widget(),
-                AsaWidget.asa_widget(),
-                OpTimeWidget.op_time_widget(5, 120),
-                OpCodeSelection.op_code_selection(),
-                OperatorWidget.operator_widget(),
+                Caretype.caretype_widget(),
+                Municipalities.municipalities_component(),
+                Anaesthetic.anaesthetic_widget(),
+                Age.age_widget(),
+                StatisticsCode.statistics_code_widget(),
+                Asa.asa_widget(),
+                OpTime.op_time_widget(5, 120),
+                OpCode.op_code_selection(),
+                Operator.operator_widget(),
             ],
         )
         return component

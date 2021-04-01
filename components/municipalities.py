@@ -4,7 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-class MunicipalitiesWidget:
+class Municipalities:
     STANDARD_VALUE = "all"
 
     @staticmethod
@@ -12,7 +12,7 @@ class MunicipalitiesWidget:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kommuner"),
-                MunicipalitiesWidget._municipalities_radiobuttons(),
+                Municipalities._municipalities_radiobuttons(),
             ],
         )
         return widget
@@ -27,7 +27,7 @@ class MunicipalitiesWidget:
         widget = dbc.RadioItems(
             id="kommuner_radiobuttons",
             options=options,
-            value=MunicipalitiesWidget.STANDARD_VALUE,
+            value=Municipalities.STANDARD_VALUE,
         )
         return widget
 
@@ -38,6 +38,6 @@ class MunicipalitiesWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return MunicipalitiesWidget.STANDARD_VALUE
+            return Municipalities.STANDARD_VALUE
 
         return app

@@ -2,9 +2,9 @@ import dash
 import dash_html_components as html
 
 
-class NumberPatients:
+class PatientCount:
     @staticmethod
-    def number_patients():
+    def patient_counter():
         widget = html.Div(
             children=[
                 # add icon or something

@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
 
-class OpTimeWidget:
+class OpTime:
     STANDARD_VALUE = [5, 120]  # TODO Uppdatera baserat på datan.
 
     @staticmethod
@@ -14,7 +14,7 @@ class OpTimeWidget:
             id="opTime_widget",
             children=[
                 dbc.Label("Operationstid"),
-                OpTimeWidget._op_time_slider(min_time, max_time),
+                OpTime._op_time_slider(min_time, max_time),
             ],
         )
 
@@ -30,7 +30,7 @@ class OpTimeWidget:
                 i: "{}min".format(i) if (i == min_time or i == max_time) else f"{i}"
                 for i in range(min_time, max_time + 5, 5)
             },
-            value=OpTimeWidget.STANDARD_VALUE,
+            value=OpTime.STANDARD_VALUE,
             step=5,
         )
         return widget
@@ -42,6 +42,6 @@ class OpTimeWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_op_time(n_clicks):
-            return OpTimeWidget.STANDARD_VALUE
+            return OpTime.STANDARD_VALUE
 
         return app

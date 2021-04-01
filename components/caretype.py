@@ -6,13 +6,13 @@ from dash.dependencies import Input, Output
 # Döpa om till vårdform, som det heter i datan
 
 
-class CaretypeWidget:
+class Caretype:
     STANDARD_VALUE = "all"
 
     @staticmethod
     def caretype_widget():
         widget = dbc.FormGroup(
-            [dbc.Label("Vårdform"), CaretypeWidget._caretype_radiobuttons()]
+            [dbc.Label("Vårdform"), Caretype._caretype_radiobuttons()]
         )
         return widget
 
@@ -38,6 +38,6 @@ class CaretypeWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return CaretypeWidget.STANDARD_VALUE
+            return Caretype.STANDARD_VALUE
 
         return app

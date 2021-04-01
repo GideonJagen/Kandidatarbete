@@ -5,7 +5,7 @@ import pandas as pd
 from dash.dependencies import Input, Output
 
 
-class OpCodeSelection:
+class OpCode:
     STANDARD_VALUE_DD = None
     STANDARD_VALUE_OPT = "Visa alla"
     STANDARD_OP_CODES = [
@@ -27,7 +27,7 @@ class OpCodeSelection:
         """
         widget = dbc.FormGroup(
             id="opCode_selection",
-            children=[dbc.Label("Operationskod"), OpCodeSelection._op_code_dropdown()],
+            children=[dbc.Label("Operationskod"), OpCode._op_code_dropdown()],
         )
         return widget
 
@@ -57,8 +57,7 @@ class OpCodeSelection:
             multi=True,
             value=[],
             options=[
-                {"label": code, "value": code}
-                for code in OpCodeSelection.STANDARD_OP_CODES
+                {"label": code, "value": code} for code in OpCode.STANDARD_OP_CODES
             ],  # list builder to create dropdown options,
         )
         return widget
@@ -70,6 +69,6 @@ class OpCodeSelection:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return OpCodeSelection.STANDARD_VALUE_DD
+            return OpCode.STANDARD_VALUE_DD
 
         return app

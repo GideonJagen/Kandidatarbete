@@ -4,7 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-class OperatorWidget:
+class Operator:
     STANDARD_VALUE_RI = "all"
     STANDARD_VALUE_DD = None
     STANDARD_OPERATORS = [
@@ -21,8 +21,8 @@ class OperatorWidget:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Operatör"),
-                OperatorWidget._operator_radiobuttons(),
-                OperatorWidget._operator_dropdown(),
+                Operator._operator_radiobuttons(),
+                Operator._operator_dropdown(),
             ],
         )
         return widget
@@ -38,7 +38,7 @@ class OperatorWidget:
         widget = dbc.RadioItems(
             id="operator_radiobuttons",
             options=options,
-            value=OperatorWidget.STANDARD_VALUE_RI,
+            value=Operator.STANDARD_VALUE_RI,
         )
         return widget
 
@@ -50,10 +50,10 @@ class OperatorWidget:
                     id="operator_dropdown",
                     placeholder="Välj operatör",
                     multi=True,
-                    value=OperatorWidget.STANDARD_VALUE_DD,
+                    value=Operator.STANDARD_VALUE_DD,
                     options=[
                         {"label": operator, "value": operator}
-                        for operator in OperatorWidget.STANDARD_OPERATORS
+                        for operator in Operator.STANDARD_OPERATORS
                     ],
                     style={"display": "block"},
                 )
@@ -63,9 +63,9 @@ class OperatorWidget:
 
     @staticmethod
     def add_operator_callbacks(app):
-        app = OperatorWidget.reset_operator_ri_callback(app)
-        app = OperatorWidget.reset_operator_dd_callback(app)
-        app = OperatorWidget.show_hide_element_callback(app)
+        app = Operator.reset_operator_ri_callback(app)
+        app = Operator.reset_operator_dd_callback(app)
+        app = Operator.show_hide_element_callback(app)
         return app
 
     @staticmethod
@@ -75,7 +75,7 @@ class OperatorWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_operator_ri(n_clicks):
-            return OperatorWidget.STANDARD_VALUE_RI
+            return Operator.STANDARD_VALUE_RI
 
         return app
 
@@ -87,7 +87,7 @@ class OperatorWidget:
         )
         def reset_operator_dd(visibility_state):
             if visibility_state == "all" or visibility_state == "blank":
-                return OperatorWidget.STANDARD_VALUE_DD
+                return Operator.STANDARD_VALUE_DD
 
         return app
 

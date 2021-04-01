@@ -4,7 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-class AgeWidget:
+class Age:
     MIN_AGE = 0
     MAX_AGE = 150  # Not the actual value, this has to be fixed, magic number
 
@@ -15,16 +15,16 @@ class AgeWidget:
                 dbc.Label("Ålder"),
                 dcc.RangeSlider(
                     id="age",
-                    min=AgeWidget.MIN_AGE,
-                    max=AgeWidget.MAX_AGE,
+                    min=Age.MIN_AGE,
+                    max=Age.MAX_AGE,
                     step=1,
                     marks={
-                        AgeWidget.MIN_AGE: "0",
+                        Age.MIN_AGE: "0",
                         16: "16",
                         80: "80",
-                        AgeWidget.MAX_AGE: "max",
+                        Age.MAX_AGE: "max",
                     },
-                    value=[AgeWidget.MIN_AGE, AgeWidget.MAX_AGE],
+                    value=[Age.MIN_AGE, Age.MAX_AGE],
                 ),
             ]
         )
@@ -37,6 +37,6 @@ class AgeWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return [AgeWidget.MIN_AGE, AgeWidget.MAX_AGE]
+            return [Age.MIN_AGE, Age.MAX_AGE]
 
         return app

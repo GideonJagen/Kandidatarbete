@@ -4,8 +4,9 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
 
-class StatisticsCodeWidget:
+class StatisticsCode:
     STANDARD_VALUE = []
+    SELECT_STAT_CODES = "Välj statistikkoder"
 
     @staticmethod
     def statistics_code_widget():
@@ -13,7 +14,7 @@ class StatisticsCodeWidget:
             id="statistics_code_widget",
             children=[
                 dbc.Label("Statistikkod"),
-                StatisticsCodeWidget._statistics_code_dropdown(),
+                StatisticsCode._statistics_code_dropdown(),
             ],
         )
         return widget
@@ -33,7 +34,7 @@ class StatisticsCodeWidget:
         dropdown = dcc.Dropdown(
             id="statistics_dropdown",
             options=codes,
-            placeholder="Välj statistikkoder",
+            placeholder=StatisticsCode.SELECT_STAT_CODES,
             value=[],
             multi=True,
         )
@@ -46,6 +47,6 @@ class StatisticsCodeWidget:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
-            return StatisticsCodeWidget.STANDARD_VALUE
+            return StatisticsCode.STANDARD_VALUE
 
         return app
