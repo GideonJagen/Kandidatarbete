@@ -45,7 +45,15 @@ def build_random_data(start_date, end_date, num_patients=100):
     postOp_time_demand = range(10, 60, 5)
     op_rooms = [247, 249, 251, 253, 256]
     vardtyp = ["Öppen vård", "Sluten vård"]
-    stat_code = ["30 dagar", "90 dagar", "6 månader", "9 månader", "1 år", ">1 år"]
+    stat_code = [
+        "30 dagar",
+        "30 dagar",
+        "90 dagar",
+        "6 månader",
+        "9 månader",
+        "1 år",
+        ">1 år",
+    ]
     op_codes = [
         "NH132",
         "SU145",
