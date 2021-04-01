@@ -32,18 +32,22 @@ class SideBar:
                 html.P(SideBar.REQUEST_FILL_FORM),
                 SideBar._filter_form(),
             ],
+            id="sidebar",
             className="p-1",
         )
         return component
 
     @staticmethod
     def _close_sidebar_button():
-        component = dbc.Button("X", className="btn btn-warning")
+        component = dbc.Button("X", id="btn_sidebar", className="btn btn-warning")
         return component
 
     @staticmethod
     def _open_sidebar_button():
-        component = dbc.Button(SideBar.OPEN_FILTER, className="btn btn-primary")
+        component = dbc.Button(
+            SideBar.OPEN_FILTER,
+            className="btn btn-primary",
+        )
         return component
 
     @staticmethod
