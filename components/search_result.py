@@ -100,8 +100,7 @@ class SearchResult:
                 "vardform": vardform,
             }
             result = DataFilterer.search_data(inputs)
-            if not result:
-                return None, "No data"
+
             return result["data"], result["number patients"]
 
         return app
