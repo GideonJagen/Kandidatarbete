@@ -6,6 +6,7 @@ from dash.dependencies import Input, Output
 
 class AsaWidget:
     STANDARD_VALUE = []  # Basera på data
+
     @staticmethod
     def asa_widget():
         widget = dbc.FormGroup(

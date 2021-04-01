@@ -35,7 +35,7 @@ app.layout = html.Div(
         UploadWidget.upload_widget(),  # TODO Hitta bättre plats
         dbc.Col(
             [
-                TabSelectionWidget.filter_tabs(),
+                # TabSelectionWidget.filter_tabs(),
                 ResetFilterButton.reset_filter_button(),
                 NumberPatients.number_patients(),
                 SearchResult.search_result(),
