@@ -47,7 +47,7 @@ def build_random_data(start_date, end_date, num_patients=100):
     vardtyp = ["Öppen vård", "Sluten vård"]
     stat_code = [
         "30 dagar",
-        "30 dagar",
+        "60 dagar",
         "90 dagar",
         "6 månader",
         "9 månader",
