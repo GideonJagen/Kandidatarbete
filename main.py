@@ -15,14 +15,14 @@ from components.vardform import VardformWidget
 from components.op_time_slider import OpTimeWidget
 from components.statistics_code import StatisticsCodeWidget
 from components.op_code_selection import OpCodeSelection
-from data_handler import DataHandler
+from data_handler import DataFilterer
 from components.upload import UploadWidget
 from components.operator import OperatorWidget
 from components.number_patients import NumberPatients
+from components.short_notice import ShortNoticeWidget
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
-DataHandler.init_data()  # Should be done by the import data widget
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])  # create Dash object
 app.layout = html.Div(
     # Top of hierarcy
@@ -35,6 +35,7 @@ app.layout = html.Div(
             [
                 TabSelectionWidget.filter_tabs(),
                 ResetFilterButton.reset_filter_button(),
+                ShortNoticeWidget.short_notice_widget(),
                 NumberPatients.number_patients(),
                 SearchResult.search_result(),
             ]
@@ -53,4 +54,6 @@ app = AgeWidget.add_age_callback(app)
 app = AnestesiWidget.add_anestesi_callback(app)
 app = OpCodeSelection.add_op_code_callback(app)
 app = OperatorWidget.add_operator_callbacks(app)
+app = ShortNoticeWidget.add_short_notice_collapse_callback(app)
+app = ShortNoticeWidget.add_short_notice_input_callback(app)
 app.run_server(debug=True)
