@@ -19,6 +19,7 @@ from data_handler import DataFilterer
 from components.upload import UploadWidget
 from components.operator import OperatorWidget
 from components.number_patients import NumberPatients
+from components.short_notice import ShortNoticeWidget
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -34,6 +35,7 @@ app.layout = html.Div(
             [
                 TabSelectionWidget.filter_tabs(),
                 ResetFilterButton.reset_filter_button(),
+                ShortNoticeWidget.short_notice_widget(),
                 NumberPatients.number_patients(),
                 SearchResult.search_result(),
             ]
@@ -52,4 +54,6 @@ app = AgeWidget.add_age_callback(app)
 app = AnestesiWidget.add_anestesi_callback(app)
 app = OpCodeSelection.add_op_code_callback(app)
 app = OperatorWidget.add_operator_callbacks(app)
+app = ShortNoticeWidget.add_short_notice_collapse_callback(app)
+app = ShortNoticeWidget.add_short_notice_input_callback(app)
 app.run_server(debug=True)
