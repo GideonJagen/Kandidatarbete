@@ -29,51 +29,12 @@ DataHandler.init_data()  # Should be done by the import data widget
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])  # create Dash object
 
-# the style arguments for the sidebar. We use position:fixed and a fixed width
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 62.5,
-    "left": 0,
-    "bottom": 0,
-    "width": "16rem",
-    "height": "100%",
-    "z-index": 1,
-    "overflow-x": "hidden",
-    "transition": "all 0.5s",
-    "padding": "0.5rem 1rem",
-    "background-color": "#f8f9fa",
-}
-
-SIDEBAR_HIDDEN = {
-    "position": "fixed",
-    "top": 62.5,
-    "left": "-16rem",
-    "bottom": 0,
-    "width": "16rem",
-    "height": "100%",
-    "z-index": 1,
-    "overflow-x": "hidden",
-    "transition": "all 0.5s",
-    "padding": "0rem 0rem",
-    "background-color": "#f8f9fa",
-}
-
-# the styles for the main content position it to the right of the sidebar and
-# add some padding.
-CONTENT_STYLE = {
-    "transition": "margin-left .5s",
-    "margin-left": "18rem",
-    "margin-right": "2rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
-}
-
-CONTENT_STYLE1 = {
-    "transition": "margin-left .5s",
-    "margin-left": "2rem",
-    "margin-right": "2rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
+COLLAPSE_WIDTH = {
+    # "height": "auto",
+    "transition": "width 0.35s ease",
+    # "-webkit - transition": "width 0.35s ease",
+    # "-moz - transition": "width 0.35s ease",
+    # "-o - transition": "width 0.35s ease",
 }
 
 content = html.Div(
@@ -85,48 +46,21 @@ content = html.Div(
         SearchResult.search_result(),
     ],
     id="page-content",
-    style=CONTENT_STYLE,
 )
 
 app.layout = html.Div(
     # Top of hierarcy
     id="main",
-    style=CONTENT_STYLE,
     children=[
-        dcc.Store(id="side_click"),
-        SideBar.sidebar_component(),
-        content,
-        # Top
+        dbc.Row(
+            [
+                SideBar.sidebar_component(),
+                content,
+            ],
+            className="p-3",
+        ),
     ],
 )
-
-
-@app.callback(
-    [
-        Output("sidebar", "style"),
-        Output("page-content", "style"),
-        Output("side_click", "data"),
-    ],
-    [Input("btn_sidebar", "n_clicks")],
-    [
-        State("side_click", "data"),
-    ],
-)
-def toggle_sidebar(n, nclick):
-    if n:
-        if nclick == "SHOW":
-            sidebar_style = SIDEBAR_HIDDEN
-            content_style = CONTENT_STYLE
-            cur_nclick = "HIDDEN"
-        else:
-            sidebar_style = SIDEBAR_STYLE
-            content_style = CONTENT_STYLE
-            cur_nclick = "SHOW"
-    else:
-        sidebar_style = SIDEBAR_STYLE
-        content_style = CONTENT_STYLE
-        cur_nclick = "SHOW"
-    return sidebar_style, content_style, cur_nclick
 
 
 app = SearchResult.search_result_callback(app)
@@ -139,4 +73,5 @@ app = Age.add_age_callback(app)
 app = Anaesthetic.add_anaesthetic_callback(app)
 app = OpCode.add_op_code_callback(app)
 app = Operator.add_operator_callbacks(app)
+app = SideBar.add_sidebar_callbacks(app)
 app.run_server(debug=True)
