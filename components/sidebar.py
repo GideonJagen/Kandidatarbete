@@ -40,6 +40,7 @@ class SideBar:
                 SideBar._filter_form(),
             ],
             id="sidebar_content",
+            style={"transition": "0.5s"},
         )
         return component
 
@@ -73,6 +74,8 @@ class SideBar:
         )
         def _toggle_sidebar(n_clicks):
             SideBar.is_open = not SideBar.is_open
-            return {"display": "contents"} if SideBar.is_open else {"display": "none"}
+            # return {"width": "auto", "display": "block"} if SideBar.is_open else {"width": "0px", "display": "none"}
+            return {"display": "block"} if SideBar.is_open else {"display": "none"}
+            # return {"visibility": "visible"} if SideBar.is_open else {"visibility": "collapse"}
 
         return app

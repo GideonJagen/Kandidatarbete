@@ -37,7 +37,7 @@ COLLAPSE_WIDTH = {
     # "-o - transition": "width 0.35s ease",
 }
 
-content = html.Div(
+content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
         FileUpload.upload_widget(),  # TODO Hitta bättre plats
