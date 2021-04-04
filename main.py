@@ -27,15 +27,7 @@ from components.sidebar import SideBar
 #   för att slippa bläddra fram o tillbaka
 DataHandler.init_data()  # Should be done by the import data widget
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])  # create Dash object
-
-COLLAPSE_WIDTH = {
-    # "height": "auto",
-    "transition": "width 0.35s ease",
-    # "-webkit - transition": "width 0.35s ease",
-    # "-moz - transition": "width 0.35s ease",
-    # "-o - transition": "width 0.35s ease",
-}
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 content = dbc.Col(
     children=[
@@ -49,7 +41,6 @@ content = dbc.Col(
 )
 
 app.layout = html.Div(
-    # Top of hierarcy
     id="main",
     children=[
         dbc.Row(
