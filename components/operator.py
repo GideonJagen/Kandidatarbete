@@ -1,13 +1,11 @@
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
+import dash
 
 
 class OperatorWidget:
-    STANDARD_VALUE_RI = "all"
-    STANDARD_VALUE_DD = None
-    STANDARD_VALUE_CB = False
     STANDARD_OPERATORS = [
         "Clara",
         "David",
@@ -23,7 +21,7 @@ class OperatorWidget:
             children=[
                 dbc.Label("Operatör"),
                 OperatorWidget._operator_radioitems(),
-                OperatorWidget._operator_dropdown_and_checkbox(),
+                OperatorWidget._operator_collapse(),
             ],
         )
         return widget
@@ -39,7 +37,7 @@ class OperatorWidget:
         widget = dbc.RadioItems(
             id="operator_radioitems",
             options=options,
-            value=OperatorWidget.STANDARD_VALUE_RI,
+            value="all",
         )
         return widget
 
@@ -49,7 +47,7 @@ class OperatorWidget:
             id="operator_dropdown",
             placeholder="Välj operatör",
             multi=True,
-            value=OperatorWidget.STANDARD_VALUE_DD,
+            value=None,
             options=[
                 {"label": operator, "value": operator}
                 for operator in OperatorWidget.STANDARD_OPERATORS
@@ -65,7 +63,7 @@ class OperatorWidget:
                 dbc.Checkbox(
                     id="no_operator_checkbox",
                     className="form-check-input",
-                    checked=OperatorWidget.STANDARD_VALUE_CB,
+                    checked=False,
                 ),
                 dbc.Label(
                     "Inkludera även icke tilldelade patienter",
@@ -78,74 +76,47 @@ class OperatorWidget:
         return component
 
     @staticmethod
-    def _operator_dropdown_and_checkbox():
-        component = dbc.Form(
-            [
-                dbc.FormGroup(OperatorWidget._operator_dropdown(), className="mx-3"),
-                OperatorWidget._no_operator_checkbox(),
+    def _operator_collapse():
+        widget = dbc.Collapse(
+            id="collapse",
+            # style={"width": "50em"},
+            children=[
+                dbc.Form(
+                    [
+                        dbc.FormGroup(
+                            OperatorWidget._operator_dropdown(), className="mx-3"
+                        ),
+                        OperatorWidget._no_operator_checkbox(),
+                    ],
+                    style={"visibility": "visible"},
+                    id="operator_dropdown_and_checkbox",
+                    inline=True,
+                )
             ],
-            style={"visibility": "visible"},
-            id="operator_dropdown_and_checkbox",
-            inline=True,
         )
-        return component
+        return widget
 
     @staticmethod
-    def add_operator_callbacks(app):
-        app = OperatorWidget.reset_operator_ri_callback(app)
-        app = OperatorWidget.reset_operator_dd_callback(app)
-        app = OperatorWidget.reset_operator_cb_callback(app)
-        app = OperatorWidget.show_hide_operator_callback(app)
-        return app
-
-    @staticmethod
-    def reset_operator_ri_callback(app):
+    def add_operator_callback(app):
         @app.callback(
+            Output(component_id="collapse", component_property="is_open"),
             Output(component_id="operator_radioitems", component_property="value"),
-            Input(component_id="reset_filter_button", component_property="n_clicks"),
-        )
-        def reset_operator_ri(n_clicks):
-            return OperatorWidget.STANDARD_VALUE_RI
-
-        return app
-
-    @staticmethod
-    def reset_operator_dd_callback(app):
-        @app.callback(
             Output(component_id="operator_dropdown", component_property="value"),
-            Input(component_id="reset_filter_button", component_property="n_clicks"),
-        )
-        def reset_operator_dd(visibility_state):
-            if visibility_state == "all" or visibility_state == "blank":
-                return OperatorWidget.STANDARD_VALUE_DD
-
-        return app
-
-    @staticmethod
-    def reset_operator_cb_callback(app):
-        @app.callback(
             Output(component_id="no_operator_checkbox", component_property="checked"),
+            Input(component_id="operator_radioitems", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_operator_dd(visibility_state):
-            if visibility_state == "all" or visibility_state == "blank":
-                return OperatorWidget.STANDARD_VALUE_CB
-
-        return app
-
-    @staticmethod
-    def show_hide_operator_callback(app):
-        @app.callback(
-            Output(
-                component_id="operator_dropdown_and_checkbox",
-                component_property="style",
-            ),
-            Input(component_id="operator_radioitems", component_property="value"),
-        )
-        def show_hide_element(visibility_state):
-            if visibility_state == "operator":
-                return {"visibility": "visible"}
-            if visibility_state == "all" or visibility_state == "blank":
-                return {"visibility": "hidden"}
+        def collapse(value, reset):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
+                return False, "all", None, False
+            elif value == "operator":
+                return True, "operator", None, False
+            return (
+                False,
+                value,
+                None,
+                False,
+            )
 
         return app
