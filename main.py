@@ -7,6 +7,9 @@ from dash.dependencies import Input, Output, State
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
+# TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
+#   för att slippa bläddra fram o tillbaka
+
 from components.age import Age
 from components.anestesi import Anaesthetic
 from components.asa import Asa
@@ -17,12 +20,13 @@ from components.caretype import Caretype
 from components.op_time_slider import OpTime
 from components.statistics_code import StatisticsCode
 from components.op_code_selection import OpCode
-from components.upload import UploadWidget
 from components.operator import Operator
 from components.number_patients import PatientCount
 from components.short_notice import ShortNotice
 from components.sidebar import SideBar
 from data_handler import DataFilterer
+from components.upload import UploadWidget
+from components.warnings import Warnings_widget
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -36,6 +40,7 @@ content = dbc.Col(
         ResetFilterButton.reset_filter_button(),
         PatientCount.patient_counter(),
         SearchResult.search_result(),
+        Warnings_widget.filetype_warning_widget(),
     ],
     id="page-content",
 )
@@ -53,7 +58,7 @@ app.layout = html.Div(
     ],
 )
 
-
+app = UploadWidget.add_upload_widget_callback(app)
 app = SearchResult.search_result_callback(app)
 app = OpTime.add_op_time_callback(app)
 app = Caretype.add_caretype_callback(app)

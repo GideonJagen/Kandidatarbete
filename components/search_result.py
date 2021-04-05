@@ -72,6 +72,7 @@ class SearchResult:
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="upload", component_property="filename"),
             Input(component_id="upload", component_property="contents"),
+            Input(component_id="load_button", component_property="n_clicks"),
         )
         def update_data(
             asa,
@@ -84,11 +85,12 @@ class SearchResult:
             op_code,
             filename,
             content,
+            load_button,
         ):
             # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
             context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
+            if context.triggered[0]["prop_id"].split(".")[0] == "load_button":
                 LoadedData.load_data(filename, content)
 
             inputs = {
