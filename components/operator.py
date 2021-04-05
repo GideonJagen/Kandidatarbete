@@ -54,7 +54,7 @@ class OperatorWidget:
                 {"label": operator, "value": operator}
                 for operator in OperatorWidget.STANDARD_OPERATORS
             ],
-            style={"display": "block", "min-width": "200px"},
+            style={"display": "block", "min-width": "15em"},
         )
         return widget
 
