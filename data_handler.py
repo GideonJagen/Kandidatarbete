@@ -46,8 +46,8 @@ class DataFilterer:
                 LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
                 if inputs["op_code"]
                 else True,
-                LoadedData.loaded_data["Vårdform_text"].isin([inputs["vardform"]])
-                if inputs["vardform"] and inputs["vardform"] != "all"
+                LoadedData.loaded_data["Vårdform_text"].isin([inputs["caretype"]])
+                if inputs["caretype"] and inputs["caretype"] != "all"
                 else True,
             )
         )
@@ -72,7 +72,7 @@ class DataFilterer:
         search_result = {}
         search_result["data"] = filtered_data
         search_result[
-            "number patients"
+            "number_of_patients"
         ] = f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}"  # refactor string when import data functionality is added
         return search_result
 

@@ -25,7 +25,7 @@ class Municipalities:
         ]
 
         widget = dbc.RadioItems(
-            id="kommuner_radiobuttons",
+            id="municipalities_radiobuttons",
             options=options,
             value=Municipalities.STANDARD_VALUE,
         )
@@ -34,7 +34,9 @@ class Municipalities:
     @staticmethod
     def add_municipalities_callback(app):
         @app.callback(
-            Output(component_id="kommuner_radiobuttons", component_property="value"),
+            Output(
+                component_id="municipalities_radiobuttons", component_property="value"
+            ),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):

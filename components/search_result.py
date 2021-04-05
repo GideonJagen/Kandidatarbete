@@ -59,14 +59,16 @@ class SearchResult:
     def search_result_callback(app):
         @app.callback(
             Output(component_id="search_result", component_property="data"),
-            Output(component_id="number patients", component_property="children"),
+            Output(component_id="number_of_patients", component_property="children"),
             Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
-            Input(component_id="anestesi_checklist", component_property="value"),
+            Input(component_id="anaesthesia_checklist", component_property="value"),
             Input(component_id="statistics_dropdown", component_property="value"),
-            Input(component_id="kommuner_radiobuttons", component_property="value"),
-            Input(component_id="vardform_radiobuttons", component_property="value"),
+            Input(
+                component_id="municipalities_radiobuttons", component_property="value"
+            ),
+            Input(component_id="caretype_radiobuttons", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="upload", component_property="filename"),
             Input(component_id="upload", component_property="contents"),
@@ -78,7 +80,7 @@ class SearchResult:
             anesthesia,
             stat_code,
             area,
-            vardform,
+            care_type,
             op_code,
             filename,
             content,
@@ -97,10 +99,10 @@ class SearchResult:
                 "stat_code": stat_code,
                 "anesthesia": anesthesia,
                 "area": area,
-                "vardform": vardform,
+                "caretype": care_type,
             }
             result = DataFilterer.search_data(inputs)
 
-            return result["data"], result["number patients"]
+            return result["data"], result["number_of_patients"]
 
         return app

@@ -22,7 +22,7 @@ class Anaesthetic:
                 {"label": "Påbörjad", "value": "pb"},
                 {"label": "Klar", "value": "klar"},
             ],
-            id="anestesi_checklist",
+            id="anaesthesia_checklist",
         )
 
         return checklist
@@ -30,7 +30,7 @@ class Anaesthetic:
     @staticmethod
     def add_anaesthetic_callback(app):
         @app.callback(
-            Output(component_id="anestesi_checklist", component_property="value"),
+            Output(component_id="anaesthesia_checklist", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):

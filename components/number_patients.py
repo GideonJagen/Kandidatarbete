@@ -8,7 +8,7 @@ class PatientCount:
         widget = html.Div(
             children=[
                 # add icon or something
-                html.H4(id="number patients"),
+                html.H4(id="number_of_patients"),
             ]
         )
         return widget

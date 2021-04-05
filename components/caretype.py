@@ -24,7 +24,7 @@ class Caretype:
             {"label": "Visa alla", "value": "all"},
         ]
         widget = dbc.RadioItems(
-            id="vardform_radiobuttons",
+            id="caretype_radiobuttons",
             options=options,
             labelStyle={"display": "block"},
             value="all",
@@ -34,7 +34,7 @@ class Caretype:
     @staticmethod
     def add_caretype_callback(app):
         @app.callback(
-            Output(component_id="vardform_radiobuttons", component_property="value"),
+            Output(component_id="caretype_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_opTime(n_clicks):
