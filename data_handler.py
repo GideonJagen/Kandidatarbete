@@ -139,3 +139,7 @@ class LoadedData:
             ),
             axis=1,
         )
+
+    @staticmethod
+    def get_unique_values(col):
+        return LoadedData.loaded_data[col].unique().tolist()
