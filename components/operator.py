@@ -17,7 +17,7 @@ class Operator:
     ]  # Made up for testing purposes
 
     @staticmethod
-    def operator_widget():
+    def getComponent():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Operatör"),

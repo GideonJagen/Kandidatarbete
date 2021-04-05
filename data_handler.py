@@ -5,49 +5,48 @@ import time
 import numpy as np
 from datetime import timedelta
 import datetime
+import io
+import base64
 
 
-class DataHandler:
-    df = pd.read_csv("output.csv", sep=";")
-
+class DataFilterer:
     @staticmethod
     def _filter_conditions(inputs) -> List:
         """
         Make that each of the inputs values are handled as individual conditions
         """
         conditions = []
-        print(len(DataHandler.df.values.tolist()))
         # Add the conditions to the list of conditions
         conditions.extend(
             (
                 # Check if patient is in right age interval
-                DataHandler.df["PatientÅlderVidOp"].isin(
+                LoadedData.loaded_data["PatientÅlderVidOp"].isin(
                     range(inputs["age"]["min"], inputs["age"]["max"] + 1)
                 ),
                 # Check if patient is in right time interval
-                DataHandler.df["KravOperationstidMinuter"].isin(
+                LoadedData.loaded_data["KravOperationstidMinuter"].isin(
                     range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
                 ),
                 # Check if patient is in right ASA class
                 (
-                    DataHandler.df["ASAklass"].isin(inputs["asa"])
+                    LoadedData.loaded_data["ASAklass"].isin(inputs["asa"])
                     if inputs["asa"]
                     else True
                 )
                 | (
-                    DataHandler.df["ASAklass"].isna()
+                    LoadedData.loaded_data["ASAklass"].isna()
                     if (-1 in inputs["asa"])
                     else False
                 ),
                 # Check if operation has matching statistcal code
-                DataHandler.df["Statistikkod"].isin(inputs["stat_code"])
+                LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
                 if inputs["stat_code"]
                 else True,
                 # Check if operation has matching operation code
-                DataHandler.df["OpkortText"].isin(inputs["op_code"])
+                LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
                 if inputs["op_code"]
                 else True,
-                DataHandler.df["Vårdform_text"].isin([inputs["vardform"]])
+                LoadedData.loaded_data["Vårdform_text"].isin([inputs["vardform"]])
                 if inputs["vardform"] and inputs["vardform"] != "all"
                 else True,
             )
@@ -59,13 +58,62 @@ class DataHandler:
     def _filter_vectorized(inputs) -> pd.DataFrame:
         start_time = time.time()
         print(inputs)
-
-        conditions = DataHandler._filter_conditions(inputs)
+        conditions = DataFilterer._filter_conditions(inputs)
         filtered = np.where(reduce(lambda a, b: a & b, conditions))
-        data = DataHandler.df.iloc[filtered].to_dict("records")
+        data = LoadedData.loaded_data.iloc[filtered].to_dict("records")
         print("---Filtering took %s seconds ---" % (time.time() - start_time))
-
         return data
+
+    @staticmethod
+    def search_data(inputs) -> dict:
+        # Alternative solution for exception? Only thrown in one case but i want to avoid several if statements
+
+        filtered_data = DataFilterer._filter_vectorized(inputs)
+        search_result = {}
+        search_result["data"] = filtered_data
+        search_result[
+            "number patients"
+        ] = f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}"  # refactor string when import data functionality is added
+        return search_result
+
+
+class LoadedData:
+    # Class stores loaded data and information about it, ex number of patients
+
+    COLUMNS = [
+        "Behandlingsnr",
+        "Anmälningstidpunkt",
+        "SistaOpTidpunkt",
+        "Opkategori_text",
+        "Prioritet_dagar",
+        "ASAklass",
+        "KravOperationstidMinuter",
+        "KravFörberedelsetidMinuter",
+        "KravtidEfterMinuter",
+        "De_PlaneradOpsal_FK",
+        "PlaneradStartOpsalTidpunkt",
+        "PatientÅlderVidOp",
+        "Veckodag",
+        "Starttimme",
+        "TotaltidStart",
+        "Vårdform_text",
+        "Statistikkod",
+        "OpkortText",
+        "dagar_till_kritisk",
+    ]  # Necessary because callbacks will try to search when program is built, key error exception will be thrown, this is a temp fix
+    loaded_data = pd.DataFrame(columns=COLUMNS)
+    number_patients = 0
+
+    @staticmethod
+    def load_data(filename, content):
+        if filename.endswith(".csv"):
+            data = content.split(",")[1]
+            data = pd.read_csv(
+                io.StringIO(base64.b64decode(data).decode("utf-8")), sep=";"
+            )  # Data loaded by widget is wrong "format", cant access full path.
+            LoadedData.loaded_data = data
+            LoadedData.number_patients = len(data.values.tolist())
+            LoadedData._add_prio_days_left_col()
 
     @staticmethod
     def _prio_days_left(booked_date, prio_days):
@@ -79,29 +127,15 @@ class DataHandler:
         return (critical_date - today).days
 
     @staticmethod
-    def init_data():
+    def _add_prio_days_left_col():
         """
         Atm just adds a column with calculated values from _prio_days_left,
         expand later to initialize "global" dataframe with the import data widget and
         use to add more columns if needed
         """
-
-        DataHandler.df["dagar_till_kritisk"] = DataHandler.df.apply(
-            lambda x: DataHandler._prio_days_left(
+        LoadedData.loaded_data["dagar_till_kritisk"] = LoadedData.loaded_data.apply(
+            lambda x: LoadedData._prio_days_left(
                 x["Anmälningstidpunkt"], x["Prioritet_dagar"]
             ),
             axis=1,
         )
-
-    @staticmethod
-    def search_data(inputs) -> dict:
-        # By returning a dictionary like this we could scale easily if we wanted
-        # to calculate statistics or some other values from the data to other widgets or something
-
-        filtered_data = DataHandler._filter_vectorized(inputs)
-        search_result = {}
-        search_result["data"] = filtered_data
-        search_result[
-            "number patients"
-        ] = f"Antal patienter: {len(filtered_data)} / {len(DataHandler.df.values.tolist())}"  # refactor string when import data functionality is added
-        return search_result

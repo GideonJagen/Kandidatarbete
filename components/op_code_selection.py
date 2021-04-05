@@ -21,7 +21,7 @@ class OpCode:
     ]  # Made up for testing purposes
 
     @staticmethod
-    def op_code_selection():
+    def getComponent():
         """
         Highest hierarcy widget of opCode_selection function
         """

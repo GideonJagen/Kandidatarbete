@@ -8,7 +8,7 @@ class Anaesthetic:
     STANDARD_VALUE = []
 
     @staticmethod
-    def anaesthetic_widget():
+    def getComponent():
         widget = dbc.FormGroup(
             [dbc.Label("Anestesibedömning"), Anaesthetic._anaesthetic_checklist()]
         )

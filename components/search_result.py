@@ -2,7 +2,7 @@ import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
-from data_handler import DataHandler
+from data_handler import DataFilterer, LoadedData
 import dash_bootstrap_components as dbc
 
 # TODO Make callback return a dictionary with inputs
@@ -68,6 +68,8 @@ class SearchResult:
             Input(component_id="kommuner_radiobuttons", component_property="value"),
             Input(component_id="vardform_radiobuttons", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
+            Input(component_id="upload", component_property="filename"),
+            Input(component_id="upload", component_property="contents"),
         )
         def update_data(
             asa,
@@ -78,9 +80,15 @@ class SearchResult:
             area,
             vardform,
             op_code,
+            filename,
+            content,
         ):
             # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
+                LoadedData.load_data(filename, content)
+
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
@@ -91,7 +99,8 @@ class SearchResult:
                 "area": area,
                 "vardform": vardform,
             }
-            result = DataHandler.search_data(inputs)
+            result = DataFilterer.search_data(inputs)
+
             return result["data"], result["number patients"]
 
         return app

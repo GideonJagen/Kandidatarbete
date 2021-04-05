@@ -8,7 +8,7 @@ class Asa:
     STANDARD_VALUE = []  # Basera på data
 
     @staticmethod
-    def asa_widget():
+    def getComponent():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label(

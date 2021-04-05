@@ -35,17 +35,17 @@ class TabSelectionWidget:
     def _patient_tab():
         filter_col_a = dbc.Col(
             [
-                Caretype.caretype_widget(),
-                Municipalities.municipalities_component(),
-                Anaesthetic.anaesthetic_widget(),
+                Caretype.getComponent(),
+                Municipalities.getComponent(),
+                Anaesthetic.getComponent(),
             ]
         )
 
         filter_col_b = dbc.Col(
             [
-                Age.age_widget(),
-                StatisticsCode.statistics_code_widget(),
-                Asa.asa_widget(),
+                Age.getComponent(),
+                StatisticsCode.getComponent(),
+                Asa.getComponent(),
             ]
         )
 
@@ -58,9 +58,9 @@ class TabSelectionWidget:
     def _operation_tab():
         filter_col_a = dbc.Col(
             [
-                OpTime.op_time_widget(5, 120),
-                OpCode.op_code_selection(),
-                Operator.operator_widget(),
+                OpTime.getComponent(5, 120),
+                OpCode.getComponent(),
+                Operator.getComponent(),
             ]
         )
 

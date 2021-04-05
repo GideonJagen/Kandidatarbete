@@ -10,7 +10,7 @@ class Caretype:
     STANDARD_VALUE = "all"
 
     @staticmethod
-    def caretype_widget():
+    def getComponent():
         widget = dbc.FormGroup(
             [dbc.Label("Vårdform"), Caretype._caretype_radiobuttons()]
         )

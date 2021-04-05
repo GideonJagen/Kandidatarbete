@@ -12,6 +12,7 @@ from components.anestesi import Anaesthetic
 from components.asa import Asa
 from components.municipalities import Municipalities
 from components.operator import Operator
+from components.short_notice import ShortNotice
 
 
 class SideBar:
@@ -53,15 +54,16 @@ class SideBar:
     def _filter_form():
         component = dbc.Form(
             children=[
-                Caretype.caretype_widget(),
-                Municipalities.municipalities_component(),
-                Anaesthetic.anaesthetic_widget(),
-                Age.age_widget(),
-                StatisticsCode.statistics_code_widget(),
-                Asa.asa_widget(),
-                OpTime.op_time_widget(5, 120),
-                OpCode.op_code_selection(),
-                Operator.operator_widget(),
+                Caretype.getComponent(),
+                Municipalities.getComponent(),
+                Anaesthetic.getComponent(),
+                Age.getComponent(),
+                StatisticsCode.getComponent(),
+                Asa.getComponent(),
+                OpTime.getComponent(5, 120),
+                OpCode.getComponent(),
+                Operator.getComponent(),
+                ShortNotice.getComponent(),
             ],
         )
         return component

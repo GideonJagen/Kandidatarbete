@@ -9,7 +9,7 @@ class StatisticsCode:
     SELECT_STAT_CODES = "Välj statistikkoder"
 
     @staticmethod
-    def statistics_code_widget():
+    def getComponent():
         widget = dbc.FormGroup(
             id="statistics_code_widget",
             children=[
@@ -23,6 +23,7 @@ class StatisticsCode:
     def _statistics_code_dropdown():
         codes = [
             {"label": "30 dagar", "value": "30 dagar"},
+            {"label": "60 dagar", "value": "60 dagar"},
             {"label": "90 dagar", "value": "90 dagar"},
             {"label": "6 månader", "value": "6 månader"},
             {"label": "9 månader", "value": "9 månader"},

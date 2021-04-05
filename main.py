@@ -17,22 +17,22 @@ from components.caretype import Caretype
 from components.op_time_slider import OpTime
 from components.statistics_code import StatisticsCode
 from components.op_code_selection import OpCode
-from data_handler import DataHandler
-from components.upload import FileUpload
+from components.upload import UploadWidget
 from components.operator import Operator
 from components.number_patients import PatientCount
+from components.short_notice import ShortNotice
 from components.sidebar import SideBar
+from data_handler import DataFilterer
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
-DataHandler.init_data()  # Should be done by the import data widget
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
-        FileUpload.upload_widget(),  # TODO Hitta bättre plats
+        UploadWidget.upload_widget(),  # TODO Hitta bättre plats
         ResetFilterButton.reset_filter_button(),
         PatientCount.patient_counter(),
         SearchResult.search_result(),
@@ -65,4 +65,6 @@ app = Anaesthetic.add_anaesthetic_callback(app)
 app = OpCode.add_op_code_callback(app)
 app = Operator.add_operator_callbacks(app)
 app = SideBar.add_sidebar_callbacks(app)
+app = ShortNotice.add_short_notice_collapse_callback(app)
+app = ShortNotice.add_short_notice_input_callback(app)
 app.run_server(debug=True)
