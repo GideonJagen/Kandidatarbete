@@ -1,18 +1,17 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-
 from dash.dependencies import Input, Output
 
-from components.op_code import OpCode
-from components.op_time import OpTime
-from components.statistics_code import StatisticsCode
-from components.caretype import Caretype
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
+from components.caretype import CareType
 from components.municipalities import Municipalities
+from components.op_code import OpCode
+from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
+from components.statistics_code import StatisticsCode
 
 
 class SideBar:
@@ -54,7 +53,7 @@ class SideBar:
     def _filter_form():
         component = dbc.Form(
             children=[
-                Caretype.get_component(),
+                CareType.get_component(),
                 Municipalities.get_component(),
                 Anesthesia.get_component(),
                 Age.get_component(),

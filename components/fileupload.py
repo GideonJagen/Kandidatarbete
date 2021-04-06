@@ -1,9 +1,10 @@
-import dash_core_components as dcc
-import dash_bootstrap_components as dbc
 import dash
-import dash_html_components as html
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
 from dash.dependencies import Input, Output
+
 from data_handler import LoadedData
+
 
 # Todo to avoid an even more massive callback (search_result) i decided to add a button with the functionality
 # of actually loading the file. When a file is selected, the widget stores it but it is not acctually loaded until
@@ -11,7 +12,7 @@ from data_handler import LoadedData
 #
 
 
-class Upload:
+class FileUpload:
     @staticmethod
     def get_component():
         upload = dbc.FormGroup(

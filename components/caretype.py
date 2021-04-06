@@ -1,18 +1,14 @@
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 from dash.dependencies import Input, Output
 
-# Döpa om till vårdform, som det heter i datan
 
-
-class Caretype:
+class CareType:
     STANDARD_VALUE = "all"
 
     @staticmethod
     def get_component():
         widget = dbc.FormGroup(
-            [dbc.Label("Vårdform"), Caretype._caretype_radiobuttons()]
+            [dbc.Label("Vårdform"), CareType._caretype_radiobuttons()]
         )
         return widget
 
@@ -38,6 +34,6 @@ class Caretype:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):
-            return Caretype.STANDARD_VALUE
+            return CareType.STANDARD_VALUE
 
         return app

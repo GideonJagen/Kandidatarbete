@@ -1,9 +1,9 @@
-import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
+
 from data_handler import DataFilterer, LoadedData
-import dash_bootstrap_components as dbc
+
 
 # TODO Make callback return a dictionary with inputs
 

@@ -1,12 +1,13 @@
-from functools import reduce
-from typing import List
-import pandas as pd
-import time
-import numpy as np
-from datetime import timedelta
+import base64
 import datetime
 import io
-import base64
+import time
+from datetime import timedelta
+from functools import reduce
+from typing import List
+
+import numpy as np
+import pandas as pd
 
 
 class DataFilterer:
