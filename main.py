@@ -5,8 +5,8 @@ import dash_html_components as html
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
-from components.caretype import CareType
-from components.fileupload import FileUpload
+from components.care_type import CareType
+from components.file_upload import FileUpload
 from components.municipalities import Municipalities
 from components.op_code import OpCode
 from components.op_time import OpTime

@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
-from components.caretype import CareType
+from components.care_type import CareType
 from components.municipalities import Municipalities
 from components.op_code import OpCode
 from components.op_time import OpTime
