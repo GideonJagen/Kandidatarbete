@@ -11,7 +11,7 @@ class OpCode:
     STANDARD_OP_CODES = []  # Made up for testing purposes
 
     @staticmethod
-    def getComponent():
+    def get_component():
         """
         Highest hierarcy widget of opCode_selection function
         """

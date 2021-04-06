@@ -9,7 +9,7 @@ class Age:
     MAX_AGE = 150  # Not the actual value, this has to be fixed, magic number
 
     @staticmethod
-    def getComponent():
+    def get_component():
         widget = dbc.FormGroup(
             [
                 dbc.Label("Ålder"),

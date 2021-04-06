@@ -11,9 +11,9 @@ from data_handler import LoadedData
 #
 
 
-class UploadWidget:
+class Upload:
     @staticmethod
-    def upload_widget():
+    def get_component():
         upload = dbc.FormGroup(
             style={"padding": "1em"},
             children=[

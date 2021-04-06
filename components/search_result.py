@@ -10,7 +10,7 @@ import dash_bootstrap_components as dbc
 
 class SearchResult:
     @staticmethod
-    def search_result():
+    def get_component():
         cols = [
             "Behandlingsnr",
             "Anmälningstidpunkt",

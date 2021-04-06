@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output, State
 import dash
 
 
-class OperatorWidget:
+class Operator:
     STANDARD_OPERATORS = [
         "Clara",
         "David",
@@ -16,12 +16,12 @@ class OperatorWidget:
     ]  # Made up for testing purposes
 
     @staticmethod
-    def operator_widget():
+    def get_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Operatör"),
-                OperatorWidget._operator_radioitems(),
-                OperatorWidget._operator_collapse(),
+                Operator._operator_radioitems(),
+                Operator._operator_collapse(),
             ],
         )
         return widget
@@ -50,7 +50,7 @@ class OperatorWidget:
             value=None,
             options=[
                 {"label": operator, "value": operator}
-                for operator in OperatorWidget.STANDARD_OPERATORS
+                for operator in Operator.STANDARD_OPERATORS
             ],
             style={"display": "block", "min-width": "15em"},
         )
@@ -78,15 +78,13 @@ class OperatorWidget:
     @staticmethod
     def _operator_collapse():
         widget = dbc.Collapse(
-            id="collapse",
+            id="operator_collapse",
             # style={"width": "50em"},
             children=[
                 dbc.Form(
                     [
-                        dbc.FormGroup(
-                            OperatorWidget._operator_dropdown(), className="mx-3"
-                        ),
-                        OperatorWidget._no_operator_checkbox(),
+                        dbc.FormGroup(Operator._operator_dropdown(), className="mx-3"),
+                        Operator._no_operator_checkbox(),
                     ],
                     style={"visibility": "visible"},
                     id="operator_dropdown_and_checkbox",
@@ -99,7 +97,7 @@ class OperatorWidget:
     @staticmethod
     def add_operator_callback(app):
         @app.callback(
-            Output(component_id="collapse", component_property="is_open"),
+            Output(component_id="operator_collapse", component_property="is_open"),
             Output(component_id="operator_radioitems", component_property="value"),
             Output(component_id="operator_dropdown", component_property="value"),
             Output(component_id="no_operator_checkbox", component_property="checked"),

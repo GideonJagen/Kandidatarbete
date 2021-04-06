@@ -7,7 +7,7 @@ import dash
 
 class ShortNotice:
     @staticmethod
-    def getComponent():
+    def get_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kort varsel"),

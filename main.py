@@ -25,8 +25,8 @@ from components.number_patients import PatientCount
 from components.short_notice import ShortNotice
 from components.sidebar import SideBar
 from data_handler import DataFilterer
-from components.upload import UploadWidget
-from components.warnings import Warnings_widget
+from components.upload import Upload
+from components.warnings import Warnings
 
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
@@ -36,11 +36,11 @@ app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
-        UploadWidget.upload_widget(),  # TODO Hitta bättre plats
-        ResetFilterButton.reset_filter_button(),
-        PatientCount.patient_counter(),
-        SearchResult.search_result(),
-        Warnings_widget.filetype_warning_widget(),
+        Upload.get_component(),  # TODO Hitta bättre plats
+        ResetFilterButton.get_component(),
+        PatientCount.get_component(),
+        SearchResult.get_component(),
+        Warnings.get_component(),
     ],
     id="page-content",
 )
@@ -50,7 +50,7 @@ app.layout = html.Div(
     children=[
         dbc.Row(
             [
-                SideBar.sidebar_component(),
+                SideBar.get_component(),
                 content,
             ],
             className="p-3",
@@ -58,8 +58,8 @@ app.layout = html.Div(
     ],
 )
 
-app = UploadWidget.add_upload_widget_callback(app)
-app = UploadWidget.add_load_button_callback(app)
+app = Upload.add_upload_widget_callback(app)
+app = Upload.add_load_button_callback(app)
 app = SearchResult.search_result_callback(app)
 app = OpTime.add_op_time_callback(app)
 app = Caretype.add_caretype_callback(app)
@@ -69,7 +69,7 @@ app = Municipalities.add_municipalities_callback(app)
 app = Age.add_age_callback(app)
 app = Anaesthetic.add_anaesthetic_callback(app)
 app = OpCode.add_op_code_callback(app)
-app = Operator.add_operator_callbacks(app)
+app = Operator.add_operator_callback(app)
 app = SideBar.add_sidebar_callbacks(app)
 app = ShortNotice.add_short_notice_collapse_callback(app)
 app = ShortNotice.add_short_notice_input_callback(app)

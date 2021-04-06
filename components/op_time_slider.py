@@ -8,7 +8,7 @@ class OpTime:
     STANDARD_VALUE = [10, 200]  # TODO Uppdatera baserat på datan.
 
     @staticmethod
-    def getComponent(min_time, max_time):
+    def get_component(min_time, max_time):
 
         widget = dbc.FormGroup(
             id="opTime_widget",

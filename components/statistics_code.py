@@ -9,7 +9,7 @@ class StatisticsCode:
     SELECT_STAT_CODES = "Välj statistikkoder"
 
     @staticmethod
-    def getComponent():
+    def get_component():
         widget = dbc.FormGroup(
             id="statistics_code_widget",
             children=[

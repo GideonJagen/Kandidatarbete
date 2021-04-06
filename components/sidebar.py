@@ -23,7 +23,7 @@ class SideBar:
     is_open = True
 
     @staticmethod
-    def sidebar_component():
+    def get_component():
         component = dbc.Row(
             children=[SideBar._sidebar_content(), SideBar._sidebar_button()],
             id="sidebar",
@@ -54,16 +54,16 @@ class SideBar:
     def _filter_form():
         component = dbc.Form(
             children=[
-                Caretype.getComponent(),
-                Municipalities.getComponent(),
-                Anaesthetic.getComponent(),
-                Age.getComponent(),
-                StatisticsCode.getComponent(),
-                Asa.getComponent(),
-                OpTime.getComponent(20, 160),
-                OpCode.getComponent(),
-                Operator.getComponent(),
-                ShortNotice.getComponent(),
+                Caretype.get_component(),
+                Municipalities.get_component(),
+                Anaesthetic.get_component(),
+                Age.get_component(),
+                StatisticsCode.get_component(),
+                Asa.get_component(),
+                OpTime.get_component(20, 160),
+                OpCode.get_component(),
+                Operator.get_component(),
+                ShortNotice.get_component(),
             ],
         )
         return component

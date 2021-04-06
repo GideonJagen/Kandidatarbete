@@ -13,9 +13,9 @@ from components.municipalities import Municipalities
 from components.operator import Operator
 
 
-class TabSelectionWidget:
+class TabSelection:
     @staticmethod
-    def filter_tabs():
+    def get_component():
         """
         Top of tab hierarcy, contains all tabs
         """
@@ -23,8 +23,8 @@ class TabSelectionWidget:
             [
                 dbc.Tabs(
                     [
-                        dbc.Tab(TabSelectionWidget._patient_tab(), label="Patient"),
-                        dbc.Tab(TabSelectionWidget._operation_tab(), label="Operation"),
+                        dbc.Tab(TabSelection._patient_tab(), label="Patient"),
+                        dbc.Tab(TabSelection._operation_tab(), label="Operation"),
                     ]
                 )
             ]
@@ -35,17 +35,17 @@ class TabSelectionWidget:
     def _patient_tab():
         filter_col_a = dbc.Col(
             [
-                Caretype.getComponent(),
-                Municipalities.getComponent(),
-                Anaesthetic.getComponent(),
+                Caretype.get_component(),
+                Municipalities.get_component(),
+                Anaesthetic.get_component(),
             ]
         )
 
         filter_col_b = dbc.Col(
             [
-                Age.getComponent(),
-                StatisticsCode.getComponent(),
-                Asa.getComponent(),
+                Age.get_component(),
+                StatisticsCode.get_component(),
+                Asa.get_component(),
             ]
         )
 
@@ -58,8 +58,8 @@ class TabSelectionWidget:
     def _operation_tab():
         filter_col_a = dbc.Col(
             [
-                OpTime.getComponent(5, 120),
-                OpCode.getComponent(),
+                OpTime.get_component(5, 120),
+                OpCode.get_component(),
                 Operator.getComponent(),
             ]
         )

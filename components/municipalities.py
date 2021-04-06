@@ -8,7 +8,7 @@ class Municipalities:
     STANDARD_VALUE = "all"
 
     @staticmethod
-    def getComponent():
+    def get_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kommuner"),
