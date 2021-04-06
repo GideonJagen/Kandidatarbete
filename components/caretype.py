@@ -32,7 +32,7 @@ class Caretype:
         return widget
 
     @staticmethod
-    def add_caretype_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="caretype_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),

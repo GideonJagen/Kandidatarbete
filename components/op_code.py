@@ -53,7 +53,7 @@ class OpCode:
         return widget
 
     @staticmethod
-    def add_op_code_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),

@@ -69,7 +69,7 @@ class SideBar:
         return component
 
     @staticmethod
-    def add_sidebar_callbacks(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="sidebar_content", component_property="style"),
             Input(component_id="btn_sidebar", component_property="n_clicks"),

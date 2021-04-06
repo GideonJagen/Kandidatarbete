@@ -56,7 +56,7 @@ class SearchResult:
         return widget
 
     @staticmethod
-    def search_result_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="search_result", component_property="data"),
             Output(component_id="number_of_patients", component_property="children"),

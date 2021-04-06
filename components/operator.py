@@ -95,7 +95,7 @@ class Operator:
         return widget
 
     @staticmethod
-    def add_operator_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="operator_collapse", component_property="is_open"),
             Output(component_id="operator_radioitems", component_property="value"),

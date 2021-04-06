@@ -32,7 +32,7 @@ class Municipalities:
         return widget
 
     @staticmethod
-    def add_municipalities_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(
                 component_id="municipalities_radiobuttons", component_property="value"

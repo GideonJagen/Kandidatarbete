@@ -36,7 +36,7 @@ class OpTime:
         return widget
 
     @staticmethod
-    def add_op_time_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="opTime_slider", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),

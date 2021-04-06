@@ -28,7 +28,7 @@ class Anesthesia:
         return checklist
 
     @staticmethod
-    def add_anesthesia_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="anaesthesia_checklist", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),

@@ -46,7 +46,7 @@ class ShortNotice:
         return widget
 
     @staticmethod
-    def add_short_notice_collapse_callback(app):
+    def add_collapse_callback(app):
         @app.callback(
             Output(component_id="collapse", component_property="is_open"),
             Output(component_id="short_notice_min", component_property="value"),
@@ -71,7 +71,7 @@ class ShortNotice:
         return app
 
     @staticmethod
-    def add_short_notice_input_callback(app):
+    def add_input_callback(app):
         @app.callback(
             Output(component_id="short_notice_min", component_property="valid"),
             Output(component_id="short_notice_min", component_property="invalid"),

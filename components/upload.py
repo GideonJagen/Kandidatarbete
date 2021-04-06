@@ -31,7 +31,7 @@ class Upload:
         return upload
 
     @staticmethod
-    def add_upload_widget_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="load_collapse", component_property="is_open"),
             Output(component_id="file-label", component_property="children"),
