@@ -60,7 +60,7 @@ class SideBar:
                 Age.getComponent(),
                 StatisticsCode.getComponent(),
                 Asa.getComponent(),
-                OpTime.getComponent(5, 120),
+                OpTime.getComponent(20, 160),
                 OpCode.getComponent(),
                 Operator.getComponent(),
                 ShortNotice.getComponent(),

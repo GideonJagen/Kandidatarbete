@@ -11,7 +11,7 @@ class Warnings_widget:
             id="filetype-warning",
             is_open=False,
             children=[
-                dbc.ModalHeader("Wrong filetype"),
+                dbc.ModalHeader("File not loaded: wrong filetype"),
                 dbc.ModalBody("Make sure the file is of type: .csv"),
                 dbc.ModalFooter(
                     children=[dbc.Button("Close", id="filetype_warning_close_button")]

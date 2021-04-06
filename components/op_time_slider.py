@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 
 
 class OpTime:
-    STANDARD_VALUE = [5, 120]  # TODO Uppdatera baserat på datan.
+    STANDARD_VALUE = [10, 200]  # TODO Uppdatera baserat på datan.
 
     @staticmethod
     def getComponent(min_time, max_time):
@@ -28,7 +28,7 @@ class OpTime:
             max=max_time,
             marks={
                 i: "{}min".format(i) if (i == min_time or i == max_time) else f"{i}"
-                for i in range(min_time, max_time + 5, 5)
+                for i in range(min_time, max_time + 20, 20)
             },
             value=OpTime.STANDARD_VALUE,
             step=5,

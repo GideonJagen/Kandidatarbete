@@ -43,15 +43,41 @@ class UploadWidget:
             ),
             prevent_initial_call=True,
         )
-        def show_load_button(filename, n_clicks):
+        def valid_upload(filename, n_clicks):
+            """
+            :param filename: name of the loaded file
+            :param n_clicks: not used, only there because button is input for callback
+            :return: Bool, String, Bool representing load_collapse property is_open, file_label, filetype-warning
+            """
+
             if isinstance(filename, str) and filename.endswith(".csv"):
-                return True, filename, False
+                return True, filename, False  # if csv file, show load button
             context = dash.callback_context
             if (
                 context.triggered[0]["prop_id"].split(".")[0]
                 == "filetype_warning_close_button"
             ):
-                return False, "Välj ny fil", False
-            return False, "Välj ny fil", True
+                return (
+                    False,
+                    "Välj ny fil",
+                    False,
+                )  # if close button in warning, close warning
+            return False, "Välj ny fil", True  # if invalid file, display warning
+
+        return app
+
+    @staticmethod
+    def add_load_button_callback(app):
+        @app.callback(
+            Output(component_id="load_button", component_property="n_clicks"),
+            Input(component_id="load_button", component_property="n_clicks"),
+            Input(component_id="upload", component_property="filename"),
+            Input(component_id="upload", component_property="contents"),
+            prevent_initial_call=True,
+        )
+        def load_data(n_clicks, filename, contents):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "load_button":
+                LoadedData.load_data(filename, contents)
 
         return app

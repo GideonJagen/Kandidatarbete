@@ -60,6 +60,7 @@ class SearchResult:
         @app.callback(
             Output(component_id="search_result", component_property="data"),
             Output(component_id="number_of_patients", component_property="children"),
+            Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
@@ -70,8 +71,6 @@ class SearchResult:
             ),
             Input(component_id="caretype_radiobuttons", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
-            Input(component_id="upload", component_property="filename"),
-            Input(component_id="upload", component_property="contents"),
             Input(component_id="load_button", component_property="n_clicks"),
         )
         def update_data(
@@ -83,16 +82,14 @@ class SearchResult:
             area,
             care_type,
             op_code,
-            filename,
-            content,
             load_button,
         ):
             # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
-            context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "load_button":
-                LoadedData.load_data(filename, content)
-
+            unique = [
+                {"label": code, "value": code}
+                for code in LoadedData.get_unique_values("OpkortText")
+            ]
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
@@ -105,6 +102,6 @@ class SearchResult:
             }
             result = DataFilterer.search_data(inputs)
 
-            return result["data"], result["number_of_patients"]
+            return result["data"], result["number_of_patients"], unique
 
         return app

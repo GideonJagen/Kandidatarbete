@@ -59,6 +59,7 @@ app.layout = html.Div(
 )
 
 app = UploadWidget.add_upload_widget_callback(app)
+app = UploadWidget.add_load_button_callback(app)
 app = SearchResult.search_result_callback(app)
 app = OpTime.add_op_time_callback(app)
 app = Caretype.add_caretype_callback(app)

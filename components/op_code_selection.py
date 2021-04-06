@@ -8,17 +8,7 @@ from dash.dependencies import Input, Output
 class OpCode:
     STANDARD_VALUE_DD = None
     STANDARD_VALUE_OPT = "Visa alla"
-    STANDARD_OP_CODES = [
-        "NH132",
-        "SU145",
-        "LU987",
-        "NX132",
-        "SX145",
-        "LX987",
-        "ND766",
-        "QD824",
-        "ED568",
-    ]  # Made up for testing purposes
+    STANDARD_OP_CODES = []  # Made up for testing purposes
 
     @staticmethod
     def getComponent():
