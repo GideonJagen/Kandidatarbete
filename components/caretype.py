@@ -37,7 +37,7 @@ class Caretype:
             Output(component_id="caretype_radiobuttons", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_opTime(n_clicks):
+        def reset_component(n_clicks):
             return Caretype.STANDARD_VALUE
 
         return app

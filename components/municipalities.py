@@ -39,7 +39,7 @@ class Municipalities:
             ),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_opTime(n_clicks):
+        def reset_component(n_clicks):
             return Municipalities.STANDARD_VALUE
 
         return app

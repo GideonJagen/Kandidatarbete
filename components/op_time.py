@@ -41,7 +41,7 @@ class OpTime:
             Output(component_id="opTime_slider", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_op_time(n_clicks):
+        def reset_component(n_clicks):
             return OpTime.STANDARD_VALUE
 
         return app

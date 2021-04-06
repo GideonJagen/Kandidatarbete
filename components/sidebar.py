@@ -3,12 +3,12 @@ import dash_html_components as html
 
 from dash.dependencies import Input, Output
 
-from components.op_code_selection import OpCode
-from components.op_time_slider import OpTime
+from components.op_code import OpCode
+from components.op_time import OpTime
 from components.statistics_code import StatisticsCode
 from components.caretype import Caretype
 from components.age import Age
-from components.anestesi import Anaesthetic
+from components.anesthesia import Anesthesia
 from components.asa import Asa
 from components.municipalities import Municipalities
 from components.operator import Operator
@@ -56,7 +56,7 @@ class SideBar:
             children=[
                 Caretype.get_component(),
                 Municipalities.get_component(),
-                Anaesthetic.get_component(),
+                Anesthesia.get_component(),
                 Age.get_component(),
                 StatisticsCode.get_component(),
                 Asa.get_component(),

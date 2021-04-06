@@ -11,17 +11,17 @@ from dash.dependencies import Input, Output, State
 #   för att slippa bläddra fram o tillbaka
 
 from components.age import Age
-from components.anestesi import Anaesthetic
+from components.anesthesia import Anesthesia
 from components.asa import Asa
 from components.reset_filter_button import ResetFilterButton
 from components.municipalities import Municipalities
 from components.search_result import SearchResult
 from components.caretype import Caretype
-from components.op_time_slider import OpTime
+from components.op_time import OpTime
 from components.statistics_code import StatisticsCode
-from components.op_code_selection import OpCode
+from components.op_code import OpCode
 from components.operator import Operator
-from components.number_patients import PatientCount
+from components.patient_count import PatientCount
 from components.short_notice import ShortNotice
 from components.sidebar import SideBar
 from data_handler import DataFilterer
@@ -67,7 +67,7 @@ app = StatisticsCode.add_statistics_code_callback(app)
 app = Asa.add_asa_callback(app)
 app = Municipalities.add_municipalities_callback(app)
 app = Age.add_age_callback(app)
-app = Anaesthetic.add_anaesthetic_callback(app)
+app = Anesthesia.add_anesthesia_callback(app)
 app = OpCode.add_op_code_callback(app)
 app = Operator.add_operator_callback(app)
 app = SideBar.add_sidebar_callbacks(app)

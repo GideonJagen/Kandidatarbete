@@ -36,7 +36,7 @@ class Age:
             Output(component_id="age", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_opTime(n_clicks):
+        def reset_component(n_clicks):
             return [Age.MIN_AGE, Age.MAX_AGE]
 
         return app
