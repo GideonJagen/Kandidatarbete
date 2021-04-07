@@ -1,15 +1,13 @@
-import dash
 import dash_html_components as html
 
 
-class NumberPatients:
+class PatientCount:
     @staticmethod
-    def number_patients():
-
+    def get_component():
         widget = html.Div(
             children=[
                 # add icon or something
-                html.H4(id="number patients"),
+                html.H4(id="number_of_patients"),
             ]
         )
         return widget

@@ -1,16 +1,16 @@
-import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
-from data_handler import DataFilterer, LoadedData
-import dash_bootstrap_components as dbc
+
+from data_handling import DataFilterer, LoadedData
+
 
 # TODO Make callback return a dictionary with inputs
 
 
 class SearchResult:
     @staticmethod
-    def search_result():
+    def get_component():
         cols = [
             "Behandlingsnr",
             "Anmälningstidpunkt",
@@ -56,20 +56,20 @@ class SearchResult:
         return widget
 
     @staticmethod
-    def search_result_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="search_result", component_property="data"),
-            Output(component_id="number patients", component_property="children"),
+            Output(component_id="number_of_patients", component_property="children"),
+            Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
-            Input(component_id="anestesi_checklist", component_property="value"),
+            Input(component_id="anaesthesia_checklist", component_property="value"),
             Input(component_id="statistics_dropdown", component_property="value"),
-            Input(component_id="kommuner_radiobuttons", component_property="value"),
-            Input(component_id="vardform_radiobuttons", component_property="value"),
+            Input(component_id="municipalities_radioitems", component_property="value"),
+            Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
-            Input(component_id="upload", component_property="filename"),
-            Input(component_id="upload", component_property="contents"),
+            Input(component_id="load_button", component_property="n_clicks"),
         )
         def update_data(
             asa,
@@ -78,17 +78,16 @@ class SearchResult:
             anesthesia,
             stat_code,
             area,
-            vardform,
+            care_type,
             op_code,
-            filename,
-            content,
+            load_button,
         ):
             # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
-            context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
-                LoadedData.load_data(filename, content)
-
+            unique = [
+                {"label": code, "value": code}
+                for code in LoadedData.get_unique_values("OpkortText")
+            ]
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
@@ -97,10 +96,10 @@ class SearchResult:
                 "stat_code": stat_code,
                 "anesthesia": anesthesia,
                 "area": area,
-                "vardform": vardform,
+                "caretype": care_type,
             }
             result = DataFilterer.search_data(inputs)
 
-            return result["data"], result["number patients"]
+            return result["data"], result["number_of_patients"], unique
 
         return app

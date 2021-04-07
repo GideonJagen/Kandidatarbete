@@ -1,37 +1,21 @@
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
-import dash_html_components as html
-import pandas as pd
+import dash_core_components as dcc
 from dash.dependencies import Input, Output
 
 
-class OpCodeSelection:
+class OpCode:
     STANDARD_VALUE_DD = None
     STANDARD_VALUE_OPT = "Visa alla"
-    STANDARD_OP_CODES = [
-        "NH132",
-        "SU145",
-        "LU987",
-        "NX132",
-        "SX145",
-        "LX987",
-        "ND766",
-        "QD824",
-        "ED568",
-    ]  # Made up for testing purposes
+    STANDARD_OP_CODES = []  # Made up for testing purposes
 
     @staticmethod
-    def op_code_selection():
+    def get_component():
         """
         Highest hierarcy widget of opCode_selection function
         """
-        widget = html.Div(
+        widget = dbc.FormGroup(
             id="opCode_selection",
-            children=[
-                html.H4("Operationskod"),
-                # OpCodeSelection._opCode_options(),
-                dbc.Col([OpCodeSelection._op_code_dropdown()], style={"width": "50%"}),
-            ],
+            children=[dbc.Label("Operationskod"), OpCode._op_code_dropdown()],
         )
         return widget
 
@@ -42,7 +26,7 @@ class OpCodeSelection:
         """
 
         options = ["Visa alla", "Exkludera", "Visa endast"]
-        widget = dcc.RadioItems(
+        widget = dbc.RadioItems(
             id="opCode_options",
             options=[{"label": opt, "value": opt} for opt in options],
             labelStyle={"display": "inline-block"},
@@ -61,19 +45,18 @@ class OpCodeSelection:
             multi=True,
             value=[],
             options=[
-                {"label": code, "value": code}
-                for code in OpCodeSelection.STANDARD_OP_CODES
+                {"label": code, "value": code} for code in OpCode.STANDARD_OP_CODES
             ],  # list builder to create dropdown options,
         )
         return widget
 
     @staticmethod
-    def add_op_code_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_opTime(n_clicks):
-            return OpCodeSelection.STANDARD_VALUE_DD
+        def reset_component(n_clicks):
+            return OpCode.STANDARD_VALUE_DD
 
         return app

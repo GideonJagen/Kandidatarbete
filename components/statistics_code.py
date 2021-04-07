@@ -1,19 +1,19 @@
-import dash_core_components as dcc
-import dash_html_components as html
 import dash_bootstrap_components as dbc
+import dash_core_components as dcc
 from dash.dependencies import Input, Output
 
 
-class StatisticsCodeWidget:
+class StatisticsCode:
     STANDARD_VALUE = []
+    SELECT_STAT_CODES = "Välj statistikkoder"
 
     @staticmethod
-    def statistics_code_widget():
+    def get_component():
         widget = dbc.FormGroup(
             id="statistics_code_widget",
             children=[
                 dbc.Label("Statistikkod"),
-                StatisticsCodeWidget._statistics_code_dropdown(),
+                StatisticsCode._statistics_code_dropdown(),
             ],
         )
         return widget
@@ -34,19 +34,19 @@ class StatisticsCodeWidget:
         dropdown = dcc.Dropdown(
             id="statistics_dropdown",
             options=codes,
-            placeholder="Välj statistikkoder",
+            placeholder=StatisticsCode.SELECT_STAT_CODES,
             value=[],
             multi=True,
         )
         return dropdown
 
     @staticmethod
-    def add_statistics_code_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="statistics_dropdown", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_opTime(n_clicks):
-            return StatisticsCodeWidget.STANDARD_VALUE
+        def reset_component(n_clicks):
+            return StatisticsCode.STANDARD_VALUE
 
         return app

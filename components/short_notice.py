@@ -1,13 +1,11 @@
-import dash_core_components as dcc
-import dash_bootstrap_components as dbc
-import dash_html_components as html
-from dash.dependencies import Input, Output, State
 import dash
+import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output
 
 
-class ShortNoticeWidget:
+class ShortNotice:
     @staticmethod
-    def short_notice_widget():
+    def get_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kort varsel"),
@@ -46,7 +44,7 @@ class ShortNoticeWidget:
         return widget
 
     @staticmethod
-    def add_short_notice_collapse_callback(app):
+    def add_collapse_callback(app):
         @app.callback(
             Output(component_id="collapse", component_property="is_open"),
             Output(component_id="short_notice_min", component_property="value"),
@@ -71,7 +69,7 @@ class ShortNoticeWidget:
         return app
 
     @staticmethod
-    def add_short_notice_input_callback(app):
+    def add_input_callback(app):
         @app.callback(
             Output(component_id="short_notice_min", component_property="valid"),
             Output(component_id="short_notice_min", component_property="invalid"),

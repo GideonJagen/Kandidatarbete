@@ -1,15 +1,12 @@
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-class AsaWidget:
-
+class Asa:
     STANDARD_VALUE = []  # Basera på data
 
     @staticmethod
-    def asa_widget():
+    def get_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label(
@@ -31,12 +28,12 @@ class AsaWidget:
         return widget
 
     @staticmethod
-    def add_asa_callback(app):
+    def add_callback(app):
         @app.callback(
             Output(component_id="asa_checklist", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_opTime(n_clicks):
-            return AsaWidget.STANDARD_VALUE
+        def reset_component(n_clicks):
+            return Asa.STANDARD_VALUE
 
         return app

@@ -1,7 +1,7 @@
-import pandas as pd
 import datetime
 import random
-from datetime import timedelta
+
+import pandas as pd
 
 
 def gen_weekday_range(start, end):

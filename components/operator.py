@@ -1,12 +1,10 @@
-import dash_core_components as dcc
+import dash
 import dash_bootstrap_components as dbc
-import dash_html_components as html
+import dash_core_components as dcc
 from dash.dependencies import Input, Output
 
 
-class OperatorWidget:
-    STANDARD_VALUE_RI = "all"
-    STANDARD_VALUE_DD = None
+class Operator:
     STANDARD_OPERATORS = [
         "Clara",
         "David",
@@ -17,91 +15,105 @@ class OperatorWidget:
     ]  # Made up for testing purposes
 
     @staticmethod
-    def operator_widget():
+    def get_component():
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Operatör"),
-                OperatorWidget._operator_radiobuttons(),
-                OperatorWidget._operator_dropdown(),
+                Operator._operator_radioitems(),
+                Operator._operator_collapse(),
             ],
         )
         return widget
 
     @staticmethod
-    def _operator_radiobuttons():
+    def _operator_radioitems():
         options = [
             {"label": "Visa alla", "value": "all"},
+            {"label": "Visa endast icke tilldelade patienter", "value": "blank"},
             {"label": "Filtrera efter operatör", "value": "operator"},
-            {"label": "Visa endast icke-tilldelade patienter", "value": "blank"},
         ]
 
         widget = dbc.RadioItems(
-            id="operator_radiobuttons",
+            id="operator_radioitems",
             options=options,
-            value=OperatorWidget.STANDARD_VALUE_RI,
+            value="all",
         )
         return widget
 
     @staticmethod
     def _operator_dropdown():
-
-        widget = html.Div(
-            [
-                dcc.Dropdown(
-                    id="operator_dropdown",
-                    placeholder="Välj operatör",
-                    multi=True,
-                    value=OperatorWidget.STANDARD_VALUE_DD,
-                    options=[
-                        {"label": operator, "value": operator}
-                        for operator in OperatorWidget.STANDARD_OPERATORS
-                    ],
-                    style={"display": "block"},
-                )
-            ]
+        widget = dcc.Dropdown(
+            id="operator_dropdown",
+            placeholder="Välj operatör",
+            multi=True,
+            value=None,
+            options=[
+                {"label": operator, "value": operator}
+                for operator in Operator.STANDARD_OPERATORS
+            ],
+            style={"display": "block", "min-width": "15em"},
         )
         return widget
 
     @staticmethod
-    def add_operator_callbacks(app):
-        app = OperatorWidget.reset_operator_ri_callback(app)
-        app = OperatorWidget.reset_operator_dd_callback(app)
-        app = OperatorWidget.show_hide_element_callback(app)
-        return app
-
-    @staticmethod
-    def reset_operator_ri_callback(app):
-        @app.callback(
-            Output(component_id="operator_radiobuttons", component_property="value"),
-            Input(component_id="reset_filter_button", component_property="n_clicks"),
+    def _no_operator_checkbox():
+        component = dbc.FormGroup(
+            [
+                dbc.Checkbox(
+                    id="no_operator_checkbox",
+                    className="form-check-input",
+                    checked=False,
+                ),
+                dbc.Label(
+                    "Inkludera även icke tilldelade patienter",
+                    html_for="standalone-checkbox",
+                    className="form-check-label",
+                ),
+            ],
+            check=True,
         )
-        def reset_operator_ri(n_clicks):
-            return OperatorWidget.STANDARD_VALUE_RI
-
-        return app
+        return component
 
     @staticmethod
-    def reset_operator_dd_callback(app):
+    def _operator_collapse():
+        widget = dbc.Collapse(
+            id="operator_collapse",
+            # style={"width": "50em"},
+            children=[
+                dbc.Form(
+                    [
+                        dbc.FormGroup(Operator._operator_dropdown(), className="mx-3"),
+                        Operator._no_operator_checkbox(),
+                    ],
+                    style={"visibility": "visible"},
+                    id="operator_dropdown_and_checkbox",
+                    inline=True,
+                )
+            ],
+        )
+        return widget
+
+    @staticmethod
+    def add_callback(app):
         @app.callback(
+            Output(component_id="operator_collapse", component_property="is_open"),
+            Output(component_id="operator_radioitems", component_property="value"),
             Output(component_id="operator_dropdown", component_property="value"),
+            Output(component_id="no_operator_checkbox", component_property="checked"),
+            Input(component_id="operator_radioitems", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
-        def reset_operator_dd(visibility_state):
-            if visibility_state == "all" or visibility_state == "blank":
-                return OperatorWidget.STANDARD_VALUE_DD
-
-        return app
-
-    @staticmethod
-    def show_hide_element_callback(app):
-        @app.callback(
-            Output(component_id="operator_dropdown", component_property="style"),
-            Input(component_id="operator_radiobuttons", component_property="value"),
-        )
-        def show_hide_element(visibility_state):
-            if visibility_state == "operator":
-                return {"display": "block"}
-            if visibility_state == "all" or visibility_state == "blank":
-                return {"display": "none"}
+        def collapse(value, reset):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
+                return False, "all", None, False
+            elif value == "operator":
+                return True, "operator", None, False
+            return (
+                False,
+                value,
+                None,
+                False,
+            )
 
         return app
