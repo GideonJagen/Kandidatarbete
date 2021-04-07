@@ -43,15 +43,21 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            className=".col-sm-",
         )
         return component
 
+    # TODO: Remove hardcoded styling
     @staticmethod
     def _sidebar_button():
-        component = dbc.Button("X", id="btn_sidebar", className="btn btn-warning")
+        component = dbc.Button(
+            "X",
+            id="btn_sidebar",
+            className="btn btn-warning",
+            style={"max-height": "85%"},
+        )
         return component
 
+    # TODO: Remove hardcoded styling
     @staticmethod
     def _filter_form():
         component = dbc.Form(
@@ -67,12 +73,12 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
-            style={
-                "width": "20em",
-            },
+            className="overflow-auto",
+            style={"width": "24em", "max-height": "75%"},
         )
         return component
 
+    # TODO: Possibly modify such that the class style is not overwritten
     @staticmethod
     def add_callback(app):
         @app.callback(
