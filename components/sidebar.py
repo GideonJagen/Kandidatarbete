@@ -14,7 +14,7 @@ from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
 
 
-class SideBar:
+class Sidebar:
     SEARCH_FILTER = "Sökfilter"
     OPEN_FILTER = "Öppna filter"
     REQUEST_FILL_FORM = "Var god fyll i relevanta sökfält"
@@ -24,7 +24,7 @@ class SideBar:
     @staticmethod
     def get_component():
         component = dbc.Row(
-            children=[SideBar._sidebar_content(), SideBar._sidebar_button()],
+            children=[Sidebar._sidebar_content(), Sidebar._sidebar_button()],
             id="sidebar",
             className="p-1",
         )
@@ -34,10 +34,10 @@ class SideBar:
     def _sidebar_content():
         component = dbc.Col(
             children=[
-                html.H2(SideBar.SEARCH_FILTER),
+                html.H2(Sidebar.SEARCH_FILTER),
                 html.Hr(),
-                html.P(SideBar.REQUEST_FILL_FORM),
-                SideBar._filter_form(),
+                html.P(Sidebar.REQUEST_FILL_FORM),
+                Sidebar._filter_form(),
             ],
             id="sidebar_content",
             style={"transition": "0.5s"},
@@ -74,9 +74,9 @@ class SideBar:
             Input(component_id="btn_sidebar", component_property="n_clicks"),
         )
         def _toggle_sidebar(n_clicks):
-            SideBar.is_open = not SideBar.is_open
+            Sidebar.is_open = not Sidebar.is_open
             # return {"width": "auto", "display": "block"} if SideBar.is_open else {"width": "0px", "display": "none"}
-            return {"display": "block"} if SideBar.is_open else {"display": "none"}
+            return {"display": "block"} if Sidebar.is_open else {"display": "none"}
             # return {"visibility": "visible"} if SideBar.is_open else {"visibility": "collapse"}
 
         return app

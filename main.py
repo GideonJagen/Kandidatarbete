@@ -15,7 +15,7 @@ from components.patient_count import PatientCount
 from components.reset_filter_button import ResetFilterButton
 from components.search_result import SearchResult
 from components.short_notice import ShortNotice
-from components.sidebar import SideBar
+from components.sidebar import Sidebar
 from components.statistics_code import StatisticsCode
 from components.warnings import Warnings
 
@@ -46,7 +46,7 @@ app.layout = html.Div(
     children=[
         dbc.Row(
             [
-                SideBar.get_component(),
+                Sidebar.get_component(),
                 content,
             ],
             className="p-3",
@@ -66,7 +66,7 @@ app = Age.add_callback(app)
 app = Anesthesia.add_callback(app)
 app = OpCode.add_callback(app)
 app = Operator.add_callback(app)
-app = SideBar.add_callback(app)
+app = Sidebar.add_callback(app)
 app = ShortNotice.add_input_callback(app)
 app = ShortNotice.add_collapse_callback(app)
 app.run_server(debug=True)

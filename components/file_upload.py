@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
 
-from data_handler import LoadedData
+from data_handling import LoadedData
 
 
 # Todo to avoid an even more massive callback (search_result) i decided to add a button with the functionality
