@@ -24,7 +24,10 @@ class Sidebar:
     @staticmethod
     def get_component():
         component = dbc.Row(
-            children=[Sidebar._sidebar_content(), Sidebar._sidebar_button()],
+            children=[
+                Sidebar._sidebar_content(),
+                Sidebar._sidebar_button(),
+            ],
             id="sidebar",
             className="p-1",
         )
@@ -40,7 +43,7 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            style={"transition": "0.5s"},
+            className=".col-sm-",
         )
         return component
 
@@ -64,6 +67,9 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
+            style={
+                "width": "20em",
+            },
         )
         return component
 
