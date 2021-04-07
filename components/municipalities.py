@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output
 
 
 class Municipalities:
-    STANDARD_VALUE = "all"
+    STANDARD_VALUE = "Hela VGR"
 
     @staticmethod
     def get_component():
@@ -18,8 +18,8 @@ class Municipalities:
     @staticmethod
     def _municipalities_radioitems():
         options = [
-            {"label": "Hela VGR", "value": "all"},
-            {"label": "Kranskommuner", "value": "close"},
+            {"label": "Hela VGR", "value": "Hela VGR"},
+            {"label": "Kranskommuner", "value": "Kranskommuner"},
         ]
 
         widget = dbc.RadioItems(
@@ -41,3 +41,7 @@ class Municipalities:
             return Municipalities.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Kommuner: {value}"

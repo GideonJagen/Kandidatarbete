@@ -97,3 +97,7 @@ class ShortNotice:
             return min_valid, min_invalid, max_valid, max_invalid
 
         return app
+
+    @staticmethod
+    def value_to_string(value_min, value_max):
+        return f"Kort varsel: {value_min if value_min else 'Min'} - {value_max if value_max else 'Max' } dagar"

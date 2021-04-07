@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output
 
 
 class CareType:
-    STANDARD_VALUE = "all"
+    STANDARD_VALUE = "Alla"
 
     @staticmethod
     def get_component():
@@ -15,7 +15,7 @@ class CareType:
         options = [
             {"label": "Öppenvård", "value": "Öppen vård"},
             {"label": "Slutenvård", "value": "Sluten vård"},
-            {"label": "Visa alla", "value": "all"},
+            {"label": "Visa alla", "value": "Alla"},
         ]
         widget = dbc.RadioItems(
             id="care_type_radioitems",
@@ -35,3 +35,7 @@ class CareType:
             return CareType.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Vårdtyp: {value}"

@@ -44,3 +44,7 @@ class OpTime:
             return OpTime.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Operationstid: {value[0]} - {value[1]}"

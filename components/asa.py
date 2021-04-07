@@ -19,7 +19,7 @@ class Asa:
                         {"label": "ASA 2", "value": 2},
                         {"label": "ASA 3", "value": 3},
                         {"label": "ASA 4", "value": 4},
-                        {"label": "Ej specificerat", "value": -1},
+                        {"label": "Saknas", "value": "Saknas"},
                     ],
                     labelStyle={"display": "inline-block"},
                 ),
@@ -37,3 +37,7 @@ class Asa:
             return Asa.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"ASA-klass: {', '.join([str(val) for val in value]) if len(value) > 0 else 'Alla' }"

@@ -16,9 +16,9 @@ class Anesthesia:
     def _anesthesia_checklist():
         checklist = dbc.Checklist(
             options=[
-                {"label": "Ej klar", "value": "ek"},
-                {"label": "Påbörjad", "value": "pb"},
-                {"label": "Klar", "value": "klar"},
+                {"label": "Ej klar", "value": "Ej klar"},
+                {"label": "Påbörjad", "value": "Påbörjad"},
+                {"label": "Klar", "value": "Klar"},
             ],
             id="anaesthesia_checklist",
         )
@@ -35,3 +35,7 @@ class Anesthesia:
             return Anesthesia.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Anestesi: {', '.join([str(val) for val in value]) if len(value) > 0 else 'Alla'}"

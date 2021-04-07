@@ -18,6 +18,7 @@ from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
 from components.statistics_code import StatisticsCode
 from components.warnings import Warnings
+from components.active_filters import ActiveFilters
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -32,6 +33,7 @@ app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
+        ActiveFilters.get_component(),
         FileUpload.get_component(),  # TODO Hitta bättre plats
         ResetFilterButton.get_component(),
         PatientCount.get_component(),
@@ -69,4 +71,5 @@ app = Operator.add_callback(app)
 app = Sidebar.add_callback(app)
 app = ShortNotice.add_input_callback(app)
 app = ShortNotice.add_collapse_callback(app)
+app = ActiveFilters.add_callback(app)
 app.run_server(debug=True)

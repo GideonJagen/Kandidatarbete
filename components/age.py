@@ -39,3 +39,7 @@ class Age:
             return [Age.MIN_AGE, Age.MAX_AGE]
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Ålder: {value[0]} - {value[1]} år"

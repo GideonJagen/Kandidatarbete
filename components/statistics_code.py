@@ -50,3 +50,7 @@ class StatisticsCode:
             return StatisticsCode.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Statistikkod: {' ,'.join([str(s) for s in value]) if len(value) > 0 else 'Alla'}"

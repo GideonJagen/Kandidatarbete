@@ -117,3 +117,7 @@ class Operator:
             )
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Operatör: {value if value else 'Alla'}"

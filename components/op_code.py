@@ -60,3 +60,7 @@ class OpCode:
             return OpCode.STANDARD_VALUE_DD
 
         return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Operationskod: {value if value else 'Alla'}"
