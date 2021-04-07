@@ -99,5 +99,17 @@ class ShortNotice:
         return app
 
     @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(component_id="active_short_notice", component_property="children"),
+            Input(component_id="short_notice_min", component_property="value"),
+            Input(component_id="short_notice_max", component_property="value"),
+        )
+        def update_str(value_min, value_max):
+            return ShortNotice.value_to_string(value_min, value_max)
+
+        return app
+
+    @staticmethod
     def value_to_string(value_min, value_max):
         return f"Kort varsel: {value_min if value_min else 'Min'} - {value_max if value_max else 'Max' } dagar"

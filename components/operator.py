@@ -119,5 +119,16 @@ class Operator:
         return app
 
     @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(component_id="active_operator", component_property="children"),
+            Input(component_id="operator_dropdown", component_property="value"),
+        )
+        def update_str(value):
+            return Operator.value_to_string(value)
+
+        return app
+
+    @staticmethod
     def value_to_string(value):
         return f"Operatör: {value if value else 'Alla'}"

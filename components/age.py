@@ -41,5 +41,16 @@ class Age:
         return app
 
     @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(component_id="active_age", component_property="children"),
+            Input(component_id="age", component_property="value"),
+        )
+        def update_str(value):
+            return Age.value_to_string(value)
+
+        return app
+
+    @staticmethod
     def value_to_string(value):
         return f"Ålder: {value[0]} - {value[1]} år"

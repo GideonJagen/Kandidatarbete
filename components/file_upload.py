@@ -25,7 +25,13 @@ class FileUpload:
                 dbc.Collapse(
                     id="load_collapse",
                     # TODO gör typ grön när datan visas, dvs när knappen klickas
-                    children=[dbc.Button(id="load_button", children=["Visa data"])],
+                    children=[
+                        dbc.Button(
+                            id="load_button",
+                            children=["Visa data"],
+                            className="btn btn-success",
+                        )
+                    ],
                 ),
             ],
         )
