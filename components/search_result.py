@@ -66,10 +66,8 @@ class SearchResult:
             Input(component_id="age", component_property="value"),
             Input(component_id="anaesthesia_checklist", component_property="value"),
             Input(component_id="statistics_dropdown", component_property="value"),
-            Input(
-                component_id="municipalities_radiobuttons", component_property="value"
-            ),
-            Input(component_id="caretype_radiobuttons", component_property="value"),
+            Input(component_id="municipalities_radioitems", component_property="value"),
+            Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="load_button", component_property="n_clicks"),
         )

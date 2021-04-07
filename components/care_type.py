@@ -7,20 +7,18 @@ class CareType:
 
     @staticmethod
     def get_component():
-        widget = dbc.FormGroup(
-            [dbc.Label("Vårdform"), CareType._caretype_radiobuttons()]
-        )
+        widget = dbc.FormGroup([dbc.Label("Vårdform"), CareType._caretype_radioitems()])
         return widget
 
     @staticmethod
-    def _caretype_radiobuttons():
+    def _caretype_radioitems():
         options = [
             {"label": "Öppenvård", "value": "Öppen vård"},
             {"label": "Slutenvård", "value": "Sluten vård"},
             {"label": "Visa alla", "value": "all"},
         ]
         widget = dbc.RadioItems(
-            id="caretype_radiobuttons",
+            id="care_type_radioitems",
             options=options,
             labelStyle={"display": "block"},
             value="all",
@@ -30,7 +28,7 @@ class CareType:
     @staticmethod
     def add_callback(app):
         @app.callback(
-            Output(component_id="caretype_radiobuttons", component_property="value"),
+            Output(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):

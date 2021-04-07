@@ -10,20 +10,20 @@ class Municipalities:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label("Kommuner"),
-                Municipalities._municipalities_radiobuttons(),
+                Municipalities._municipalities_radioitems(),
             ],
         )
         return widget
 
     @staticmethod
-    def _municipalities_radiobuttons():
+    def _municipalities_radioitems():
         options = [
             {"label": "Hela VGR", "value": "all"},
             {"label": "Kranskommuner", "value": "close"},
         ]
 
         widget = dbc.RadioItems(
-            id="municipalities_radiobuttons",
+            id="municipalities_radioitems",
             options=options,
             value=Municipalities.STANDARD_VALUE,
         )
@@ -33,7 +33,7 @@ class Municipalities:
     def add_callback(app):
         @app.callback(
             Output(
-                component_id="municipalities_radiobuttons", component_property="value"
+                component_id="municipalities_radioitems", component_property="value"
             ),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
