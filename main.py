@@ -2,6 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
+from components.active_filters import ActiveFilters
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
@@ -18,7 +19,6 @@ from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
 from components.statistics_code import StatisticsCode
 from components.warnings import Warnings
-from components.active_filters import ActiveFilters
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
