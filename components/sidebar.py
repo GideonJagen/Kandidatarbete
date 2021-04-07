@@ -78,11 +78,10 @@ class Sidebar:
         @app.callback(
             Output(component_id="sidebar_content", component_property="style"),
             Input(component_id="btn_sidebar", component_property="n_clicks"),
+            prevent_initial_call=True,
         )
         def _toggle_sidebar(n_clicks):
             Sidebar.is_open = not Sidebar.is_open
-            # return {"width": "auto", "display": "block"} if SideBar.is_open else {"width": "0px", "display": "none"}
             return {"display": "block"} if Sidebar.is_open else {"display": "none"}
-            # return {"visibility": "visible"} if SideBar.is_open else {"visibility": "collapse"}
 
         return app
