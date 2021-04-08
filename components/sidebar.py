@@ -29,8 +29,11 @@ class Sidebar:
                 Sidebar._sidebar_button(),
             ],
             id="sidebar",
-            style={"background-color": "#DCEAEF"},
             className="p-1",
+            style={
+                "background-color": "#DCEAEF",
+                "height": "inherit",
+            },
         )
         return component
 
@@ -42,9 +45,11 @@ class Sidebar:
                 html.P(Sidebar.REQUEST_FILL_FORM),
                 html.Hr(style={"border-width": 4, "border-color": "#6ea6cd"}),
                 Sidebar._filter_form(),
-                html.Hr(),
             ],
             id="sidebar_content",
+            style={
+                "height": "inherit",
+            },
         )
         return component
 
@@ -60,8 +65,9 @@ class Sidebar:
             ],
             id="btn_sidebar",
             color="primary",
-            className="mr-1",
-            style={"max-height": "85%"},
+            style={
+                "height": "inherit",
+            },
         )
         return component
 
@@ -81,8 +87,12 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
-            className="overflow-auto",
-            style={"width": "24em", "max-height": "75%"},
+            # className="overflow-auto",
+            style={
+                "width": "24em",
+                "overflow": "auto",
+                "height": "calc(100% - 122px)",
+            },
         )
         return component
 

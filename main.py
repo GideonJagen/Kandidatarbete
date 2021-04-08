@@ -53,9 +53,11 @@ app.layout = html.Div(
                 Sidebar.get_component(),
                 content,
             ],
-            className="p-3",
+            # className="p-3",
+            style={"margin-right": "0", "margin-left": "0", "height": "100%"},
         ),
     ],
+    style={"height": "100vh"},
 )
 
 app = FileUpload.add_callback(app)
