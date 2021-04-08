@@ -1,4 +1,5 @@
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -8,7 +9,14 @@ class Anesthesia:
     @staticmethod
     def get_component():
         widget = dbc.FormGroup(
-            [dbc.Label("Anestesibedömning"), Anesthesia._anesthesia_checklist()]
+            [
+                dbc.Label(
+                    "Anestesibedömning",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
+                Anesthesia._anesthesia_checklist(),
+            ]
         )
         return widget
 

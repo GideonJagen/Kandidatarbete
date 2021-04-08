@@ -1,4 +1,5 @@
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -7,15 +8,24 @@ class CareType:
 
     @staticmethod
     def get_component():
-        widget = dbc.FormGroup([dbc.Label("Vårdform"), CareType._caretype_radioitems()])
+        widget = dbc.FormGroup(
+            [
+                dbc.Label(
+                    "Vårdform",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
+                CareType._caretype_radioitems(),
+            ]
+        )
         return widget
 
     @staticmethod
     def _caretype_radioitems():
         options = [
+            {"label": "Visa alla", "value": "Alla"},
             {"label": "Öppenvård", "value": "Öppen vård"},
             {"label": "Slutenvård", "value": "Sluten vård"},
-            {"label": "Visa alla", "value": "Alla"},
         ]
         widget = dbc.RadioItems(
             id="care_type_radioitems",

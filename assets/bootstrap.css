@@ -20,7 +20,7 @@
   --info: #fdd990;
   --warning: #fdb366;
   --danger: #d6604d;
-  --light: #fff;
+  --light: #ffffff;
   --dark: #000;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -7006,7 +7006,7 @@ button.bg-dark:focus {
   font-weight: 400 !important; }
 
 .font-weight-bold {
-  font-weight: 700 !important; }
+  font-weight: 500 !important; }
 
 .font-weight-bolder {
   font-weight: bolder !important; }

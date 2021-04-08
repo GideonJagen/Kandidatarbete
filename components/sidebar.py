@@ -29,6 +29,7 @@ class Sidebar:
                 Sidebar._sidebar_button(),
             ],
             id="sidebar",
+            style={"background-color": "#DCEAEF"},
             className="p-1",
         )
         return component
@@ -38,9 +39,10 @@ class Sidebar:
         component = dbc.Col(
             children=[
                 html.H2(Sidebar.SEARCH_FILTER),
-                html.Hr(),
                 html.P(Sidebar.REQUEST_FILL_FORM),
+                html.Hr(style={"border-width": 4, "border-color": "#6ea6cd"}),
                 Sidebar._filter_form(),
+                html.Hr(),
             ],
             id="sidebar_content",
         )
@@ -52,7 +54,8 @@ class Sidebar:
         component = dbc.Button(
             "X",
             id="btn_sidebar",
-            className="btn btn-warning",
+            color="primary",
+            className="mr-1",
             style={"max-height": "85%"},
         )
         return component

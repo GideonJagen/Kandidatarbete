@@ -1,5 +1,6 @@
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -15,7 +16,14 @@ class OpCode:
         """
         widget = dbc.FormGroup(
             id="opCode_selection",
-            children=[dbc.Label("Operationskod"), OpCode._op_code_dropdown()],
+            children=[
+                dbc.Label(
+                    "Operationskod",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
+                OpCode._op_code_dropdown(),
+            ],
         )
         return widget
 

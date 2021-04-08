@@ -1,5 +1,6 @@
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -12,7 +13,11 @@ class OpTime:
         widget = dbc.FormGroup(
             id="opTime_widget",
             children=[
-                dbc.Label("Operationstid"),
+                dbc.Label(
+                    "Operationstid",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
                 OpTime._op_time_slider(min_time, max_time),
             ],
         )
