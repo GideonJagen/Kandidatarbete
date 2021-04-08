@@ -1,5 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -8,7 +9,11 @@ class ShortNotice:
     def get_component():
         widget = dbc.FormGroup(
             children=[
-                dbc.Label("Kort varsel"),
+                dbc.Label(
+                    "Kort varsel",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
                 dbc.RadioItems(
                     id="short_notice_items",
                     options=[

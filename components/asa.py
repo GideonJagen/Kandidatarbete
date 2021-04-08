@@ -1,4 +1,5 @@
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -10,8 +11,10 @@ class Asa:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label(
-                    children="ASA-klass",
+                    "ASA-klass",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
                 dbc.Checklist(
                     id="asa_checklist",
                     options=[

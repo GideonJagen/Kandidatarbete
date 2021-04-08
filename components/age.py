@@ -1,5 +1,6 @@
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
@@ -11,7 +12,11 @@ class Age:
     def get_component():
         widget = dbc.FormGroup(
             [
-                dbc.Label("Ålder"),
+                dbc.Label(
+                    "Ålder",
+                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                ),
+                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
                 dcc.RangeSlider(
                     id="age",
                     min=Age.MIN_AGE,
