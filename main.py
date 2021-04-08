@@ -28,7 +28,7 @@ from components.warnings import Warnings
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__)
 
 content = dbc.Col(
     children=[
