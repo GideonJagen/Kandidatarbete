@@ -21,7 +21,7 @@ class Age:
                     id="age",
                     min=Age.MIN_AGE,
                     max=Age.MAX_AGE,
-                    step=1,
+                    step=None,
                     marks={
                         Age.MIN_AGE: "0",
                         16: "16",

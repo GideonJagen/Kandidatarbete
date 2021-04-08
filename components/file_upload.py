@@ -20,21 +20,18 @@ class FileUpload:
                 dcc.Upload(
                     id="upload",
                     children=[
-                        dbc.Button(
-                            className="btn btn-light btn-link",
-                            id="file-label",
-                            children=["Välj ny fil"],
-                        )
-                    ],
-                ),
-                dbc.Collapse(
-                    id="load_collapse",
-                    # TODO gör typ grön när datan visas, dvs när knappen klickas
-                    children=[
-                        dbc.Button(
-                            id="load_button",
-                            children=["Visa data"],
-                            className="btn btn-success",
+                        dbc.Row(
+                            [
+                                dbc.Button(
+                                    children=["Välj ny fil"],
+                                    color="primary",
+                                ),
+                                dbc.Label(
+                                    id="file-label",
+                                    children="Ingen fil vald",
+                                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                                ),
+                            ]
                         )
                     ],
                 ),
@@ -63,7 +60,11 @@ class FileUpload:
             """
 
             if isinstance(filename, str) and filename.endswith(".csv"):
-                return True, filename, False  # if csv file, show load button
+                return (
+                    True,
+                    f"Vald fil: {filename}",
+                    False,
+                )  # if csv file, show load button
             context = dash.callback_context
             if (
                 context.triggered[0]["prop_id"].split(".")[0]

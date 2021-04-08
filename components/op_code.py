@@ -82,4 +82,4 @@ class OpCode:
 
     @staticmethod
     def value_to_string(value):
-        return f"Operationskod: {value if value else 'Alla'}"
+        return f"Operationskod: {', '.join(value) if value else 'Alla'}"
