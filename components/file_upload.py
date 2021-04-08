@@ -16,11 +16,16 @@ class FileUpload:
     @staticmethod
     def get_component():
         upload = dbc.FormGroup(
-            style={"padding": "1em"},
             children=[
                 dcc.Upload(
                     id="upload",
-                    children=[dbc.Label(id="file-label", children=["Välj ny fil"])],
+                    children=[
+                        dbc.Button(
+                            className="btn btn-light btn-link",
+                            id="file-label",
+                            children=["Välj ny fil"],
+                        )
+                    ],
                 ),
                 dbc.Collapse(
                     id="load_collapse",

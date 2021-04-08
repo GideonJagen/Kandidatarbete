@@ -18,10 +18,54 @@ class ActiveFilters:
     @staticmethod
     def get_component():
         widget = dbc.Table(
+            className="table table-striped table-dark",
             style={"width": "40em"},
             bordered=False,
+            borderless=True,
             id="active_filters",
             children=[html.Tbody(ActiveFilters._build_rows())],
+        )
+        return widget
+
+    @staticmethod
+    def _get_component():
+        widget = dbc.Row(
+            children=[
+                dbc.Col(
+                    children=[
+                        dbc.Row(
+                            children=[
+                                dbc.Label(id="active_age"),
+                                dbc.Label(id="active_asa"),
+                            ]
+                        ),
+                        dbc.Row(
+                            children=[
+                                dbc.Label(id="active_anesthesia"),
+                                dbc.Label(id="active_op_time"),
+                            ]
+                        ),
+                        dbc.Row(
+                            children=[
+                                dbc.Label(id="active_short_notice"),
+                                dbc.Label(id="active_care_type"),
+                            ]
+                        ),
+                        dbc.Row(
+                            children=[
+                                dbc.Label(id="active_op_code"),
+                                dbc.Label(id="active_statistics_code"),
+                            ]
+                        ),
+                        dbc.Row(
+                            children=[
+                                dbc.Label(id="active_municipalities"),
+                                dbc.Label(id="active_operator"),
+                            ]
+                        ),
+                    ]
+                ),
+            ]
         )
         return widget
 
