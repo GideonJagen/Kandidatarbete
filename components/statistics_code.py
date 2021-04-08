@@ -50,3 +50,20 @@ class StatisticsCode:
             return StatisticsCode.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(
+                component_id="active_statistics_code", component_property="children"
+            ),
+            Input(component_id="statistics_dropdown", component_property="value"),
+        )
+        def update_str(value):
+            return StatisticsCode.value_to_string(value)
+
+        return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Statistikkod: {' ,'.join([str(s) for s in value]) if len(value) > 0 else 'Alla'}"

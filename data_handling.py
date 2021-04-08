@@ -36,7 +36,7 @@ class DataFilterer:
                 )
                 | (
                     LoadedData.loaded_data["ASAklass"].isna()
-                    if (-1 in inputs["asa"])
+                    if ("Saknas" in inputs["asa"])
                     else False
                 ),
                 # Check if operation has matching statistcal code
@@ -48,7 +48,7 @@ class DataFilterer:
                 if inputs["op_code"]
                 else True,
                 LoadedData.loaded_data["Vårdform_text"].isin([inputs["caretype"]])
-                if inputs["caretype"] and inputs["caretype"] != "all"
+                if inputs["caretype"] and inputs["caretype"] != "Alla"
                 else True,
             )
         )

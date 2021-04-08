@@ -60,3 +60,18 @@ class OpCode:
             return OpCode.STANDARD_VALUE_DD
 
         return app
+
+    @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(component_id="active_op_code", component_property="children"),
+            Input(component_id="opCode_dropdown", component_property="value"),
+        )
+        def update_str(value):
+            return OpCode.value_to_string(value)
+
+        return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Operationskod: {value if value else 'Alla'}"

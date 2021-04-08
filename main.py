@@ -2,6 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
+from components.active_filters import ActiveFilters
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
@@ -32,6 +33,7 @@ app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
+        ActiveFilters.get_component(),
         FileUpload.get_component(),  # TODO Hitta bättre plats
         ResetFilterButton.get_component(),
         PatientCount.get_component(),
@@ -69,4 +71,16 @@ app = Operator.add_callback(app)
 app = Sidebar.add_callback(app)
 app = ShortNotice.add_input_callback(app)
 app = ShortNotice.add_collapse_callback(app)
+app = Age.add_str_callback(app)
+app = Anesthesia.add_str_callback(app)
+app = Asa.add_str_callback(app)
+app = CareType.add_str_callback(app)
+app = Municipalities.add_str_callback(app)
+app = OpCode.add_str_callback(app)
+app = OpTime.add_str_callback(app)
+app = Operator.add_str_callback(app)
+app = ShortNotice.add_str_callback(app)
+app = StatisticsCode.add_str_callback(app)
+
+
 app.run_server(debug=True)

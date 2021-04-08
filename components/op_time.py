@@ -44,3 +44,18 @@ class OpTime:
             return OpTime.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(component_id="active_op_time", component_property="children"),
+            Input(component_id="opTime_slider", component_property="value"),
+        )
+        def update_str(value):
+            return OpTime.value_to_string(value)
+
+        return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Operationstid: {value[0]} - {value[1]}"

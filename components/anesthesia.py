@@ -16,9 +16,9 @@ class Anesthesia:
     def _anesthesia_checklist():
         checklist = dbc.Checklist(
             options=[
-                {"label": "Ej klar", "value": "ek"},
-                {"label": "Påbörjad", "value": "pb"},
-                {"label": "Klar", "value": "klar"},
+                {"label": "Ej klar", "value": "Ej klar"},
+                {"label": "Påbörjad", "value": "Påbörjad"},
+                {"label": "Klar", "value": "Klar"},
             ],
             id="anaesthesia_checklist",
         )
@@ -35,3 +35,18 @@ class Anesthesia:
             return Anesthesia.STANDARD_VALUE
 
         return app
+
+    @staticmethod
+    def add_str_callback(app):
+        @app.callback(
+            Output(component_id="active_anesthesia", component_property="children"),
+            Input(component_id="anaesthesia_checklist", component_property="value"),
+        )
+        def update_str(value):
+            return Anesthesia.value_to_string(value)
+
+        return app
+
+    @staticmethod
+    def value_to_string(value):
+        return f"Anestesi: {', '.join([str(val) for val in value]) if len(value) > 0 else 'Alla'}"
