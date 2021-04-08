@@ -28,7 +28,9 @@ from components.warnings import Warnings
 # TODO Kolla upp hur man skulle kunna se värdena på patienten man ska ersätta samtidigt som man letar efter en ny,
 #   för att slippa bläddra fram o tillbaka
 
-app = dash.Dash(__name__)
+FA = "https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+
+app = dash.Dash(__name__, external_stylesheets=[FA])
 
 content = dbc.Col(
     children=[
