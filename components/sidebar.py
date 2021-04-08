@@ -24,7 +24,10 @@ class Sidebar:
     @staticmethod
     def get_component():
         component = dbc.Row(
-            children=[Sidebar._sidebar_content(), Sidebar._sidebar_button()],
+            children=[
+                Sidebar._sidebar_content(),
+                Sidebar._sidebar_button(),
+            ],
             id="sidebar",
             className="p-1",
         )
@@ -40,15 +43,21 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            style={"transition": "0.5s"},
         )
         return component
 
+    # TODO: Remove hardcoded styling
     @staticmethod
     def _sidebar_button():
-        component = dbc.Button("X", id="btn_sidebar", className="btn btn-warning")
+        component = dbc.Button(
+            "X",
+            id="btn_sidebar",
+            className="btn btn-warning",
+            style={"max-height": "85%"},
+        )
         return component
 
+    # TODO: Remove hardcoded styling
     @staticmethod
     def _filter_form():
         component = dbc.Form(
@@ -64,19 +73,21 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
+            className="overflow-auto",
+            style={"width": "24em", "max-height": "75%"},
         )
         return component
 
+    # TODO: Possibly modify such that the class style is not overwritten
     @staticmethod
     def add_callback(app):
         @app.callback(
             Output(component_id="sidebar_content", component_property="style"),
             Input(component_id="btn_sidebar", component_property="n_clicks"),
+            prevent_initial_call=True,
         )
         def _toggle_sidebar(n_clicks):
             Sidebar.is_open = not Sidebar.is_open
-            # return {"width": "auto", "display": "block"} if SideBar.is_open else {"width": "0px", "display": "none"}
             return {"display": "block"} if Sidebar.is_open else {"display": "none"}
-            # return {"visibility": "visible"} if SideBar.is_open else {"visibility": "collapse"}
 
         return app
