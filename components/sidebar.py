@@ -53,7 +53,6 @@ class Sidebar:
         )
         return component
 
-    # TODO: Remove hardcoded styling
     @staticmethod
     def _sidebar_button():
         component = dbc.Button(
@@ -71,7 +70,6 @@ class Sidebar:
         )
         return component
 
-    # TODO: Remove hardcoded styling
     @staticmethod
     def _filter_form():
         component = dbc.Form(
@@ -87,11 +85,10 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
-            # className="overflow-auto",
             style={
                 "width": "24em",
                 "overflow": "auto",
-                "height": "calc(100% - 122px)",
+                "height": "calc(100% - 8em)",
             },
         )
         return component
