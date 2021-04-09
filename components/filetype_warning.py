@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 
 
-class Warnings:
+class FiletypeWarning:
     @staticmethod
     def get_component():
         widget = dbc.Modal(
