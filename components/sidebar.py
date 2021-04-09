@@ -30,8 +30,11 @@ class Sidebar:
                 Sidebar._sidebar_button(),
             ],
             id="sidebar",
-            style={"background-color": "#DCEAEF"},
             className="p-1",
+            style={
+                "background-color": "#DCEAEF",
+                "height": "inherit",
+            },
         )
         return component
 
@@ -44,25 +47,31 @@ class Sidebar:
                 html.P(Sidebar.REQUEST_FILL_FORM),
                 html.Hr(style={"border-width": 4, "border-color": "#6ea6cd"}),
                 Sidebar._filter_form(),
-                html.Hr(),
             ],
             id="sidebar_content",
+            style={
+                "height": "inherit",
+            },
         )
         return component
 
-    # TODO: Remove hardcoded styling
     @staticmethod
     def _sidebar_button():
         component = dbc.Button(
-            "X",
+            children=[
+                html.I(
+                    id="sidebar_btn_icon",
+                    className="fas fa-chevron-left",
+                )
+            ],
             id="btn_sidebar",
             color="primary",
-            className="mr-1",
-            style={"max-height": "85%"},
+            style={
+                "height": "inherit",
+            },
         )
         return component
 
-    # TODO: Remove hardcoded styling
     @staticmethod
     def _filter_form():
         component = dbc.Form(
@@ -78,8 +87,11 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
-            className="overflow-auto",
-            style={"width": "24em", "max-height": "75%"},
+            style={
+                "width": "24em",
+                "overflow": "auto",
+                "height": "calc(100% - 8em)",
+            },
         )
         return component
 
@@ -88,11 +100,15 @@ class Sidebar:
     def add_callback(app):
         @app.callback(
             Output(component_id="sidebar_content", component_property="style"),
+            Output(component_id="sidebar_btn_icon", component_property="className"),
             Input(component_id="btn_sidebar", component_property="n_clicks"),
             prevent_initial_call=True,
         )
         def _toggle_sidebar(n_clicks):
             Sidebar.is_open = not Sidebar.is_open
-            return {"display": "block"} if Sidebar.is_open else {"display": "none"}
+            return (
+                {"display": "block"} if Sidebar.is_open else {"display": "none"},
+                "fas fa-chevron-left" if Sidebar.is_open else "fas fa-chevron-right",
+            )
 
         return app
