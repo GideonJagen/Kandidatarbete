@@ -18,7 +18,7 @@ from components.search_result import SearchResult
 from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
 from components.statistics_code import StatisticsCode
-from components.warnings import Warnings
+from components.filetype_warning import FiletypeWarning
 from components.notes import Notes
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
@@ -39,7 +39,7 @@ content = dbc.Col(
         dbc.Row(children=[ActiveFilters.get_component(), Notes.get_component()]),
         PatientCount.get_component(),
         SearchResult.get_component(),
-        Warnings.get_component(),
+        FiletypeWarning.get_component(),
     ],
     id="page-content",
 )
