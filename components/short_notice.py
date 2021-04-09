@@ -10,9 +10,17 @@ class ShortNotice:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label(
-                    "Kort varsel",
+                    html.Span(
+                        [
+                            "Kort varsel ",
+                            html.I(
+                                className="fas fa-info-circle", id="short_notice_info"
+                            ),
+                        ]
+                    ),
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
+                ShortNotice._short_notice_tooltip(),
                 html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
                 dbc.RadioItems(
                     id="short_notice_items",
@@ -47,6 +55,18 @@ class ShortNotice:
             ]
         )
         return widget
+
+    @staticmethod
+    def _short_notice_tooltip():
+        tooltip = dbc.Tooltip(
+            "För att visa patienter noterade med ”Angelägen” eller "
+            "liknande ord i ”Information till planerare/koordinator”, "
+            "välj ”Inkludera alla” och sök sedan på ordet i kategorin ”Nyckelord”",
+            target="short_notice_info",
+            placement="auto",
+            style={"text-transform": "none"},
+        )
+        return tooltip
 
     @staticmethod
     def add_collapse_callback(app):

@@ -11,11 +11,16 @@ class Asa:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label(
-                    "ASA-klass",
+                    html.Span(
+                        [
+                            "ASA-klass ",
+                            html.I(className="fas fa-info-circle", id="asa_info"),
+                        ]
+                    ),
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
+                Asa._asa_tooltip(),
                 html.Hr(className="sidebar-separator"),
-                # html.Hr(className = "ml-1"),
                 dbc.Checklist(
                     id="asa_checklist",
                     options=[
@@ -30,6 +35,18 @@ class Asa:
             ],
         )
         return widget
+
+    @staticmethod
+    def _asa_tooltip():
+        tooltip = dbc.Tooltip(
+            "För att inkludera patienter som ej klassats av narkosläkare, "
+            "välj ”Ej klassad” utöver önskade klasser och inkludera sedan "
+            "önskad ASA-klass som nyckelord i kategorin ”Nyckelord”",
+            target="asa_info",
+            placement="auto",
+            style={"text-transform": "none"},
+        )
+        return tooltip
 
     @staticmethod
     def add_callback(app):
