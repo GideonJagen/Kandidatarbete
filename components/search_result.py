@@ -1,7 +1,7 @@
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
-
+import dash
 from data_handling import DataFilterer, LoadedData
 
 
@@ -23,12 +23,11 @@ class SearchResult:
         ]
 
         widget = html.Div(
-            style={"height": "800px"},
             children=[
                 dash_table.DataTable(
                     id="search_result",
                     page_size=15,
-                    style_table={"height": "500px", "overflowY": "auto"},
+                    style_table={"height": "40vh", "overflowY": "auto"},
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
                     sort_action="native",
@@ -78,6 +77,8 @@ class SearchResult:
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="load_button", component_property="n_clicks"),
+            Input(component_id="upload", component_property="filename"),
+            Input(component_id="upload", component_property="contents"),
         )
         def update_data(
             asa,
@@ -89,9 +90,15 @@ class SearchResult:
             care_type,
             op_code,
             load_button,
+            filename,
+            contents,
         ):
+
             # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
+                LoadedData.load_data(filename, contents)
             unique = [
                 {"label": code, "value": code}
                 for code in LoadedData.get_unique_values("OpkortText")
