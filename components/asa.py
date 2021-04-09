@@ -14,7 +14,8 @@ class Asa:
                     "ASA-klass",
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
-                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
+                html.Hr(className="sidebar-separator"),
+                #html.Hr(className = "ml-1"),
                 dbc.Checklist(
                     id="asa_checklist",
                     options=[

@@ -15,6 +15,7 @@ from components.statistics_code import StatisticsCode
 from components.file_upload import FileUpload
 
 
+
 class Sidebar:
     SEARCH_FILTER = "Sökfilter"
     OPEN_FILTER = "Öppna filter"
@@ -47,6 +48,7 @@ class Sidebar:
                 html.Hr(),
             ],
             id="sidebar_content",
+            className="pl-5",
         )
         return component
 
