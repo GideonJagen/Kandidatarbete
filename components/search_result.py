@@ -39,15 +39,24 @@ class SearchResult:
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} < 30",  # Change to desired value
+                                "filter_query": "{dagar_till_kritisk} <= 180",
+                                "column_id": "dagar_till_kritisk",  # Change to desired value
                             },
-                            "backgroundColor": "#EE7733",
+                            "backgroundColor": "#228833",
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} < 3",  # Change to desired value
+                                "filter_query": "{dagar_till_kritisk} <= 60",
+                                "column_id": "dagar_till_kritisk",  # Change to desired value
                             },
-                            "backgroundColor": "#CC3311",
+                            "backgroundColor": "#CCBB44",
+                        },
+                        {
+                            "if": {
+                                "filter_query": "{dagar_till_kritisk} <= 30",
+                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                            },
+                            "backgroundColor": "#EE6677",
                         },
                     ],
                 ),
