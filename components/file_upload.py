@@ -64,7 +64,7 @@ class FileUpload:
 
             if isinstance(filename, str) and filename.endswith(".csv"):
                 return (
-                    True,
+                    False,  # never show load_button
                     f"Vald fil: {filename}",
                     False,
                 )  # if csv file, show load button
