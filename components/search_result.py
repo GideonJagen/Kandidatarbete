@@ -13,14 +13,13 @@ class SearchResult:
     def get_component():
         cols = [
             "Behandlingsnr",
+            "dagar_till_kritisk",
             "Anmälningstidpunkt",
             "Prioritet_dagar",
             "ASAklass",
-            "KravOperationstidMinuter",
-            "KravFörberedelsetidMinuter",
             "KravtidEfterMinuter",
             "PatientÅlderVidOp",
-            "dagar_till_kritisk",  # change name of column
+            # change name of column
         ]
 
         widget = html.Div(
