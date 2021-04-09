@@ -12,6 +12,7 @@ from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
+from components.file_upload import FileUpload
 
 
 class Sidebar:
@@ -42,6 +43,7 @@ class Sidebar:
         component = dbc.Col(
             children=[
                 html.H2(Sidebar.SEARCH_FILTER),
+                FileUpload.get_component(),
                 html.P(Sidebar.REQUEST_FILL_FORM),
                 html.Hr(style={"border-width": 4, "border-color": "#6ea6cd"}),
                 Sidebar._filter_form(),
@@ -80,7 +82,7 @@ class Sidebar:
                 Age.get_component(),
                 StatisticsCode.get_component(),
                 Asa.get_component(),
-                OpTime.get_component(20, 160),
+                OpTime.get_component(),
                 OpCode.get_component(),
                 Operator.get_component(),
                 ShortNotice.get_component(),

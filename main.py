@@ -36,8 +36,6 @@ content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
         ActiveFilters.get_component(),
-        FileUpload.get_component(),  # TODO Hitta bättre plats
-        ResetFilterButton.get_component(),
         PatientCount.get_component(),
         SearchResult.get_component(),
         Warnings.get_component(),
