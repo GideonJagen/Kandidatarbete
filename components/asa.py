@@ -20,7 +20,7 @@ class Asa:
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
                 Asa._asa_tooltip(),
-                html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
+                html.Hr(className="sidebar-separator"),
                 dbc.Checklist(
                     id="asa_checklist",
                     options=[

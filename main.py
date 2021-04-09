@@ -18,7 +18,8 @@ from components.search_result import SearchResult
 from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
 from components.statistics_code import StatisticsCode
-from components.warnings import Warnings
+from components.filetype_warning import FiletypeWarning
+from components.notes import Notes
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -35,10 +36,10 @@ app = dash.Dash(__name__, external_stylesheets=[FA])
 content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
-        ActiveFilters.get_component(),
+        dbc.Row(children=[ActiveFilters.get_component(), Notes.get_component()]),
         PatientCount.get_component(),
         SearchResult.get_component(),
-        Warnings.get_component(),
+        FiletypeWarning.get_component(),
     ],
     id="page-content",
 )

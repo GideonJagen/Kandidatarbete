@@ -49,6 +49,7 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
+            className="pl-5",
             style={
                 "height": "inherit",
             },

@@ -25,13 +25,16 @@ class FileUpload:
                                 dbc.Button(
                                     children=["Välj ny fil"],
                                     color="primary",
+                                    # className="ml-2"
                                 ),
                                 dbc.Label(
                                     id="file-label",
                                     children="Ingen fil vald",
-                                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+                                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4 ml-2",
                                 ),
-                            ]
+                            ],
+                            className="p-2",
+                            justify="start",
                         )
                     ],
                 ),
