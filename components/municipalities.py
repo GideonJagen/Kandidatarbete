@@ -11,9 +11,17 @@ class Municipalities:
         widget = dbc.FormGroup(
             children=[
                 dbc.Label(
-                    "Kommuner",
+                    html.Span(
+                        [
+                            "Kommuner ",
+                            html.I(
+                                className="fas fa-info-circle", id="municipalities_info"
+                            ),
+                        ]
+                    ),
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
+                Municipalities._municipalities_tooltip(),
                 html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
                 Municipalities._municipalities_radioitems(),
             ],
@@ -33,6 +41,22 @@ class Municipalities:
             value=Municipalities.STANDARD_VALUE,
         )
         return widget
+
+    @staticmethod
+    def _municipalities_tooltip():
+        tooltip = dbc.Tooltip(
+            "”Kranskommuner” inkluderar: Härryda, Partille, Öckerö, "
+            "Stenungsund, Tjörn, Orust, Färgelanda, Ale, Lerum, "
+            "Vårgårda, Bollebygd, Tranemo, Lilla Edet, Mark, Svenljunga, "
+            "Herrljunga, Göteborg, Mölndal, Kungälv, Lysekil, Uddevalla, "
+            "Vänersborg, Trollhättan, Alingsås, Borås, Ulricehamn",
+            target="municipalities_info",
+            placement="auto",
+            style={
+                "text-transform": "none",
+            },
+        )
+        return tooltip
 
     @staticmethod
     def add_callback(app):
