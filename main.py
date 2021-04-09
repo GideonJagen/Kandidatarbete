@@ -36,11 +36,7 @@ app = dash.Dash(__name__, external_stylesheets=[FA])
 content = dbc.Col(
     children=[
         html.H1(id="h1", children="Plando-prototype"),
-        dbc.Row(
-            children=[
-                ActiveFilters.get_component(),
-                Notes.get_component()
-                ]),
+        dbc.Row(children=[ActiveFilters.get_component(), Notes.get_component()]),
         PatientCount.get_component(),
         SearchResult.get_component(),
         Warnings.get_component(),
