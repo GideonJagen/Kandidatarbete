@@ -5,10 +5,11 @@ from dash.dependencies import Input, Output
 
 
 class OpTime:
-    STANDARD_VALUE = [10, 200]  # TODO Uppdatera baserat på datan.
+    MIN_TIME = 0  # TODO Uppdatera baserat på datan.
+    MAX_TIME = 180
 
     @staticmethod
-    def get_component(min_time, max_time):
+    def get_component():
 
         widget = dbc.FormGroup(
             id="opTime_widget",
@@ -18,23 +19,25 @@ class OpTime:
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
                 html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
-                OpTime._op_time_slider(min_time, max_time),
+                OpTime._op_time_slider(),
             ],
         )
 
         return widget
 
     @staticmethod
-    def _op_time_slider(min_time, max_time):
+    def _op_time_slider():
         widget = dcc.RangeSlider(
             id="opTime_slider",
-            min=min_time,
-            max=max_time,
+            min=OpTime.MIN_TIME,
+            max=OpTime.MAX_TIME,
             marks={
-                i: "{}min".format(i) if (i == min_time or i == max_time) else f"{i}"
-                for i in range(min_time, max_time + 20, 20)
+                i: "{}min".format(i)
+                if (i == OpTime.MIN_TIME or i == OpTime.MAX_TIME)
+                else f"{i}"
+                for i in range(OpTime.MIN_TIME, OpTime.MAX_TIME + 20, 20)
             },
-            value=OpTime.STANDARD_VALUE,
+            value=[OpTime.MIN_TIME, OpTime.MAX_TIME],
             step=5,
         )
         return widget
@@ -46,7 +49,7 @@ class OpTime:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):
-            return OpTime.STANDARD_VALUE
+            return [OpTime.MIN_TIME, OpTime.MAX_TIME]
 
         return app
 
