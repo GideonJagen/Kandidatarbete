@@ -1,6 +1,7 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import dash
 
 
 class Asa:
@@ -21,16 +22,30 @@ class Asa:
                 ),
                 Asa._asa_tooltip(),
                 html.Hr(className="sidebar-separator"),
-                dbc.Checklist(
-                    id="asa_checklist",
+                dbc.RadioItems(
+                    id="asa_radio_items",
+                    value="Visa alla",
                     options=[
-                        {"label": "ASA 1", "value": 1},
-                        {"label": "ASA 2", "value": 2},
-                        {"label": "ASA 3", "value": 3},
-                        {"label": "ASA 4", "value": 4},
-                        {"label": "Saknas", "value": "Saknas"},
+                        {"label": "Visa alla", "value": "Visa alla"},
+                        {"label": "Välj: ", "value": "Välj"},
                     ],
-                    labelStyle={"display": "inline-block"},
+                ),
+                dbc.Collapse(
+                    id="asa_collapse",
+                    is_open=False,
+                    children=[
+                        dbc.Checklist(
+                            id="asa_checklist",
+                            options=[
+                                {"label": "ASA 1", "value": 1},
+                                {"label": "ASA 2", "value": 2},
+                                {"label": "ASA 3", "value": 3},
+                                {"label": "ASA 4", "value": 4},
+                                {"label": "Saknas", "value": "Saknas"},
+                            ],
+                            labelStyle={"display": "inline-block"},
+                        ),
+                    ],
                 ),
             ],
         )
@@ -50,12 +65,30 @@ class Asa:
 
     @staticmethod
     def add_callback(app):
+        app = Asa._add_callback(app)
+
         @app.callback(
             Output(component_id="asa_checklist", component_property="value"),
+            Output(component_id="asa_radio_items", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):
-            return Asa.STANDARD_VALUE
+            return Asa.STANDARD_VALUE, "Visa alla"
+
+        return app
+
+    @staticmethod
+    def _add_callback(app):
+        @app.callback(
+            Output(component_id="asa_collapse", component_property="is_open"),
+            Input(component_id="asa_radio_items", component_property="value"),
+            Input(component_id="reset_filter_button", component_property="n_clicks"),
+        )
+        def collapse(value, reset):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
+                return False
+            return value == "Välj"
 
         return app
 

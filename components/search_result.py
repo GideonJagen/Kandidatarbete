@@ -69,6 +69,7 @@ class SearchResult:
             Output(component_id="number_of_patients", component_property="children"),
             Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="asa_checklist", component_property="value"),
+            Input(component_id="asa_radio_items", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
             Input(component_id="anaesthesia_checklist", component_property="value"),
@@ -82,6 +83,7 @@ class SearchResult:
         )
         def update_data(
             asa,
+            asa_radio,
             op_time,
             age,
             anesthesia,
@@ -106,6 +108,7 @@ class SearchResult:
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
+                "asa_radio": asa_radio,
                 "op_time": {"min": op_time[0], "max": op_time[1]},
                 "op_code": op_code,
                 "stat_code": stat_code,
