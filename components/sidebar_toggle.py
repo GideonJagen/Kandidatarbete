@@ -15,6 +15,11 @@ class SidebarToggle:
             ],
             id="sidebar_toggle",
             width=1,
+            className="pl-0",
+            style={
+                "height": "inherit",
+                "flex": "0 0 0",
+            },
         )
         return component
 
@@ -29,7 +34,6 @@ class SidebarToggle:
             ],
             id="btn_sidebar_toggle",
             color="primary",
-            # className="d-flex align-content-around flex-wrap"
             className="h-100 d-inline-block",
         )
         return component

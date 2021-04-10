@@ -23,7 +23,6 @@ class SearchResult:
         ]
 
         widget = html.Div(
-            style={"height": "800px"},
             children=[
                 dash_table.DataTable(
                     id="search_result",
@@ -60,6 +59,7 @@ class SearchResult:
                     ],
                 ),
             ],
+            style={"height": "40em"},
         )
         return widget
 

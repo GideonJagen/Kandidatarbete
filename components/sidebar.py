@@ -33,6 +33,7 @@ class Sidebar:
             className="col-3",
             style={
                 "height": "inherit",
+                "overflow": "auto",
             },
         )
         return component
@@ -52,10 +53,5 @@ class Sidebar:
                 Operator.get_component(),
                 ShortNotice.get_component(),
             ],
-            style={
-                "width": "24em",
-                "overflow": "auto",
-                "height": "calc(100% - 8em)",
-            },
         )
         return component
