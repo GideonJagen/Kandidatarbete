@@ -29,15 +29,19 @@ class DataFilterer:
                     range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
                 ),
                 # Check if patient is in right ASA class
-                (
-                    LoadedData.loaded_data["ASAklass"].isin(inputs["asa"])
-                    if inputs["asa"]
-                    else True
-                )
-                | (
-                    LoadedData.loaded_data["ASAklass"].isna()
-                    if ("Saknas" in inputs["asa"])
-                    else False
+                True
+                if inputs["asa_radio"] == "Visa alla"
+                else (
+                    (
+                        LoadedData.loaded_data["ASAklass"].isin(inputs["asa"])
+                        if inputs["asa"]
+                        else True
+                    )
+                    | (
+                        LoadedData.loaded_data["ASAklass"].isna()
+                        if ("Saknas" in inputs["asa"])
+                        else False
+                    )
                 ),
                 # Check if operation has matching statistcal code
                 LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
