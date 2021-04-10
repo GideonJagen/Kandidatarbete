@@ -1,34 +1,24 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-from dash.dependencies import Input, Output
+
 from components.reset_filter_button import ResetFilterButton
-from components.age import Age
-from components.anesthesia import Anesthesia
-from components.asa import Asa
-from components.care_type import CareType
-from components.municipalities import Municipalities
-from components.op_code import OpCode
-from components.op_time import OpTime
-from components.operator import Operator
-from components.short_notice import ShortNotice
-from components.statistics_code import StatisticsCode
 
 
 class ActiveFilters:
     @staticmethod
     def get_component():
         widget = dbc.Col(
+            width={"width": "60%"},
             children=[
                 ResetFilterButton.get_component(),
                 dbc.Table(
                     className="table table-striped table-dark",
-                    style={"width": "40em"},
                     bordered=False,
                     borderless=True,
                     id="active_filters",
                     children=[html.Tbody(ActiveFilters._build_rows())],
                 ),
-            ]
+            ],
         )
         return widget
 

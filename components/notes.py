@@ -7,7 +7,10 @@ class Notes:
     @staticmethod
     def get_component():
         widget = dbc.Col(
-            style={"max-width": "40%"},
+            style={
+                "width": "40%",
+            },
+            className="col m-3",
             children=[
                 dbc.Row(
                     justify="end",
