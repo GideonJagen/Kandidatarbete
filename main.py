@@ -2,24 +2,21 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-from components.active_filters import ActiveFilters
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
 from components.care_type import CareType
+from components.content import Content
 from components.file_upload import FileUpload
 from components.municipalities import Municipalities
 from components.op_code import OpCode
 from components.op_time import OpTime
 from components.operator import Operator
-from components.patient_count import PatientCount
-from components.reset_filter_button import ResetFilterButton
 from components.search_result import SearchResult
 from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
+from components.sidebar_toggle import SidebarToggle
 from components.statistics_code import StatisticsCode
-from components.filetype_warning import FiletypeWarning
-from components.notes import Notes
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -33,16 +30,6 @@ FA = "https://use.fontawesome.com/releases/v5.15.3/css/all.css"
 
 app = dash.Dash(__name__, external_stylesheets=[FA])
 
-content = dbc.Col(
-    children=[
-        html.H1(id="h1", children="Plando-prototype"),
-        dbc.Row(children=[ActiveFilters.get_component(), Notes.get_component()]),
-        PatientCount.get_component(),
-        SearchResult.get_component(),
-        FiletypeWarning.get_component(),
-    ],
-    id="page-content",
-)
 
 app.layout = html.Div(
     id="main",
@@ -50,13 +37,16 @@ app.layout = html.Div(
         dbc.Row(
             [
                 Sidebar.get_component(),
-                content,
+                SidebarToggle.get_component(),
+                Content.get_component(),
             ],
-            # className="p-3",
             style={"margin-right": "0", "margin-left": "0", "height": "100%"},
         ),
     ],
-    style={"height": "100vh"},
+    style={
+        "height": "100vh",
+        "width": "100vw",
+    },
 )
 
 app = FileUpload.add_callback(app)
@@ -71,7 +61,7 @@ app = Age.add_callback(app)
 app = Anesthesia.add_callback(app)
 app = OpCode.add_callback(app)
 app = Operator.add_callback(app)
-app = Sidebar.add_callback(app)
+app = SidebarToggle.add_callback(app)
 app = ShortNotice.add_input_callback(app)
 app = ShortNotice.add_collapse_callback(app)
 app = Age.add_str_callback(app)

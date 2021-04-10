@@ -59,6 +59,7 @@ class SearchResult:
                     ],
                 ),
             ],
+            style={"height": "40em"},
         )
         return widget
 
