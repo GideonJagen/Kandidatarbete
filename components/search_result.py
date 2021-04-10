@@ -32,6 +32,10 @@ class SearchResult:
                     data=None,
                     sort_action="native",
                     fixed_rows={"headers": True},
+                    style_data={"border": "0.2em solid #6ea6cd"},
+                    style_header={
+                        "background-color": "#6ea6cd",
+                    },
                     style_data_conditional=[
                         {
                             "backgroundColor": "#FFFFFF",

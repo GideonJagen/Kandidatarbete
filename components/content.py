@@ -12,10 +12,10 @@ class Content:
     @staticmethod
     def get_component():
         content = dbc.Col(
+            className="col-8 mr-3",
             children=[
-                html.H1(id="h1", children="Plando-prototype"),
+                html.H3(id="h4", children="Plando"),
                 dbc.Row(
-                    style={"width": "60vw"},
                     className="row p-1 justify-content-start",
                     children=[ActiveFilters.get_component(), Notes.get_component()],
                 ),

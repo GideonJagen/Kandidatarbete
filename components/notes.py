@@ -7,14 +7,17 @@ class Notes:
     @staticmethod
     def get_component():
         widget = dbc.Col(
-            style={
-                "width": "40%",
-            },
-            className="col m-3",
+            className="col-3 ml-3 mr-3",
             children=[
                 dbc.Row(
                     justify="end",
-                    children=[dbc.Button(color="link", children="Återställ")],
+                    children=[
+                        dbc.Button(
+                            color="link",
+                            children="Återställ",
+                            style={"height": "2.5em"},
+                        )
+                    ],
                 ),
                 dbc.Row(
                     dbc.Textarea(
