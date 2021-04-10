@@ -1,18 +1,17 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-from dash.dependencies import Input, Output
 
 from components.age import Age
 from components.anesthesia import Anesthesia
 from components.asa import Asa
 from components.care_type import CareType
+from components.file_upload import FileUpload
 from components.municipalities import Municipalities
 from components.op_code import OpCode
 from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
-from components.file_upload import FileUpload
 
 
 class Sidebar:
