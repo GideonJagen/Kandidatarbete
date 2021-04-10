@@ -20,6 +20,7 @@ from components.sidebar import Sidebar
 from components.statistics_code import StatisticsCode
 from components.filetype_warning import FiletypeWarning
 from components.notes import Notes
+from components.sidebar_toggle import SidebarToggle
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -50,13 +51,16 @@ app.layout = html.Div(
         dbc.Row(
             [
                 Sidebar.get_component(),
+                SidebarToggle.get_component(),
                 content,
             ],
-            # className="p-3",
             style={"margin-right": "0", "margin-left": "0", "height": "100%"},
         ),
     ],
-    style={"height": "100vh"},
+    style={
+        "height": "100vh",
+        "width": "100vw",
+    },
 )
 
 app = FileUpload.add_callback(app)
@@ -71,7 +75,7 @@ app = Age.add_callback(app)
 app = Anesthesia.add_callback(app)
 app = OpCode.add_callback(app)
 app = Operator.add_callback(app)
-app = Sidebar.add_callback(app)
+app = SidebarToggle.add_callback(app)
 app = ShortNotice.add_input_callback(app)
 app = ShortNotice.add_collapse_callback(app)
 app = Age.add_str_callback(app)
