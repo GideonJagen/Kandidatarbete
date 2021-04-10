@@ -26,11 +26,12 @@ class SearchResult:
             children=[
                 dash_table.DataTable(
                     id="search_result",
-                    page_size=15,
-                    style_table={"height": "40vh", "overflowY": "auto"},
+                    page_size=50,
+                    style_table={"height": "50vh", "overflowY": "auto"},
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
                     sort_action="native",
+                    fixed_rows={"headers": True},
                     style_data_conditional=[
                         {
                             "backgroundColor": "#FFFFFF",
@@ -59,7 +60,6 @@ class SearchResult:
                     ],
                 ),
             ],
-            style={"height": "40em"},
         )
         return widget
 

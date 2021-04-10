@@ -15,7 +15,9 @@ class Content:
             children=[
                 html.H1(id="h1", children="Plando-prototype"),
                 dbc.Row(
-                    children=[ActiveFilters.get_component(), Notes.get_component()]
+                    style={"width": "60vw"},
+                    className="row p-1 justify-content-start",
+                    children=[ActiveFilters.get_component(), Notes.get_component()],
                 ),
                 PatientCount.get_component(),
                 SearchResult.get_component(),

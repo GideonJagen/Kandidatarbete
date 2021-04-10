@@ -50,7 +50,17 @@ class SidebarToggle:
         def _toggle_sidebar(n_clicks):
             SidebarToggle.is_open = not SidebarToggle.is_open
             return (
-                {"display": "block"} if SidebarToggle.is_open else {"display": "none"},
+                {
+                    "display": "block",
+                    "height": "inherit",
+                    "overflow": "auto",
+                }
+                if SidebarToggle.is_open
+                else {
+                    "display": "none",
+                    "height": "inherit",
+                    "overflow": "auto",
+                },
                 "fas fa-chevron-left"
                 if SidebarToggle.is_open
                 else "fas fa-chevron-right",
