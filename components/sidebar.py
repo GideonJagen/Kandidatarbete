@@ -26,15 +26,11 @@ class Sidebar:
                 html.H2(Sidebar.SEARCH_FILTER),
                 FileUpload.get_component(),
                 html.P(Sidebar.REQUEST_FILL_FORM),
-                html.Hr(style={"border-width": 4, "border-color": "#6ea6cd"}),
+                html.Hr(className="sidebar-Hr"),
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            className="col-3",
-            style={
-                "height": "inherit",
-                "overflow": "auto",
-            },
+            className="col-3 sidebar-height pl-4 pt-4",
         )
         return component
 
