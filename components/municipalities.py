@@ -32,7 +32,7 @@ class Municipalities:
     def _municipalities_radioitems():
         options = [
             {"label": "Hela VGR", "value": "Hela VGR"},
-            {"label": "Kranskommuner", "value": "Kranskommuner"},
+            {"label": "Kranskommuner", "value": "Kranskommuner", "disabled": True},
         ]
 
         widget = dbc.RadioItems(
