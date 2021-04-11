@@ -44,9 +44,13 @@ class DataFilterer:
                     )
                 ),
                 # Check if operation has matching statistcal code
-                LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
-                if inputs["stat_code"]
-                else True,
+                True
+                if inputs["stat_code_radio"] == "Visa alla"
+                else (
+                    LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
+                    if inputs["stat_code"]
+                    else True
+                ),
                 # Check if operation has matching operation code
                 LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
                 if inputs["op_code"]
