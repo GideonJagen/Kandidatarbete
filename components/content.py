@@ -16,7 +16,7 @@ class Content:
             children=[
                 html.H3(id="h4", children="Plando"),
                 dbc.Row(
-                    className="row p-1 justify-content-start",
+                    className="justify-content-start ml-0 pb-4",
                     children=[ActiveFilters.get_component(), Notes.get_component()],
                 ),
                 PatientCount.get_component(),

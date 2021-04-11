@@ -1,4 +1,79 @@
-.sidebar-separator{
+:root {
+    --c-dark-blue: #6ea6cd;
+    --c-mid-blue: #98cae1;
+    --c-light-blue: #c2e4ef;
+    --c-hover-red: #a24839;
+    --c-red: #d6604d;
+    --c-hover-orange: #d2883b;
+    --c-orange: #fdb366;
+    --c-hover-yellow: #d8b05e;
+    --c-yellow: #fdd990;
+    --c-green: #44bb99;
+    --c-hover-green: #348e74;
+    --c-hover-dark-blue: #4d7998;
+    --c-white: #fff;
+    --c-light-gray: #dcdcdc;
+    --c-mid-gray: #babcbe;
+    --c-dark-gray: #707070;
+    --c-primary: #6ea6cd;
+    --c-secondary: #c2e4ef;
+    --c-success: #44bb99;
+    --c-info: #fdd990;
+    --c-warning: #fdb366;
+    --c-danger: #d6604d;
+    --c-light: #ffffff;
+    --c-dark: #000;
+}
+
+.sidebar-separator {
     margin-top: 0em;
     margin-bottom: 0.5em;
 }
+
+.sidebar-Hr {
+    border-width: 0.1em;
+    border-color: #6ea6cd;
+}
+
+.sidebar-height {
+    height: inherit;
+    overflow: auto;
+    background-color: var(--c-light-blue);
+}
+
+.sidebar-toggle{
+    height: inherit;
+    flex: 0 0 0;
+}
+
+.sidebar-button{
+    color: var(--c-white);
+    background-color: var(--c-dark-blue);
+    border-color: var(--c-dark-blue);
+}
+
+.btn-toggle {
+  color: #ffffff;
+  background-color: #6ea6cd;
+  border-color: #6ea6cd; }
+  .btn-toggle:hover {
+    color: #fff;
+    background-color: #5295c3;
+    border-color: #488fc0; }
+  .btn-toggle:focus, .btn-toggle.focus {
+    color: #fff;
+    background-color: #5295c3;
+    border-color: #488fc0;
+    box-shadow: 0 0 0 0.2rem rgba(98, 147, 180, 0.5); }
+  .btn-toggle.disabled, .btn-toggle:disabled {
+    color: #212529;
+    background-color: #6ea6cd;
+    border-color: #6ea6cd; }
+  .btn-toggle:not(:disabled):not(.disabled):active, .btn-toggle:not(:disabled):not(.disabled).active,
+  .show > .btn-toggle.dropdown-toggle {
+    color: #fff;
+    background-color: #488fc0;
+    border-color: #4089bb; }
+    .btn-toggle:not(:disabled):not(.disabled):active:focus, .btn-toggle:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-toggle.dropdown-toggle:focus {
+      box-shadow: 0 0 0 0.2rem rgba(98, 147, 180, 0.5); }
