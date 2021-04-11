@@ -15,9 +15,9 @@ class ActiveFilters:
                     children=[
                         ResetFilterButton.get_component(),
                         dbc.Table(
-                            className="table table-striped",
+                            className="table table-striped shadow-sm",
                             style={
-                                "background-color": "#6ea6cd",
+                                "background-color": "#c2e4ef",
                                 "height": "100%",
                                 "margin-bottom": "0px",
                             },

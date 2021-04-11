@@ -41,7 +41,12 @@ app.layout = html.Div(
                 SidebarToggle.get_component(),
                 Content.get_component(),
             ],
-            style={"margin-right": "0", "margin-left": "0", "height": "100%"},
+            style={
+                "margin-right": "0",
+                "margin-left": "0",
+                "height": "100%",
+                "background-color": "#ECF9FE",
+            },
         ),
     ],
     style={

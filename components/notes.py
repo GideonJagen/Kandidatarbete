@@ -26,6 +26,7 @@ class Notes:
                     style={"height": "90%"},
                     children=[
                         dbc.Textarea(
+                            className="shadow-sm",
                             style={"resize": "none"},
                             id="notes",
                             placeholder="Anteckningar...",

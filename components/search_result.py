@@ -28,6 +28,7 @@ class SearchResult:
                     id="search_result",
                     page_size=50,
                     style_table={
+                        "background-color": "#ECF9FE",
                         "height": "50vh",
                         "overflowY": "auto",
                         "width": "100%",
@@ -52,7 +53,7 @@ class SearchResult:
                     style_as_list_view=True,
                     style_data_conditional=[
                         {
-                            "backgroundColor": "#FFFFFF",
+                            "backgroundColor": "#ECF9FE",
                         },
                         {
                             "if": {

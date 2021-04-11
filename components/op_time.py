@@ -38,7 +38,7 @@ class OpTime:
                 for i in range(OpTime.MIN_TIME, OpTime.MAX_TIME + 20, 20)
             },
             value=[OpTime.MIN_TIME, OpTime.MAX_TIME],
-            step=5,
+            step=20,
         )
         return widget
 

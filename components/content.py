@@ -12,7 +12,8 @@ class Content:
     @staticmethod
     def get_component():
         content = dbc.Col(
-            className="col-8 mr-3",
+            className="col-8 mr-1",
+            style={"background-color": "#ECF9FE"},
             children=[
                 html.H3(id="h4", children="Plando"),
                 dbc.Row(
