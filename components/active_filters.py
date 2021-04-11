@@ -8,17 +8,28 @@ class ActiveFilters:
     @staticmethod
     def get_component():
         widget = dbc.Col(
+            className="col-5",
             children=[
-                ResetFilterButton.get_component(),
-                dbc.Table(
-                    className="table table-striped table-dark",
-                    style={"width": "40em"},
-                    bordered=False,
-                    borderless=True,
-                    id="active_filters",
-                    children=[html.Tbody(ActiveFilters._build_rows())],
-                ),
-            ]
+                dbc.Row(
+                    className="row-9",
+                    justify="end",
+                    children=[
+                        dbc.Table(
+                            className="table table-striped shadow-sm",
+                            style={
+                                "background-color": "#c2e4ef",
+                                "height": "100%",
+                                "margin": "0px",
+                            },
+                            bordered=False,
+                            borderless=True,
+                            id="active_filters",
+                            children=[html.Tbody(ActiveFilters._build_rows())],
+                        ),
+                        ResetFilterButton.get_component(),
+                    ],
+                )
+            ],
         )
         return widget
 

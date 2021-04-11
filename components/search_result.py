@@ -26,14 +26,34 @@ class SearchResult:
             children=[
                 dash_table.DataTable(
                     id="search_result",
-                    page_size=15,
-                    style_table={"height": "40vh", "overflowY": "auto"},
+                    page_size=50,
+                    style_table={
+                        "background-color": "#ECF9FE",
+                        "height": "50vh",
+                        "overflowY": "auto",
+                        "width": "100%",
+                    },
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
                     sort_action="native",
+                    fixed_rows={"headers": True},
+                    style_data={
+                        "border": "0.2em solid grey",
+                        "height": "2.8em",
+                        "padding": "0.8em",
+                        "width": "7em",
+                        "textAlign": "center",
+                    },
+                    style_header={
+                        "background-color": "#6ea6cd",
+                        "fontWeight": "bold",
+                        "textAlign": "center",
+                        "padding": "0.5em",
+                    },
+                    style_as_list_view=True,
                     style_data_conditional=[
                         {
-                            "backgroundColor": "#FFFFFF",
+                            "backgroundColor": "#ECF9FE",
                         },
                         {
                             "if": {
@@ -59,7 +79,6 @@ class SearchResult:
                     ],
                 ),
             ],
-            style={"height": "40em"},
         )
         return widget
 
@@ -74,7 +93,8 @@ class SearchResult:
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
             Input(component_id="anaesthesia_checklist", component_property="value"),
-            Input(component_id="statistics_dropdown", component_property="value"),
+            Input(component_id="statistics_checklist", component_property="value"),
+            Input(component_id="statistics_radio_items", component_property="value"),
             Input(component_id="municipalities_radioitems", component_property="value"),
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
@@ -89,6 +109,7 @@ class SearchResult:
             age,
             anesthesia,
             stat_code,
+            stat_code_radio,
             area,
             care_type,
             op_code,
@@ -113,6 +134,7 @@ class SearchResult:
                 "op_time": {"min": op_time[0], "max": op_time[1]},
                 "op_code": op_code,
                 "stat_code": stat_code,
+                "stat_code_radio": stat_code_radio,
                 "anesthesia": anesthesia,
                 "area": area,
                 "caretype": care_type,

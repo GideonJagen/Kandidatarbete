@@ -1,4 +1,5 @@
 import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output
 
 
 class Notes:
@@ -7,22 +8,43 @@ class Notes:
     @staticmethod
     def get_component():
         widget = dbc.Col(
-            style={"max-width": "40%"},
+            className="col-3 ml-3 mr-3",
             children=[
                 dbc.Row(
-                    justify="end",
-                    children=[dbc.Button(color="link", children="Återställ")],
+                    style={"height": "90%"},
+                    children=[
+                        dbc.Textarea(
+                            className="shadow-sm",
+                            style={"resize": "none"},
+                            id="notes",
+                            placeholder="Anteckningar...",
+                            bs_size="md",
+                        )
+                    ],
                 ),
                 dbc.Row(
-                    dbc.Textarea(
-                        placeholder="Anteckningar...",
-                        bs_size="md",
-                    )
+                    style={"height": "10%"},
+                    justify="end",
+                    children=[
+                        dbc.Button(
+                            id="reset_notes",
+                            color="link",
+                            children="Återställ",
+                            style={"height": "2.5em"},
+                        )
+                    ],
                 ),
             ],
         )
         return widget
 
     @staticmethod
-    def add_callback():
-        pass
+    def add_callback(app):
+        @app.callback(
+            Output(component_id="notes", component_property="value"),
+            Input(component_id="reset_notes", component_property="n_clicks"),
+        )
+        def reset(n_clicks):
+            return None
+
+        return app

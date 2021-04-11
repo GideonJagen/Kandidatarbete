@@ -15,11 +15,11 @@ class SidebarToggle:
             ],
             id="sidebar_toggle",
             width=1,
-            className="pl-0",
-            style={
-                "height": "inherit",
-                "flex": "0 0 0",
-            },
+            className="pl-0 sidebar-toggle",
+            # style={
+            #    "height": "inherit",
+            #    "flex": "0 0 0",
+            # },
         )
         return component
 
@@ -33,8 +33,8 @@ class SidebarToggle:
                 )
             ],
             id="btn_sidebar_toggle",
-            color="primary",
-            className="h-100 d-inline-block",
+            # color="primary",
+            className="h-100 d-inline-block btn-toggle",
         )
         return component
 
@@ -50,7 +50,13 @@ class SidebarToggle:
         def _toggle_sidebar(n_clicks):
             SidebarToggle.is_open = not SidebarToggle.is_open
             return (
-                {"display": "block"} if SidebarToggle.is_open else {"display": "none"},
+                {
+                    "display": "block",
+                }
+                if SidebarToggle.is_open
+                else {
+                    "display": "none",
+                },
                 "fas fa-chevron-left"
                 if SidebarToggle.is_open
                 else "fas fa-chevron-right",

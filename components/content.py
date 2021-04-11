@@ -12,10 +12,12 @@ class Content:
     @staticmethod
     def get_component():
         content = dbc.Col(
+            className="col-8 mr-1 mt-5",
+            style={"background-color": "#ECF9FE"},
             children=[
-                html.H1(id="h1", children="Plando-prototype"),
                 dbc.Row(
-                    children=[ActiveFilters.get_component(), Notes.get_component()]
+                    className="justify-content-start ml-0 pb-4",
+                    children=[ActiveFilters.get_component(), Notes.get_component()],
                 ),
                 PatientCount.get_component(),
                 SearchResult.get_component(),

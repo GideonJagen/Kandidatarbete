@@ -17,6 +17,7 @@ from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
 from components.sidebar_toggle import SidebarToggle
 from components.statistics_code import StatisticsCode
+from components.notes import Notes
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -40,7 +41,11 @@ app.layout = html.Div(
                 SidebarToggle.get_component(),
                 Content.get_component(),
             ],
-            style={"margin-right": "0", "margin-left": "0", "height": "100%"},
+            className="ml-0 mr-0 h-100",
+            style={
+                # "height": "100%",
+                "background-color": "#ECF9FE",
+            },
         ),
     ],
     style={
@@ -74,6 +79,6 @@ app = OpTime.add_str_callback(app)
 app = Operator.add_str_callback(app)
 app = ShortNotice.add_str_callback(app)
 app = StatisticsCode.add_str_callback(app)
-
+app = Notes.add_callback(app)
 
 app.run_server(debug=True)

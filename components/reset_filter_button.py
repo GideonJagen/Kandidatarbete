@@ -7,7 +7,7 @@ class ResetFilterButton:
         button = dbc.Button(
             "Återställ",
             id="reset_filter_button",
-            color="danger",
-            style={"margin-left": "50em", "height": "40px"},
+            color="link",
+            style={"height": "2.5em"},
         )
         return button
