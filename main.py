@@ -41,10 +41,9 @@ app.layout = html.Div(
                 SidebarToggle.get_component(),
                 Content.get_component(),
             ],
+            className="ml-0 mr-0 h-100",
             style={
-                "margin-right": "0",
-                "margin-left": "0",
-                "height": "100%",
+                # "height": "100%",
                 "background-color": "#ECF9FE",
             },
         ),

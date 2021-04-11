@@ -11,6 +11,7 @@ class ActiveFilters:
             className="col-5",
             children=[
                 dbc.Row(
+                    className="row-9",
                     justify="end",
                     children=[
                         ResetFilterButton.get_component(),
@@ -19,7 +20,7 @@ class ActiveFilters:
                             style={
                                 "background-color": "#c2e4ef",
                                 "height": "100%",
-                                "margin-bottom": "0px",
+                                "margin": "0px",
                             },
                             bordered=False,
                             borderless=True,
