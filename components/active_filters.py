@@ -17,8 +17,9 @@ class ActiveFilters:
                         dbc.Table(
                             className="table table-striped",
                             style={
-                                "border": "0.15em solid black",
                                 "background-color": "#6ea6cd",
+                                "height": "100%",
+                                "margin-bottom": "0px",
                             },
                             bordered=False,
                             borderless=True,

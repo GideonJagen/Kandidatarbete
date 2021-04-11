@@ -27,7 +27,11 @@ class SearchResult:
                 dash_table.DataTable(
                     id="search_result",
                     page_size=50,
-                    style_table={"height": "50vh", "overflowY": "auto"},
+                    style_table={
+                        "height": "50vh",
+                        "overflowY": "auto",
+                        "width": "100%",
+                    },
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
                     sort_action="native",
