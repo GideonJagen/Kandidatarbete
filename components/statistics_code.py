@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import dash
 
 
 class StatisticsCode:
@@ -18,13 +18,27 @@ class StatisticsCode:
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
                 html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
-                StatisticsCode._statistics_code_dropdown(),
+                dbc.RadioItems(
+                    id="statistics_radio_items",
+                    value="Visa alla",
+                    options=[
+                        {"label": "Visa alla", "value": "Visa alla"},
+                        {"label": "Välj: ", "value": "Välj"},
+                    ],
+                ),
+                dbc.Collapse(
+                    id="statistics_collapse",
+                    is_open=False,
+                    children=[
+                        StatisticsCode._statistics_code_checklist(),
+                    ],
+                ),
             ],
         )
         return widget
 
     @staticmethod
-    def _statistics_code_dropdown():
+    def _statistics_code_checklist():
         codes = [
             {"label": "30 dagar", "value": "30 dagar"},
             {"label": "60 dagar", "value": "60 dagar"},
@@ -36,23 +50,42 @@ class StatisticsCode:
         ]
 
         # TODO: Replace this dropdown with a dbc component, if there's a suitable replacement
-        dropdown = dcc.Dropdown(
-            id="statistics_dropdown",
+        checklist = dbc.Checklist(
+            id="statistics_checklist",
             options=codes,
-            placeholder=StatisticsCode.SELECT_STAT_CODES,
-            value=[],
-            multi=True,
+            # placeholder=StatisticsCode.SELECT_STAT_CODES,
+            # value=[],
+            # multi=True,
+            labelStyle={"display": "inline-block"},
         )
-        return dropdown
+        return checklist
 
     @staticmethod
     def add_callback(app):
+        app = StatisticsCode._add_callback(app)
+
         @app.callback(
-            Output(component_id="statistics_dropdown", component_property="value"),
+            Output(component_id="statistics_checklist", component_property="value"),
+            Output(component_id="statistics_radio_items", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):
-            return StatisticsCode.STANDARD_VALUE
+            return StatisticsCode.STANDARD_VALUE, "Visa alla"
+
+        return app
+
+    @staticmethod
+    def _add_callback(app):
+        @app.callback(
+            Output(component_id="statistics_collapse", component_property="is_open"),
+            Input(component_id="statistics_radio_items", component_property="value"),
+            Input(component_id="reset_filter_button", component_property="n_clicks"),
+        )
+        def collapse(value, reset):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
+                return False
+            return value == "Välj"
 
         return app
 
@@ -62,7 +95,7 @@ class StatisticsCode:
             Output(
                 component_id="active_statistics_code", component_property="children"
             ),
-            Input(component_id="statistics_dropdown", component_property="value"),
+            Input(component_id="statistics_checklist", component_property="value"),
         )
         def update_str(value):
             return StatisticsCode.value_to_string(value)
