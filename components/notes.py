@@ -11,18 +11,6 @@ class Notes:
             className="col-3 ml-3 mr-3",
             children=[
                 dbc.Row(
-                    style={"height": "10%"},
-                    justify="end",
-                    children=[
-                        dbc.Button(
-                            id="reset_notes",
-                            color="link",
-                            children="Återställ",
-                            style={"height": "2.5em"},
-                        )
-                    ],
-                ),
-                dbc.Row(
                     style={"height": "90%"},
                     children=[
                         dbc.Textarea(
@@ -31,6 +19,18 @@ class Notes:
                             id="notes",
                             placeholder="Anteckningar...",
                             bs_size="md",
+                        )
+                    ],
+                ),
+                dbc.Row(
+                    style={"height": "10%"},
+                    justify="end",
+                    children=[
+                        dbc.Button(
+                            id="reset_notes",
+                            color="link",
+                            children="Återställ",
+                            style={"height": "2.5em"},
                         )
                     ],
                 ),

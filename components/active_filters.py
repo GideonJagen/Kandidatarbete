@@ -14,7 +14,6 @@ class ActiveFilters:
                     className="row-9",
                     justify="end",
                     children=[
-                        ResetFilterButton.get_component(),
                         dbc.Table(
                             className="table table-striped shadow-sm",
                             style={
@@ -27,6 +26,7 @@ class ActiveFilters:
                             id="active_filters",
                             children=[html.Tbody(ActiveFilters._build_rows())],
                         ),
+                        ResetFilterButton.get_component(),
                     ],
                 )
             ],
