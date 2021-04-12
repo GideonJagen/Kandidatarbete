@@ -12,7 +12,7 @@ class Content:
     @staticmethod
     def get_component():
         content = dbc.Col(
-            className="col-8 mr-1 mt-5",
+            className="mt-2",
             style={"background-color": "#ECF9FE"},
             children=[
                 dbc.Row(
