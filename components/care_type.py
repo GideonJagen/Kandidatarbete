@@ -31,7 +31,7 @@ class CareType:
             id="care_type_radioitems",
             options=options,
             labelStyle={"display": "block"},
-            value="all",
+            value="Alla",
         )
         return widget
 
