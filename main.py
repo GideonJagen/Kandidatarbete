@@ -18,6 +18,7 @@ from components.sidebar import Sidebar
 from components.sidebar_toggle import SidebarToggle
 from components.statistics_code import StatisticsCode
 from components.notes import Notes
+from components.free_text_search import FreeTextSearch
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -80,5 +81,6 @@ app = Operator.add_str_callback(app)
 app = ShortNotice.add_str_callback(app)
 app = StatisticsCode.add_str_callback(app)
 app = Notes.add_callback(app)
+app = FreeTextSearch.add_callback(app)
 
 app.run_server(debug=True)
