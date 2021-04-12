@@ -96,12 +96,13 @@ class StatisticsCode:
                 component_id="active_statistics_code", component_property="children"
             ),
             Input(component_id="statistics_checklist", component_property="value"),
+            Input(component_id="statistics_radio_items", component_property="value"),
         )
-        def update_str(value):
-            return StatisticsCode.value_to_string(value)
+        def update_str(value_cl, value_ri):
+            return StatisticsCode.value_to_string(value_cl, value_ri)
 
         return app
 
     @staticmethod
-    def value_to_string(value):
-        return f"Statistikkod: {' ,'.join([str(s) for s in value]) if len(value) > 0 else 'Alla'}"
+    def value_to_string(value_cl, value_ri):
+        return f"Statistikkod: {' ,'.join([str(s) for s in value_cl]) if len(value_cl) > 0 and value_ri == 'Välj' and len(value_cl) < 7 else 'Alla'}"

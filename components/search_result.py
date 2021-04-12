@@ -60,7 +60,7 @@ class SearchResult:
                                 "filter_query": "{dagar_till_kritisk} <= 180",
                                 "column_id": "dagar_till_kritisk",  # Change to desired value
                             },
-                            "backgroundColor": "#228833",
+                            "backgroundColor": "#fdd990",
                         },
                         {
                             "if": {
