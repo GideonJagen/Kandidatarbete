@@ -10,41 +10,47 @@ class Notes:
     def get_component():
         widget = dbc.Col(
             className="col-3 ml-3 mr-3",
-            children=[
-                dbc.Row(
-                    children=[
-                        dbc.Input(id="notes_input", placeholder="Press ENTER to submit")
-                    ]
-                ),
-                dbc.Row(
-                    style={"height": "75%"},  # why doesnt row classes work?????????
-                    children=[
-                        dbc.Textarea(
-                            readOnly=True,
-                            className="shadow-sm",
-                            style={
-                                "resize": "none",
-                                "background-color": "#c2e4ef",
-                            },
-                            id="notes",
-                            placeholder="",
-                            bs_size="md",
-                        )
-                    ],
-                ),
-                dbc.Row(
-                    justify="end",
-                    children=[
-                        dbc.Button(
-                            id="reset_notes",
-                            color="link",
-                            children="Återställ",
-                        )
-                    ],
-                ),
-            ],
+            children=[Notes._input_row(), Notes._notes_row(), Notes._reset_row()],
         )
         return widget
+
+    @staticmethod
+    def _input_row():
+        return dbc.Row(
+            children=[dbc.Input(id="notes_input", placeholder="Press ENTER to submit")]
+        )
+
+    @staticmethod
+    def _notes_row():
+        return dbc.Row(
+            style={"height": "75%"},  # why doesnt row classes work?????????
+            children=[
+                dbc.Textarea(
+                    readOnly=True,
+                    className="shadow-sm",
+                    style={
+                        "resize": "none",
+                        "background-color": "#c2e4ef",
+                    },
+                    id="notes",
+                    placeholder="",
+                    bs_size="md",
+                )
+            ],
+        )
+
+    @staticmethod
+    def _reset_row():
+        return dbc.Row(
+            justify="end",
+            children=[
+                dbc.Button(
+                    id="reset_notes",
+                    color="link",
+                    children="Återställ",
+                )
+            ],
+        )
 
     @staticmethod
     def add_callback(app):
