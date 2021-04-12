@@ -26,7 +26,11 @@ class ShortNotice:
                     id="short_notice_items",
                     options=[
                         {"label": "Inkludera alla", "value": "all"},
-                        {"label": "Visa endast kort varsel", "value": "interval"},
+                        {
+                            "label": "Visa endast kort varsel",
+                            "value": "interval",
+                            "disabled": True,
+                        },
                     ],
                     value="all",
                 ),
