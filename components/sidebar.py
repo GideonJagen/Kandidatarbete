@@ -34,20 +34,22 @@ class Sidebar:
         )
         return component
 
+    # Operationstid, Operatör, Benämning, Patientålder, ASA-klass, Anestesibedömning, Statistikkod, Kort varsel, Vårdform, Avstånd
+
     @staticmethod
     def _filter_form():
         component = dbc.Form(
             children=[
+                OpTime.get_component(),
+                Operator.get_component(),
+                OpCode.get_component(),
+                Age.get_component(),
+                Asa.get_component(),
+                Anesthesia.get_component(),
+                StatisticsCode.get_component(),
+                ShortNotice.get_component(),
                 CareType.get_component(),
                 Municipalities.get_component(),
-                Anesthesia.get_component(),
-                Age.get_component(),
-                StatisticsCode.get_component(),
-                Asa.get_component(),
-                OpTime.get_component(),
-                OpCode.get_component(),
-                Operator.get_component(),
-                ShortNotice.get_component(),
             ],
         )
         return component

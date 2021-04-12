@@ -24,9 +24,9 @@ class Anesthesia:
     def _anesthesia_checklist():
         checklist = dbc.Checklist(
             options=[
-                {"label": "Ej klar", "value": "Ej klar"},
-                {"label": "Påbörjad", "value": "Påbörjad"},
-                {"label": "Klar", "value": "Klar"},
+                {"label": "Ej klar", "value": "Ej klar", "disabled": True},
+                {"label": "Påbörjad", "value": "Påbörjad", "disabled": True},
+                {"label": "Klar", "value": "Klar", "disabled": True},
             ],
             id="anaesthesia_checklist",
         )

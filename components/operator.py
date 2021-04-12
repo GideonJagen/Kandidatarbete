@@ -34,8 +34,12 @@ class Operator:
     def _operator_radioitems():
         options = [
             {"label": "Visa alla", "value": "all"},
-            {"label": "Visa endast icke tilldelade patienter", "value": "blank"},
-            {"label": "Filtrera efter operatör", "value": "operator"},
+            {
+                "label": "Visa endast icke tilldelade patienter",
+                "value": "blank",
+                "disabled": True,
+            },
+            {"label": "Filtrera efter operatör", "value": "operator", "disabled": True},
         ]
 
         widget = dbc.RadioItems(
