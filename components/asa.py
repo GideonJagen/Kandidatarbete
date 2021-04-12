@@ -97,12 +97,13 @@ class Asa:
         @app.callback(
             Output(component_id="active_asa", component_property="children"),
             Input(component_id="asa_checklist", component_property="value"),
+            Input(component_id="asa_radio_items", component_property="value"),
         )
-        def update_str(value):
-            return Asa.value_to_string(value)
+        def update_str(value_cl, value_ri):
+            return Asa.value_to_string(value_cl, value_ri)
 
         return app
 
     @staticmethod
-    def value_to_string(value):
-        return f"ASA-klass: {', '.join([str(val) for val in value]) if len(value) > 0 else 'Alla' }"
+    def value_to_string(value_cl, value_ri):
+        return f"ASA-klass: {', '.join([str(val) for val in value_cl]) if len(value_cl) > 0 and value_ri == 'Välj' and len(value_cl) < 5 else 'Alla' }"
