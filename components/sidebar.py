@@ -12,6 +12,7 @@ from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
+from components.free_text_search import FreeTextSearch
 
 
 class Sidebar:
@@ -50,6 +51,7 @@ class Sidebar:
                 ShortNotice.get_component(),
                 CareType.get_component(),
                 Municipalities.get_component(),
+                FreeTextSearch.get_component(),
             ],
         )
         return component

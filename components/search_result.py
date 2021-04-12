@@ -60,21 +60,21 @@ class SearchResult:
                                 "filter_query": "{dagar_till_kritisk} <= 180",
                                 "column_id": "dagar_till_kritisk",  # Change to desired value
                             },
-                            "backgroundColor": "#228833",
+                            "backgroundColor": "var(--c-yellow)",
                         },
                         {
                             "if": {
                                 "filter_query": "{dagar_till_kritisk} <= 60",
                                 "column_id": "dagar_till_kritisk",  # Change to desired value
                             },
-                            "backgroundColor": "#CCBB44",
+                            "backgroundColor": "var(--c-orange)",
                         },
                         {
                             "if": {
                                 "filter_query": "{dagar_till_kritisk} <= 30",
                                 "column_id": "dagar_till_kritisk",  # Change to desired value
                             },
-                            "backgroundColor": "#EE6677",
+                            "backgroundColor": "var(--c-red)",
                         },
                     ],
                 ),
