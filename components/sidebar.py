@@ -31,7 +31,7 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            className="col-3 sidebar-height pl-4 pt-4",
+            className="col-3 sidebar-height pt-2",
         )
         return component
 
