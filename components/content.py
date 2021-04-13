@@ -1,5 +1,4 @@
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 
 from components.active_filters import ActiveFilters
 from components.filetype_warning import FiletypeWarning
@@ -12,17 +11,17 @@ class Content:
     @staticmethod
     def get_component():
         content = dbc.Col(
-            className="mt-2",
-            style={"background-color": "#ECF9FE"},
             children=[
                 dbc.Row(
-                    className="justify-content-start ml-0 pb-4",
                     children=[ActiveFilters.get_component(), Notes.get_component()],
+                    className="justify-content-start ml-0 mr-0",
                 ),
                 PatientCount.get_component(),
                 SearchResult.get_component(),
                 FiletypeWarning.get_component(),
             ],
             id="page-content",
+            className="scrollable p-2",
+            style={"background-color": "var(--c-very-light-blue)"},
         )
         return content

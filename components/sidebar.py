@@ -6,13 +6,13 @@ from components.anesthesia import Anesthesia
 from components.asa import Asa
 from components.care_type import CareType
 from components.file_upload import FileUpload
+from components.free_text_search import FreeTextSearch
 from components.municipalities import Municipalities
 from components.op_code import OpCode
 from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
-from components.free_text_search import FreeTextSearch
 
 
 class Sidebar:
@@ -31,11 +31,12 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            className="col-3 sidebar-height pt-2",
+            className="col-3 pt-2 sidebar-bg-color scrollable",
         )
         return component
 
-    # Operationstid, Operatör, Benämning, Patientålder, ASA-klass, Anestesibedömning, Statistikkod, Kort varsel, Vårdform, Avstånd
+    # Requested order of filters:
+    # Optime, Operator, Opcode, Age, Asa, Anesth., Stat.Code, ShortNotice, CareType, Municip., FreeText
 
     @staticmethod
     def _filter_form():
