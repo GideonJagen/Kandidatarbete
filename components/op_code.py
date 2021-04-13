@@ -11,9 +11,6 @@ class OpCode:
 
     @staticmethod
     def get_component():
-        """
-        Highest hierarcy widget of opCode_selection function
-        """
         widget = dbc.FormGroup(
             id="opCode_selection",
             children=[
@@ -28,26 +25,8 @@ class OpCode:
         return widget
 
     @staticmethod
-    def _op_code_options():
-        """
-        Check buttons of top hierarcy widget
-        """
-
-        options = ["Visa alla", "Exkludera", "Visa endast"]
-        widget = dbc.RadioItems(
-            id="opCode_options",
-            options=[{"label": opt, "value": opt} for opt in options],
-            labelStyle={"display": "inline-block"},
-        )
-        return widget
-
-    @staticmethod
     def _op_code_dropdown():
-        """
-        Dropdown list of top hierarcy widget
-        """
-
-        widget = dcc.Dropdown(
+        dropdown = dcc.Dropdown(
             id="opCode_dropdown",
             placeholder="Välj operationskod",
             multi=True,
@@ -56,7 +35,7 @@ class OpCode:
                 {"label": code, "value": code} for code in OpCode.STANDARD_OP_CODES
             ],  # list builder to create dropdown options,
         )
-        return widget
+        return dropdown
 
     @staticmethod
     def add_callback(app):

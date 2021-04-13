@@ -13,52 +13,63 @@ import pandas as pd
 class DataFilterer:
     @staticmethod
     def _filter_conditions(inputs) -> List:
-        """
-        Make that each of the inputs values are handled as individual conditions
-        """
-        conditions = []
-        # Add the conditions to the list of conditions
-        conditions.extend(
-            (
-                # Check if patient is in right age interval
-                LoadedData.loaded_data["PatientÅlderVidOp"].isin(
-                    range(inputs["age"]["min"], inputs["age"]["max"] + 1)
-                ),
-                # Check if patient is in right time interval
-                LoadedData.loaded_data["KravOperationstidMinuter"].isin(
-                    range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
-                ),
-                # Check if patient is in right ASA class
-                True
-                if inputs["asa_radio"] == "Visa alla"
-                else (
-                    (
-                        LoadedData.loaded_data["ASAklass"].isin(inputs["asa"])
-                        if inputs["asa"]
-                        else True
-                    )
-                    | (
-                        LoadedData.loaded_data["ASAklass"].isna()
-                        if ("Saknas" in inputs["asa"])
-                        else False
-                    )
-                ),
-                # Check if operation has matching statistcal code
-                True
-                if inputs["stat_code_radio"] == "Visa alla"
-                else (
-                    LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
-                    if inputs["stat_code"]
+        match_age = LoadedData.loaded_data["PatientÅlderVidOp"].isin(
+            range(inputs["age"]["min"], inputs["age"]["max"] + 1)
+        )
+
+        match_op_time = LoadedData.loaded_data["KravOperationstidMinuter"].isin(
+            range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
+        )
+
+        match_asa = (
+            True
+            if inputs["asa_radio"] == "Visa alla"
+            else (
+                (
+                    LoadedData.loaded_data["ASAklass"].isin(inputs["asa"])
+                    if inputs["asa"]
                     else True
-                ),
-                # Check if operation has matching operation code
-                LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
-                if inputs["op_code"]
-                else True,
-                LoadedData.loaded_data["Vårdform_text"].isin([inputs["caretype"]])
-                if inputs["caretype"] and inputs["caretype"] != "Alla"
-                else True,
+                )
+                | (
+                    LoadedData.loaded_data["ASAklass"].isna()
+                    if ("Saknas" in inputs["asa"])
+                    else False
+                )
             )
+        )
+
+        match_stat_code = (
+            True
+            if inputs["stat_code_radio"] == "Visa alla"
+            else (
+                LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
+                if inputs["stat_code"]
+                else True
+            )
+        )
+
+        match_op_code = (
+            LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
+            if inputs["op_code"]
+            else True,
+        )
+
+        match_care_type = (
+            LoadedData.loaded_data["Vårdform_text"].isin([inputs["caretype"]])
+            if inputs["caretype"] and inputs["caretype"] != "Alla"
+            else True
+        )
+
+        conditions = []
+        conditions.extend(
+            [
+                match_age,
+                match_op_time,
+                match_asa,
+                match_stat_code,
+                match_op_code,
+                match_care_type,
+            ]
         )
 
         return conditions
@@ -78,11 +89,10 @@ class DataFilterer:
         # Alternative solution for exception? Only thrown in one case but i want to avoid several if statements
 
         filtered_data = DataFilterer._filter_vectorized(inputs)
-        search_result = {}
-        search_result["data"] = filtered_data
-        search_result[
-            "number_of_patients"
-        ] = f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}"  # refactor string when import data functionality is added
+        search_result = {
+            "data": filtered_data,
+            "number_of_patients": f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}",
+        }
         return search_result
 
 
