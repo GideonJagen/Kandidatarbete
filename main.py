@@ -8,7 +8,9 @@ from components.asa import Asa
 from components.care_type import CareType
 from components.content import Content
 from components.file_upload import FileUpload
+from components.free_text_search import FreeTextSearch
 from components.municipalities import Municipalities
+from components.notes import Notes
 from components.op_code import OpCode
 from components.op_time import OpTime
 from components.operator import Operator
@@ -17,8 +19,6 @@ from components.short_notice import ShortNotice
 from components.sidebar import Sidebar
 from components.sidebar_toggle import SidebarToggle
 from components.statistics_code import StatisticsCode
-from components.notes import Notes
-from components.free_text_search import FreeTextSearch
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -44,8 +44,7 @@ app.layout = html.Div(
             ],
             className="ml-0 mr-0 h-100",
             style={
-                # "height": "100%",
-                "background-color": "#ECF9FE",
+                "background-color": "var(--c-very-light-blue)",
             },
         ),
     ],
