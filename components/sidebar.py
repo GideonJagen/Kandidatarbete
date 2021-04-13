@@ -35,7 +35,8 @@ class Sidebar:
         )
         return component
 
-    # Operationstid, Operatör, Benämning, Patientålder, ASA-klass, Anestesibedömning, Statistikkod, Kort varsel, Vårdform, Avstånd
+    # Requested order of filters:
+    # Optime, Operator, Opcode, Age, Asa, Anesth., Stat.Code, ShortNotice, CareType, Municip., FreeText
 
     @staticmethod
     def _filter_form():
