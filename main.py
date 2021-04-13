@@ -44,8 +44,7 @@ app.layout = html.Div(
             ],
             className="ml-0 mr-0 h-100",
             style={
-                # "height": "100%",
-                "background-color": "#ECF9FE",
+                "background-color": "var(--c-very-light-blue)",
             },
         ),
     ],

@@ -31,7 +31,7 @@ class Sidebar:
                 Sidebar._filter_form(),
             ],
             id="sidebar_content",
-            className="col-3 sidebar-height pt-2",
+            className="col-3 pt-2 sidebar-bg-color scrollable",
         )
         return component
 

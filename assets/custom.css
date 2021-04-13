@@ -2,6 +2,7 @@
     --c-dark-blue: #6ea6cd;
     --c-mid-blue: #98cae1;
     --c-light-blue: #c2e4ef;
+    --c-very-light-blue: #ecf9fe;
     --c-hover-red: #a24839;
     --c-red: #d6604d;
     --c-hover-orange: #d2883b;
@@ -26,7 +27,7 @@
 }
 
 .sidebar-separator {
-    margin-top: 0em;
+    margin-top: 0;
     margin-bottom: 0.5em;
 }
 
@@ -35,9 +36,12 @@
     border-color: #6ea6cd;
 }
 
-.sidebar-height {
+.scrollable {
     height: inherit;
     overflow: auto;
+}
+
+.sidebar-bg-color {
     background-color: var(--c-light-blue);
 }
 
