@@ -82,4 +82,4 @@ app = StatisticsCode.add_str_callback(app)
 app = Notes.add_callback(app)
 app = FreeTextSearch.add_callback(app)
 
-app.run_server(debug=True)
+app.run_server(debug=True, dev_tools_ui=False)

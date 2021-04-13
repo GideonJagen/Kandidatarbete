@@ -89,11 +89,10 @@ class DataFilterer:
         # Alternative solution for exception? Only thrown in one case but i want to avoid several if statements
 
         filtered_data = DataFilterer._filter_vectorized(inputs)
-        search_result = {}
-        search_result["data"] = filtered_data
-        search_result[
-            "number_of_patients"
-        ] = f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}"  # refactor string when import data functionality is added
+        search_result = {
+            "data": filtered_data,
+            "number_of_patients": f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}",
+        }
         return search_result
 
 

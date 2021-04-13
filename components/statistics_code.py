@@ -53,9 +53,6 @@ class StatisticsCode:
         checklist = dbc.Checklist(
             id="statistics_checklist",
             options=codes,
-            # placeholder=StatisticsCode.SELECT_STAT_CODES,
-            # value=[],
-            # multi=True,
             labelStyle={"display": "inline-block"},
         )
         return checklist
@@ -105,4 +102,4 @@ class StatisticsCode:
 
     @staticmethod
     def value_to_string(value_cl, value_ri):
-        return f"Statistikkod: {' ,'.join([str(s) for s in value_cl]) if len(value_cl) > 0 and value_ri == 'Välj' and len(value_cl) < 7 else 'Alla'}"
+        return f"Statistikkod: {' ,'.join([str(s) for s in value_cl]) if 0 < len(value_cl) < 7 and value_ri == 'Välj' else 'Alla'}"

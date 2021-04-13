@@ -117,7 +117,7 @@ class SearchResult:
             contents,
         ):
 
-            # By inputing a dictionary we allow more specific searchs to be done by creating combinations.
+            # By inputting a dictionary we allow more specific searches to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "upload":
