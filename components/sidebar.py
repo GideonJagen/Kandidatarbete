@@ -6,13 +6,13 @@ from components.anesthesia import Anesthesia
 from components.asa import Asa
 from components.care_type import CareType
 from components.file_upload import FileUpload
+from components.free_text_search import FreeTextSearch
 from components.municipalities import Municipalities
 from components.op_code import OpCode
 from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
-from components.free_text_search import FreeTextSearch
 
 
 class Sidebar:
