@@ -13,6 +13,8 @@ from data_handling import LoadedData
 
 
 class FileUpload:
+    SELECT_NEW_FILE = "Välj ny fil"
+
     @staticmethod
     def get_component():
         upload = dcc.Upload(
@@ -55,36 +57,42 @@ class FileUpload:
             Output(component_id="file-label", component_property="children"),
             Output(component_id="filetype-warning", component_property="is_open"),
             Input(component_id="upload", component_property="filename"),
+            Input(component_id="upload", component_property="contents"),
             Input(
                 component_id="filetype_warning_close_button",
                 component_property="n_clicks",
             ),
             prevent_initial_call=True,
         )
-        def valid_upload(filename, n_clicks):
+        def valid_upload(filename, contents, n_clicks):
             """
             :param filename: name of the loaded file
             :param n_clicks: not used, only there because button is input for callback
             :return: Bool, String, Bool representing load_collapse property is_open, file_label, filetype-warning
             """
+            load_is_open = False
+            file_label = FileUpload.SELECT_NEW_FILE
+            warning_is_open = False
 
-            if isinstance(filename, str) and filename.endswith(".csv"):
-                return (
-                    False,  # never show load_button
-                    f"Vald fil: {filename}",
-                    False,
-                )  # if csv file, show load button
+            def get_outputs():
+                return load_is_open, file_label, warning_is_open
+
             context = dash.callback_context
-            if (
-                context.triggered[0]["prop_id"].split(".")[0]
-                == "filetype_warning_close_button"
-            ):
-                return (
-                    False,
-                    "Välj ny fil",
-                    False,
-                )  # if close button in warning, close warning
-            return False, "Välj ny fil", True  # if invalid file, display warning
+            triggered_component = context.triggered[0]["prop_id"].split(".")[0]
+
+            # In the case of closing the warning
+            if triggered_component == "filetype_warning_close_button":
+                return get_outputs()
+
+            # In the case of correctly loading a file
+            elif isinstance(filename, str) and filename.endswith(".csv"):
+                file_label = f"Vald fil: {filename}"
+                return get_outputs()
+
+            # Default
+            else:
+                warning_is_open = True
+                return get_outputs()
 
         return app
 
