@@ -2,6 +2,8 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+from data_handling import LoadedData
+import dash
 
 
 class Age:
@@ -39,8 +41,13 @@ class Age:
         @app.callback(
             Output(component_id="age", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
+            Input(component_id="upload", component_property="filename"),
+            Input(component_id="upload", component_property="contents"),
         )
-        def reset_component(n_clicks):
+        def reset_component(n_clicks, filename, contents):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
+                LoadedData.load_data(filename, contents)
             return [Age.MIN_AGE, Age.MAX_AGE]
 
         return app

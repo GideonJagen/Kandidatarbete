@@ -98,8 +98,6 @@ class SearchResult:
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="load_button", component_property="n_clicks"),
-            Input(component_id="upload", component_property="filename"),
-            Input(component_id="upload", component_property="contents"),
         )
         def update_data(
             asa,
@@ -112,16 +110,13 @@ class SearchResult:
             area,
             care_type,
             op_code,
-            load_button,
-            filename,
-            contents,
         ):
 
             # By inputting a dictionary we allow more specific searches to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
             context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
-                LoadedData.load_data(filename, contents)
+            if context.triggered[0]["prop_id"].split(".")[0] == "age":
+                print("age")
             unique = [
                 {"label": code, "value": code}
                 for code in LoadedData.get_unique_values("OpkortText")
