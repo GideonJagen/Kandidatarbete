@@ -15,32 +15,38 @@ from data_handling import LoadedData
 class FileUpload:
     @staticmethod
     def get_component():
-        upload = dbc.FormGroup(
+        upload = dcc.Upload(
+            id="upload",
             children=[
-                dcc.Upload(
-                    id="upload",
-                    children=[
-                        dbc.Row(
-                            [
-                                dbc.Button(
-                                    children=["Välj ny fil"],
-                                    color="primary",
-                                    # className="ml-2"
-                                ),
-                                dbc.Label(
-                                    id="file-label",
-                                    children="Ingen fil vald",
-                                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4 ml-2",
-                                ),
-                            ],
-                            className="p-2",
-                            justify="start",
-                        )
+                dbc.Row(
+                    [
+                        FileUpload._upload_button(),
+                        FileUpload._upload_label(),
                     ],
-                ),
+                    className="p-2",
+                    justify="start",
+                )
             ],
         )
         return upload
+
+    @staticmethod
+    def _upload_button():
+        button = dbc.Button(
+            children=["Välj ny fil"],
+            color="primary",
+            # className="ml-2"
+        )
+        return button
+
+    @staticmethod
+    def _upload_label():
+        label = dbc.Label(
+            id="file-label",
+            children="Ingen fil vald",
+            className="label col-form-label-lg font-weight-bold mb-n4 pd-n4 ml-2",
+        )
+        return label
 
     @staticmethod
     def add_callback(app):
