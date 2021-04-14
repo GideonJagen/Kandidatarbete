@@ -86,7 +86,6 @@ class SearchResult:
         @app.callback(
             Output(component_id="search_result", component_property="data"),
             Output(component_id="number_of_patients", component_property="children"),
-            Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="asa_radio_items", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
@@ -97,7 +96,6 @@ class SearchResult:
             Input(component_id="municipalities_radioitems", component_property="value"),
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
-            Input(component_id="load_button", component_property="n_clicks"),
         )
         def update_data(
             asa,
@@ -111,16 +109,8 @@ class SearchResult:
             care_type,
             op_code,
         ):
-
             # By inputting a dictionary we allow more specific searches to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
-            context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "age":
-                print("age")
-            unique = [
-                {"label": code, "value": code}
-                for code in LoadedData.get_unique_values("OpkortText")
-            ]
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
@@ -134,7 +124,6 @@ class SearchResult:
                 "caretype": care_type,
             }
             result = DataFilterer.search_data(inputs)
-
-            return result["data"], result["number_of_patients"], unique
+            return result["data"], result["number_of_patients"]
 
         return app

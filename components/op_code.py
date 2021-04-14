@@ -2,6 +2,8 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+from data_handling import LoadedData
+import dash
 
 
 class OpCode:
@@ -41,10 +43,21 @@ class OpCode:
     def add_callback(app):
         @app.callback(
             Output(component_id="opCode_dropdown", component_property="value"),
+            Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
+            Input(component_id="upload", component_property="filename"),
+            Input(component_id="upload", component_property="contents"),
         )
-        def reset_component(n_clicks):
-            return OpCode.STANDARD_VALUE_DD
+        def reset_component(n_clicks, filename, contents):
+            context = dash.callback_context
+            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
+                LoadedData.load_data(filename, contents)
+            unique = [
+                {"label": code, "value": code}
+                for code in LoadedData.get_unique_values("OpkortText")
+            ]
+
+            return OpCode.STANDARD_VALUE_DD, unique
 
         return app
 
