@@ -51,7 +51,9 @@ class OpCode:
         def reset_component(n_clicks, filename, contents):
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "upload":
-                LoadedData.load_data(filename, contents)
+                LoadedData.load_data(
+                    filename, contents
+                )  # Hmmm how to solve so this is not done by every callback
             unique = [
                 {"label": code, "value": code}
                 for code in LoadedData.get_unique_values("OpkortText")
