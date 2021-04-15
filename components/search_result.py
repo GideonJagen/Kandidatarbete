@@ -122,10 +122,13 @@ class SearchResult:
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "upload":
                 LoadedData.load_data(filename, contents)
-            unique = [
-                {"label": code, "value": code}
-                for code in LoadedData.get_unique_values("OpkortText")
-            ]
+
+            unique = LoadedData.get_unique_label_values("OpkortText")
+
+            # unique = [
+            #     {"label": code, "value": code}
+            #     for code in LoadedData._get_unique_values("OpkortText")
+            # ]
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,

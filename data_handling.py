@@ -164,5 +164,13 @@ class LoadedData:
         )
 
     @staticmethod
-    def get_unique_values(col):
+    def _get_unique_values(col):
         return LoadedData.loaded_data[col].unique().tolist()
+
+    @staticmethod
+    def get_unique_label_values(col_name):
+        unique = [
+            {"label": code, "value": code}
+            for code in LoadedData._get_unique_values(col_name)
+        ]
+        return unique
