@@ -14,12 +14,13 @@ class SearchResult:
     def get_component():
         cols = [
             "Behandlingsnr",
-            "dagar_till_kritisk",
+            "Kvar på prio-tid",
             "Anmälningstidpunkt",
             "Prioritet_dagar",
             "ASAklass",
             "KravtidEfterMinuter",
             "PatientÅlderVidOp",
+            "OpkortText"
             # change name of column
         ]
 
@@ -41,14 +42,17 @@ class SearchResult:
                     style_data={
                         "border": "0.2em solid grey",
                         "height": "2.8em",
-                        "width": "7em",
+                        "width": "6em",
                         "textAlign": "center",
                     },
                     style_header={
                         "background-color": "#6ea6cd",
                         "fontWeight": "bold",
                         "textAlign": "center",
+                        "fontSize": "12px",
                     },
+                    # Göra table scroll-bart i x-led? Fler kolumner kommer behöva visas, kan
+                    # ju vara scrollbart när side_drawer är öppen
                     style_as_list_view=True,
                     style_data_conditional=[
                         {
@@ -56,22 +60,22 @@ class SearchResult:
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} <= 180",
-                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                                "filter_query": "{Kvar på prio-tid} <= 180",
+                                "column_id": "Kvar på prio-tid",  # Change to desired value
                             },
                             "backgroundColor": "var(--c-yellow)",
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} <= 60",
-                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                                "filter_query": "{Kvar på prio-tid} <= 60",
+                                "column_id": "Kvar på prio-tid",  # Change to desired value
                             },
                             "backgroundColor": "var(--c-orange)",
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} <= 30",
-                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                                "filter_query": "{Kvar på prio-tid} <= 30",
+                                "column_id": "Kvar på prio-tid",  # Change to desired value
                             },
                             "backgroundColor": "var(--c-red)",
                         },

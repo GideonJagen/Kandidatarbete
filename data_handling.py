@@ -51,7 +51,7 @@ class DataFilterer:
         match_op_code = (
             LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
             if inputs["op_code"]
-            else True,
+            else True
         )
 
         match_care_type = (
@@ -118,7 +118,7 @@ class LoadedData:
         "Vårdform_text",
         "Statistikkod",
         "OpkortText",
-        "dagar_till_kritisk",
+        "Kvar på väntetid",
     ]  # Necessary because callbacks will try to search when program is built, key error exception will be thrown, this is a temp fix
     loaded_data = pd.DataFrame(columns=COLUMNS)
     patient_count = 0
@@ -156,7 +156,7 @@ class LoadedData:
         expand later to initialize "global" dataframe with the import data widget and
         use to add more columns if needed
         """
-        LoadedData.loaded_data["dagar_till_kritisk"] = LoadedData.loaded_data.apply(
+        LoadedData.loaded_data["Kvar på prio-tid"] = LoadedData.loaded_data.apply(
             lambda x: LoadedData._prio_days_left(
                 x["Anmälningstidpunkt"], x["Prioritet_dagar"]
             ),
