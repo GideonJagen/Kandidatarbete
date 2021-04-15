@@ -113,13 +113,6 @@ class SearchResult:
             warning_is_open,
         ):
 
-            # By inputting a dictionary we allow more specific searches to be done by creating combinations.
-            # Might let the user create "shortcuts"/save filters to compare results
-
-            # unique = [
-            #     {"label": code, "value": code}
-            #     for code in LoadedData._get_unique_values("OpkortText")
-            # ]
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
