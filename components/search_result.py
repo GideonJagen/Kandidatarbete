@@ -14,12 +14,13 @@ class SearchResult:
     def get_component():
         cols = [
             "Behandlingsnr",
-            "dagar_till_kritisk",
+            "Kvar på prio-tid",
             "Anmälningstidpunkt",
             "Prioritet_dagar",
             "ASAklass",
             "KravtidEfterMinuter",
             "PatientÅlderVidOp",
+            "OpkortText"
             # change name of column
         ]
 
@@ -56,22 +57,22 @@ class SearchResult:
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} <= 180",
-                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                                "filter_query": "{Kvar på prio-tid} <= 180",
+                                "column_id": "Kvar på prio-tid",  # Change to desired value
                             },
                             "backgroundColor": "var(--c-yellow)",
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} <= 60",
-                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                                "filter_query": "{Kvar på prio-tid} <= 60",
+                                "column_id": "Kvar på prio-tid",  # Change to desired value
                             },
                             "backgroundColor": "var(--c-orange)",
                         },
                         {
                             "if": {
-                                "filter_query": "{dagar_till_kritisk} <= 30",
-                                "column_id": "dagar_till_kritisk",  # Change to desired value
+                                "filter_query": "{Kvar på prio-tid} <= 30",
+                                "column_id": "Kvar på prio-tid",  # Change to desired value
                             },
                             "backgroundColor": "var(--c-red)",
                         },
@@ -86,7 +87,6 @@ class SearchResult:
         @app.callback(
             Output(component_id="search_result", component_property="data"),
             Output(component_id="number_of_patients", component_property="children"),
-            Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="asa_radio_items", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
@@ -97,9 +97,7 @@ class SearchResult:
             Input(component_id="municipalities_radioitems", component_property="value"),
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
-            Input(component_id="load_button", component_property="n_clicks"),
-            Input(component_id="upload", component_property="filename"),
-            Input(component_id="upload", component_property="contents"),
+            Input(component_id="filetype-warning", component_property="is_open"),
         )
         def update_data(
             asa,
@@ -112,20 +110,9 @@ class SearchResult:
             area,
             care_type,
             op_code,
-            load_button,
-            filename,
-            contents,
+            warning_is_open,
         ):
 
-            # By inputting a dictionary we allow more specific searches to be done by creating combinations.
-            # Might let the user create "shortcuts"/save filters to compare results
-            context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
-                LoadedData.load_data(filename, contents)
-            unique = [
-                {"label": code, "value": code}
-                for code in LoadedData.get_unique_values("OpkortText")
-            ]
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
                 "asa": asa,
@@ -140,6 +127,6 @@ class SearchResult:
             }
             result = DataFilterer.search_data(inputs)
 
-            return result["data"], result["number_of_patients"], unique
+            return result["data"], result["number_of_patients"]
 
         return app

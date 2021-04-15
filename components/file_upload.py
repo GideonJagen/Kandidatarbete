@@ -56,6 +56,7 @@ class FileUpload:
             Output(component_id="load_collapse", component_property="is_open"),
             Output(component_id="file-label", component_property="children"),
             Output(component_id="filetype-warning", component_property="is_open"),
+            Output(component_id="opCode_dropdown", component_property="options"),
             Input(component_id="upload", component_property="filename"),
             Input(component_id="upload", component_property="contents"),
             Input(
@@ -74,11 +75,14 @@ class FileUpload:
             file_label = FileUpload.SELECT_NEW_FILE
             warning_is_open = False
 
-            def get_outputs():
-                return load_is_open, file_label, warning_is_open
-
             context = dash.callback_context
             triggered_component = context.triggered[0]["prop_id"].split(".")[0]
+            if triggered_component == "upload":
+                LoadedData.load_data(filename, contents)
+            unique_op_cards = LoadedData.get_unique_label_values("OpkortText")
+
+            def get_outputs():
+                return load_is_open, file_label, warning_is_open, unique_op_cards
 
             # In the case of closing the warning
             if triggered_component == "filetype_warning_close_button":
