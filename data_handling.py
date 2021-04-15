@@ -91,7 +91,7 @@ class DataFilterer:
         filtered_data = DataFilterer._filter_vectorized(inputs)
         search_result = {
             "data": filtered_data,
-            "number_of_patients": f"Antal patienter: {len(filtered_data)} / {LoadedData.number_patients}",
+            "number_of_patients": f"Antal patienter: {len(filtered_data)} / {LoadedData.patient_count}",
         }
         return search_result
 
@@ -121,7 +121,7 @@ class LoadedData:
         "dagar_till_kritisk",
     ]  # Necessary because callbacks will try to search when program is built, key error exception will be thrown, this is a temp fix
     loaded_data = pd.DataFrame(columns=COLUMNS)
-    number_patients = 0
+    patient_count = 0
 
     @staticmethod
     def load_data(filename, content):
@@ -131,8 +131,12 @@ class LoadedData:
                 io.StringIO(base64.b64decode(data).decode("utf-8")), sep=";"
             )  # Data loaded by widget is wrong "format", cant access full path.
             LoadedData.loaded_data = data
-            LoadedData.number_patients = len(data.values.tolist())
+            LoadedData._update_patient_count()
             LoadedData._add_prio_days_left_col()
+
+    @staticmethod
+    def _update_patient_count():
+        LoadedData.patient_count = len(LoadedData.loaded_data.values.tolist())
 
     @staticmethod
     def _prio_days_left(booked_date, prio_days):
