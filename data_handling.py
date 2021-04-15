@@ -51,7 +51,7 @@ class DataFilterer:
         match_op_code = (
             LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
             if inputs["op_code"]
-            else True,
+            else True
         )
 
         match_care_type = (

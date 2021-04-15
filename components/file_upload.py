@@ -79,6 +79,8 @@ class FileUpload:
 
             context = dash.callback_context
             triggered_component = context.triggered[0]["prop_id"].split(".")[0]
+            if triggered_component == "upload":
+                LoadedData.load_data(filename, contents)
 
             # In the case of closing the warning
             if triggered_component == "filetype_warning_close_button":

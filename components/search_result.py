@@ -119,9 +119,6 @@ class SearchResult:
 
             # By inputting a dictionary we allow more specific searches to be done by creating combinations.
             # Might let the user create "shortcuts"/save filters to compare results
-            context = dash.callback_context
-            if context.triggered[0]["prop_id"].split(".")[0] == "upload":
-                LoadedData.load_data(filename, contents)
 
             unique = LoadedData.get_unique_label_values("OpkortText")
 
