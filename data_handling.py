@@ -121,6 +121,7 @@ class LoadedData:
         "Statistikkod",
         "OpkortText",
         "Kvar på prio-tid",
+        "Planerade operatörer (Ansvarig)",
     ]
     loaded_data = pd.DataFrame(columns=COLUMNS)
     patient_count = 0
