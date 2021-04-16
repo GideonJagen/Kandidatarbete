@@ -37,12 +37,11 @@ class Operator:
             {
                 "label": "Visa endast icke tilldelade patienter",
                 "value": "blank",
-                # "disabled": True,
             },
             {
                 "label": "Filtrera efter operatör",
                 "value": "operator",
-            },  # "disabled": True},
+            },
         ]
 
         widget = dbc.RadioItems(
@@ -90,7 +89,6 @@ class Operator:
     def _operator_collapse():
         widget = dbc.Collapse(
             id="operator_collapse",
-            # style={"width": "50em"},
             children=[
                 dbc.Form(
                     [
