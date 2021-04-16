@@ -99,6 +99,8 @@ class DataFilterer:
 class LoadedData:
     # Class stores loaded data and information about it, ex number of patients
 
+    # Necessary because callbacks will try to search when program is built, key error exception will be thrown,
+    # this is a temp fix
     COLUMNS = [
         "Behandlingsnr",
         "Anmälningstidpunkt",
@@ -119,7 +121,7 @@ class LoadedData:
         "Statistikkod",
         "OpkortText",
         "Kvar på prio-tid",
-    ]  # Necessary because callbacks will try to search when program is built, key error exception will be thrown, this is a temp fix
+    ]
     loaded_data = pd.DataFrame(columns=COLUMNS)
     patient_count = 0
 
@@ -169,8 +171,8 @@ class LoadedData:
 
     @staticmethod
     def get_unique_label_values(col_name):
-        unique = [
+        label_values = [
             {"label": code, "value": code}
             for code in LoadedData._get_unique_values(col_name)
         ]
-        return unique
+        return label_values
