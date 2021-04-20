@@ -4,36 +4,6 @@ import random
 import pandas as pd
 
 
-def gen_weekday_range(start, end):
-    """
-    Returns a list of weekdsays between two dates.
-    Elements in list of type: Timestamps
-    """
-    dates = pd.date_range(start, end).tolist()
-    weekdays = [date for date in dates if date.day_of_week not in [5, 6]]
-    return weekdays
-
-
-print(gen_weekday_range("2021-01-01", "2021-02-02")[0])
-
-"""
-Behandlingsnr, Anmälningstidpunkt, SistaOpTidpunkt, Opkategori_text, Prioritet_dagar, KortVarsel, ASAklass,
-KravOperationstidMinuter, KravFörberedelsetidMinuter, KravtidEfterMinuter, PlaneradStartOpsalTidpunkt,
-PlaneradSlutOpsalTidpunkt, De_PlaneradOpsal_FK, PatientÅlderVidOp, Veckodag, Starttimme, 'TotaltidStart'
-"""
-
-
-def get_random_time():
-    minutes = random.choice(range(0, 60, 5))
-    if minutes < 10:
-        minutes = "0" + str(minutes)
-    hours = random.choice(range(7, 15))
-    if hours < 10:
-        hours = "0" + str(hours)
-
-    return "{}:{}:00".format(hours, minutes)
-
-
 def build_random_data(start_date, end_date, num_patients=100):
     date_range = gen_weekday_range(start_date, end_date)  # Dummy dates
 
@@ -65,6 +35,9 @@ def build_random_data(start_date, end_date, num_patients=100):
         "QD824",
         "ED568",
     ]
+
+    operators = open("resources/operators.txt").readlines()
+    operators = [s.rstrip("\n") for s in operators]
 
     patients = []
     for i in range(
@@ -101,6 +74,7 @@ def build_random_data(start_date, end_date, num_patients=100):
                 "Vårdform_text": random.choice(vardtyp),
                 "Statistikkod": random.choice(stat_code),
                 "OpkortText": random.choice(op_codes),
+                "Planerade operatörer (Ansvarig)": random.choice(operators),
             }
             patients.append(patient)
 
@@ -124,10 +98,42 @@ def build_random_data(start_date, end_date, num_patients=100):
                 "Vårdform_text": random.choice(vardtyp),
                 "Statistikkod": random.choice(stat_code),
                 "OpkortText": random.choice(op_codes),
+                "Planerade operatörer (Ansvarig)": random.choice(operators),
             }
             patients.append(patient)
 
     return patients
+
+
+def gen_weekday_range(start, end):
+    """
+    Returns a list of weekdsays between two dates.
+    Elements in list of type: Timestamps
+    """
+    dates = pd.date_range(start, end).tolist()
+    weekdays = [date for date in dates if date.day_of_week not in [5, 6]]
+    return weekdays
+
+
+print(gen_weekday_range("2021-01-01", "2021-02-02")[0])
+
+
+"""
+Behandlingsnr, Anmälningstidpunkt, SistaOpTidpunkt, Opkategori_text, Prioritet_dagar, KortVarsel, ASAklass,
+KravOperationstidMinuter, KravFörberedelsetidMinuter, KravtidEfterMinuter, PlaneradStartOpsalTidpunkt,
+PlaneradSlutOpsalTidpunkt, De_PlaneradOpsal_FK, PatientÅlderVidOp, Veckodag, Starttimme, 'TotaltidStart'
+"""
+
+
+def get_random_time():
+    minutes = random.choice(range(0, 60, 5))
+    if minutes < 10:
+        minutes = "0" + str(minutes)
+    hours = random.choice(range(7, 15))
+    if hours < 10:
+        hours = "0" + str(hours)
+
+    return "{}:{}:00".format(hours, minutes)
 
 
 def days_since_booking(booked_date):

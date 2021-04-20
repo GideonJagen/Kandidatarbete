@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
 
+import components.operator
 from data_handling import LoadedData
 
 
@@ -57,6 +58,7 @@ class FileUpload:
             Output(component_id="file-label", component_property="children"),
             Output(component_id="filetype-warning", component_property="is_open"),
             Output(component_id="opCode_dropdown", component_property="options"),
+            Output(component_id="operator_dropdown", component_property="options"),
             Input(component_id="upload", component_property="filename"),
             Input(component_id="upload", component_property="contents"),
             Input(
@@ -79,10 +81,20 @@ class FileUpload:
             triggered_component = context.triggered[0]["prop_id"].split(".")[0]
             if triggered_component == "upload":
                 LoadedData.load_data(filename, contents)
-            unique_op_cards = LoadedData.get_unique_label_values("OpkortText")
+
+            unique_op_codes = LoadedData.get_unique_label_values("OpkortText")
+            unique_operators = LoadedData.get_unique_label_values(
+                "Planerade operatörer (Ansvarig)"
+            )
 
             def get_outputs():
-                return load_is_open, file_label, warning_is_open, unique_op_cards
+                return (
+                    load_is_open,
+                    file_label,
+                    warning_is_open,
+                    unique_op_codes,
+                    unique_operators,
+                )
 
             # In the case of closing the warning
             if triggered_component == "filetype_warning_close_button":
