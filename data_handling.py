@@ -164,6 +164,16 @@ class LoadedData:
         )
 
     @staticmethod
+    def _add_desirous_status():
+        def _is_desirious(s):
+            if s.lower().find("angelägen") == -1:
+                return False
+            else:
+                return True
+
+        LoadedData.loaded_data.assign(desirious=lambda x: _is_desirious(x))
+
+    @staticmethod
     def _get_unique_values(col):
         return LoadedData.loaded_data[col].unique().tolist()
 
