@@ -1,0 +1,15 @@
+class Constants:
+    BEHANDLINGS_NUMMER = "Behandlingsnr"
+    ANM_TIDPUNKT = "Anmälningstidpunkt"
+    SISTA_OP_TIDPUNKT = "SistaOpTidpunkt"
+    OP_KATEGORI = "Opkategori_text"
+    PRIORITET_DAGAR = "Prioritet_dagar"
+    ASA_KLASS = "ASAklass"
+    OP_TID = "KravOperationstidMinuter"  # Change to "Operationstid" column name
+    PATIENT_ALDER = "PatientÅlderVidOp"
+    VECKODAG = "Veckodag"
+    VARDFORM = "Vårdform_text"
+    STAT_KOD = "Statistikkod"
+    OP_KORT = "OpkortText"
+    KVAR_PRIO_TID = "Kvar på prio-tid"
+    PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"

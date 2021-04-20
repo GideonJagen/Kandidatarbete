@@ -2,7 +2,7 @@ import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
-
+from resources.constants import Constants
 from data_handling import DataFilterer, LoadedData
 
 
@@ -13,14 +13,14 @@ class SearchResult:
     @staticmethod
     def get_component():
         cols = [
-            "Behandlingsnr",
-            "Kvar på prio-tid",
-            "Anmälningstidpunkt",
-            "Prioritet_dagar",
-            "ASAklass",
-            "KravtidEfterMinuter",
-            "PatientÅlderVidOp",
-            "OpkortText"
+            Constants.BEHANDLINGS_NUMMER,
+            Constants.KVAR_PRIO_TID,
+            Constants.ANM_TIDPUNKT,
+            Constants.PRIORITET_DAGAR,
+            Constants.ASA_KLASS,
+            Constants.OP_TID,
+            Constants.PATIENT_ALDER,
+            Constants.OP_KORT
             # change name of column
         ]
 

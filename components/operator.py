@@ -37,9 +37,11 @@ class Operator:
             {
                 "label": "Visa endast icke tilldelade patienter",
                 "value": "blank",
-                "disabled": True,
             },
-            {"label": "Filtrera efter operatör", "value": "operator", "disabled": True},
+            {
+                "label": "Filtrera efter operatör",
+                "value": "operator",
+            },
         ]
 
         widget = dbc.RadioItems(
@@ -87,7 +89,6 @@ class Operator:
     def _operator_collapse():
         widget = dbc.Collapse(
             id="operator_collapse",
-            # style={"width": "50em"},
             children=[
                 dbc.Form(
                     [
@@ -113,17 +114,29 @@ class Operator:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def collapse(value, reset):
+            collapse_is_open = False
+            radio_items = value
+            dropdown_value = None
+            no_operator_checkbox = False
+
+            def get_output():
+                return (
+                    collapse_is_open,
+                    radio_items,
+                    dropdown_value,
+                    no_operator_checkbox,
+                )
+
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
-                return False, "all", None, False
+                radio_items = "all"
+                return get_output()
+
             elif value == "operator":
-                return True, "operator", None, False
-            return (
-                False,
-                value,
-                None,
-                False,
-            )
+                collapse_is_open = True
+                return get_output()
+
+            return get_output()
 
         return app
 
