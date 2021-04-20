@@ -133,6 +133,7 @@ class LoadedData:
             LoadedData.loaded_data = data
             LoadedData._update_patient_count()
             LoadedData._add_prio_days_left_col()
+            LoadedData._add_desirous_status()
 
     @staticmethod
     def _update_patient_count():
