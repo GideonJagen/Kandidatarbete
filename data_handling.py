@@ -5,7 +5,7 @@ import time
 from datetime import timedelta
 from functools import reduce
 from typing import List
-
+from resources.constants import Constants
 import numpy as np
 import pandas as pd
 
@@ -102,26 +102,20 @@ class LoadedData:
     # Necessary because callbacks will try to search when program is built, key error exception will be thrown,
     # this is a temp fix
     COLUMNS = [
-        "Behandlingsnr",
-        "Anmälningstidpunkt",
-        "SistaOpTidpunkt",
-        "Opkategori_text",
-        "Prioritet_dagar",
-        "ASAklass",
-        "KravOperationstidMinuter",
-        "KravFörberedelsetidMinuter",
-        "KravtidEfterMinuter",
-        "De_PlaneradOpsal_FK",
-        "PlaneradStartOpsalTidpunkt",
-        "PatientÅlderVidOp",
-        "Veckodag",
-        "Starttimme",
-        "TotaltidStart",
-        "Vårdform_text",
-        "Statistikkod",
-        "OpkortText",
-        "Kvar på prio-tid",
-        "Planerade operatörer (Ansvarig)",
+        Constants.BEHANDLINGS_NUMMER,
+        Constants.ANM_TIDPUNKT,
+        Constants.SISTA_OP_TIDPUNKT,
+        Constants.OP_KATEGORI,
+        Constants.PRIORITET_DAGAR,
+        Constants.ASA_KLASS,
+        Constants.OP_TID,
+        Constants.PATIENT_ALDER,
+        Constants.VECKODAG,
+        Constants.VARDFORM,
+        Constants.STAT_KOD,
+        Constants.OP_KORT,
+        Constants.KVAR_PRIO_TID,
+        Constants.PLANERAD_OPERATOR,
     ]
     loaded_data = pd.DataFrame(columns=COLUMNS)
     patient_count = 0
