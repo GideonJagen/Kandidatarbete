@@ -37,6 +37,7 @@ def build_random_data(start_date, end_date, num_patients=100):
     ]
 
     operators = open("resources/operators.txt").readlines()
+    operators = [s.rstrip("\n") for s in operators]
 
     patients = []
     for i in range(
@@ -97,6 +98,7 @@ def build_random_data(start_date, end_date, num_patients=100):
                 "Vårdform_text": random.choice(vardtyp),
                 "Statistikkod": random.choice(stat_code),
                 "OpkortText": random.choice(op_codes),
+                "Planerade operatörer (Ansvarig)": random.choice(operators),
             }
             patients.append(patient)
 

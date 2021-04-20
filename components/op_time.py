@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output
 
 class OpTime:
     MIN_TIME = 0  # TODO Uppdatera baserat på datan.
-    MAX_TIME = 180
+    MAX_TIME = 200
 
     @staticmethod
     def get_component():
