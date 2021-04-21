@@ -29,7 +29,7 @@ class ShortNotice:
                         {
                             "label": "Visa endast kort varsel",
                             "value": "interval",
-                            "disabled": True,
+                            # "disabled": True,
                         },
                     ],
                     value="all",
@@ -37,20 +37,19 @@ class ShortNotice:
                 dbc.Collapse(
                     id="collapse",
                     # TODO REMOVE WHEN IMPLEMENTING CSS
-                    style={"width": "300px"},
+                    # style={"width": "300px"},
                     children=[
                         dbc.InputGroup(
                             [
                                 dbc.Input(
                                     id="short_notice_min",
                                     placeholder="Min dagar",
-                                    invalid=True,
+                                    # invalid=True,
                                 ),
                                 dbc.Input(
                                     id="short_notice_max",
                                     placeholder="Max dagar",
-                                    invalid=True,
-                                    style={},
+                                    # invalid=True,
                                 ),
                             ]
                         )
@@ -83,17 +82,28 @@ class ShortNotice:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def collapse(value, reset):
+            collapse_is_open = False
+            short_notice_min = None
+            short_notice_max = None
+            short_notice_items = "all"
+
+            def get_output():
+                return (
+                    collapse_is_open,
+                    short_notice_min,
+                    short_notice_max,
+                    short_notice_items,
+                )
+
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
-                return False, None, None, "all"
+                return get_output()
             elif value == "interval":
-                return True, None, None, "interval"
-            return (
-                False,
-                None,
-                None,
-                "all",
-            )  # Just to be sure one item is always selected, looks better
+                collapse_is_open = True
+                short_notice_items = value
+                return get_output()
+
+            return get_output()
 
         return app
 
