@@ -23,9 +23,8 @@ class DetailView:
                             className="shadow-sm",
                             style={
                                 "resize": "none",
-                                "background-color": "#c2e4ef",
+                                "background-color": "var(--c-light-blue)",
                             },
-                            placeholder="Detalj-vy",
                             bs_size="md",
                         )
                     ],
@@ -42,7 +41,6 @@ class DetailView:
             f"Behandlingsnummer: {data[Constants.BEHANDLINGS_NUMMER]} \n"
             f"Info till planerare: \n"
             f"Kommun: \n"
-            f""
         )
 
     @staticmethod

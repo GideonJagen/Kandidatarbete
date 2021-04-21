@@ -30,7 +30,7 @@ class Notes:
                     className="shadow-sm",
                     style={
                         "resize": "none",
-                        "background-color": "#c2e4ef",
+                        "background-color": "var(--c-light-blue)",
                     },
                     id="notes",
                     placeholder="",
