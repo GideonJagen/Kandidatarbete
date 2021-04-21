@@ -116,6 +116,10 @@ class LoadedData:
         Constants.OP_KORT,
         Constants.KVAR_PRIO_TID,
         Constants.PLANERAD_OPERATOR,
+        Constants.BILAGOR,
+        Constants.KOMPLETTERING_OP_KORT,
+        Constants.EXTRA_ARTIKLAR,
+        Constants.INFO_TILL_KOORDINATOR,
     ]
     loaded_data = pd.DataFrame(columns=COLUMNS)
     patient_count = 0
@@ -169,7 +173,30 @@ class LoadedData:
             else:
                 return True
 
-        LoadedData.loaded_data.assign(desirious=lambda x: _is_desirious(x))
+        LoadedData.loaded_data.assign(
+            desirious=lambda x: _is_desirious(x[Constants.INFO_TILL_KOORDINATOR])
+        )
+
+    @staticmethod
+    def _add_warning_symbols():
+        def _has_attachment(content):
+            if not content:
+                return False
+            return True
+
+        def _requires_tools(supplement, extra_tools):
+            if not supplement or extra_tools:
+                return False
+            return True
+
+        LoadedData.loaded_data.assign(
+            has_attachment=lambda x: _has_attachment(x[Constants.BILAGOR])
+        )
+        LoadedData.loaded_data.assign(
+            requires_tools=lambda x: _requires_tools(
+                x[Constants.KOMPLETTERING_OP_KORT], x[Constants.EXTRA_ARTIKLAR]
+            )
+        )
 
     @staticmethod
     def _get_unique_values(col):

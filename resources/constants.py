@@ -13,3 +13,7 @@ class Constants:
     OP_KORT = "OpkortText"
     KVAR_PRIO_TID = "Kvar på prio-tid"
     PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"
+    BILAGOR = "Bilagor"
+    KOMPLETTERING_OP_KORT = "Komplettering opkort"
+    EXTRA_ARTIKLAR = "Extra artiklar att beställa från op/sterilcentralen"
+    INFO_TILL_KOORDINATOR = "Information till planerare/koordinator"
