@@ -171,3 +171,23 @@ class LoadedData:
             for code in LoadedData._get_unique_values(col_name)
         ]
         return label_values
+
+    @staticmethod
+    def find_patient(treatment_nr):
+        return LoadedData.loaded_data.loc[
+            (LoadedData.loaded_data[Constants.BEHANDLINGS_NUMMER] == int(treatment_nr))
+        ]
+
+    @staticmethod
+    def patient_to_string(patient_row, detailed=True):
+
+        return (
+            f"Namn: David \n"
+            f"Behandlingsnummer: {patient_row[Constants.BEHANDLINGS_NUMMER].values[0]} \n"
+            f"Operationstid: {patient_row[Constants.OP_TID].values[0]} \n"
+            f"Operatör: {patient_row[Constants.PLANERAD_OPERATOR].values[0]} \n"
+            f"Operationskod: {patient_row[Constants.OP_KORT].values[0]} \n"
+            f"Ålder: {patient_row[Constants.PATIENT_ALDER].values[0]} \n"
+            f"Statistikkod: {patient_row[Constants.STAT_KOD].values[0]} \n"
+            f"ASA-klass : {patient_row[Constants.ASA_KLASS].values[0]} \n"
+        )
