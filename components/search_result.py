@@ -10,6 +10,8 @@ from data_handling import DataFilterer, LoadedData
 
 
 class SearchResult:
+    PAGE_SIZE = 50
+
     @staticmethod
     def get_component():
         cols = [
@@ -27,8 +29,10 @@ class SearchResult:
         widget = html.Div(
             children=[
                 dash_table.DataTable(
+                    cell_selectable=True,
                     id="search_result",
-                    page_size=50,
+                    page_size=SearchResult.PAGE_SIZE,
+                    page_current=0,
                     style_table={
                         "background-color": "var(--c-very-light-blue)",
                         "height": "50vh",
@@ -46,7 +50,7 @@ class SearchResult:
                         "textAlign": "center",
                     },
                     style_header={
-                        "background-color": "#6ea6cd",
+                        "background-color": "var(--c-dark-blue)",
                         "fontWeight": "bold",
                         "textAlign": "center",
                     },
