@@ -115,10 +115,11 @@ class PatientToReplace:
                         input_value = None
                 else:
                     PatientToReplace.current_notes = "Värdet måste vara numeriskt!"
+                    valid_input = False
+                    invalid_input = True
             else:
                 input_value = input
-                valid_input = False
-                invalid_input = True
+
             return get_outputs()
 
         return app
