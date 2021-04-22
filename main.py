@@ -10,7 +10,7 @@ from components.content import Content
 from components.file_upload import FileUpload
 from components.free_text_search import FreeTextSearch
 from components.municipalities import Municipalities
-from components.notes import Notes
+from components.patient_to_replace import PatientToReplace
 from components.op_code import OpCode
 from components.op_time import OpTime
 from components.operator import Operator
@@ -80,7 +80,7 @@ app = OpTime.add_str_callback(app)
 app = Operator.add_str_callback(app)
 app = ShortNotice.add_str_callback(app)
 app = StatisticsCode.add_str_callback(app)
-app = Notes.add_callback(app)
+app = PatientToReplace.add_callback(app)
 app = FreeTextSearch.add_callback(app)
 app = DetailView.add_callback(app)
 app.run_server(debug=True, dev_tools_ui=True)

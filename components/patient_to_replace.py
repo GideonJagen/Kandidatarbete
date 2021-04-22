@@ -1,11 +1,12 @@
 import dash
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
+
 from data_handling import LoadedData
-import numpy as np
 
 
-class Notes:
+class PatientToReplace:
     current_notes = ""
     PLACEHOLDER_MSG = (
         "Fyll i behandlingsnummer på patienten som ska ersättas i rutan ovan."
@@ -15,7 +16,12 @@ class Notes:
     def get_component():
         widget = dbc.Col(
             className="col-3 ml-3 mr-3",
-            children=[Notes._input_row(), Notes._notes_row(), Notes._reset_row()],
+            children=[
+                html.H4("Avbokad patient"),
+                PatientToReplace._input_row(),
+                PatientToReplace._details_row(),
+                PatientToReplace._reset_row(),
+            ],
         )
         return widget
 
@@ -28,12 +34,12 @@ class Notes:
         )
 
     @staticmethod
-    def _notes_row():
+    def _details_row():
         return dbc.Row(
-            style={"height": "75%"},  # why doesnt row classes work?????????
+            style={"height": "15.5em"},  # why doesnt row classes work?????????
             children=[
                 dbc.Textarea(
-                    placeholder=Notes.PLACEHOLDER_MSG,
+                    placeholder=PatientToReplace.PLACEHOLDER_MSG,
                     readOnly=True,
                     className="shadow-sm",
                     style={
@@ -48,16 +54,15 @@ class Notes:
 
     @staticmethod
     def _reset_row():
-        return dbc.Row(
-            justify="end",
-            children=[
-                dbc.Button(
-                    id="reset_notes",
-                    color="link",
-                    children="Återställ",
-                )
-            ],
+        button = dbc.Button(
+            id="reset_notes",
+            color="link",
+            children="Återställ",
         )
+
+        row = dbc.Row(justify="end", children=[button])
+
+        return row
 
     @staticmethod
     def add_callback(app):
@@ -76,12 +81,17 @@ class Notes:
             input_value = input
 
             def get_outputs():
-                return Notes.current_notes, input_value, invalid_input, valid_input
+                return (
+                    PatientToReplace.current_notes,
+                    input_value,
+                    invalid_input,
+                    valid_input,
+                )
 
             context = dash.callback_context
 
             if context.triggered[0]["prop_id"].split(".")[0] == "reset_notes":
-                Notes.current_notes = ""
+                PatientToReplace.current_notes = ""
                 input_value = None
                 invalid_input = False
                 valid_input = False
@@ -90,19 +100,21 @@ class Notes:
                 if input and input.isnumeric():
                     patient = LoadedData.find_patient(input)
                     if len(patient) > 0:
-                        Notes.current_notes = LoadedData.patient_to_string(patient)
+                        PatientToReplace.current_notes = LoadedData.patient_to_string(
+                            patient
+                        )
                         valid_input = True
                         invalid_input = False
                         input_value = None
                     else:
                         valid_input = False
                         invalid_input = True
-                        Notes.current_notes = (
+                        PatientToReplace.current_notes = (
                             f"Ingen patient med behandlingsnummer: {input} hittades."
                         )
                         input_value = None
                 else:
-                    Notes.current_notes = "Värdet måste vara numeriskt!"
+                    PatientToReplace.current_notes = "Värdet måste vara numeriskt!"
             else:
                 input_value = input
             return get_outputs()

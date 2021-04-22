@@ -1,9 +1,8 @@
-import dash
 import dash_bootstrap_components as dbc
+import dash_html_components as html
 from dash.dependencies import Input, Output
 from data_handling import LoadedData
 from resources.constants import Constants
-import numpy as np
 
 
 class DetailView:
@@ -14,8 +13,9 @@ class DetailView:
         widget = dbc.Col(
             className="col-3 ml-3 mr-3",
             children=[
+                html.H4("Detaljvy (vald patient)"),
                 dbc.Row(
-                    style={"height": "90%"},  # why doesnt row classes work?????????
+                    style={"height": "18em"},
                     children=[
                         dbc.Textarea(
                             id="detail-view",
@@ -28,7 +28,7 @@ class DetailView:
                             bs_size="md",
                         )
                     ],
-                )
+                ),
             ],
         )
         return widget
