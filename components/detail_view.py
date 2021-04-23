@@ -37,9 +37,9 @@ class DetailView:
     def _row_to_string(data):
 
         return (
-            f"Namn: David \n"
+            f"Namn: Namn Namnson \n"
             f"Behandlingsnummer: {data[Constants.BEHANDLINGS_NUMMER]} \n"
-            f"Info till planerare: \n"
+            f"Info till planerare:\n"
             f"Kommun: \n"
         )
 

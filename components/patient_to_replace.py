@@ -105,14 +105,13 @@ class PatientToReplace:
                         )
                         valid_input = True
                         invalid_input = False
-                        input_value = None
+                        input_value = input
                     else:
                         valid_input = False
                         invalid_input = True
-                        PatientToReplace.current_notes = (
-                            f"Ingen patient med behandlingsnummer: {input} hittades."
-                        )
-                        input_value = None
+                        input_value = input
+                        PatientToReplace.current_notes = "Ingen patient hittades"
+
                 else:
                     PatientToReplace.current_notes = "Värdet måste vara numeriskt!"
                     valid_input = False
