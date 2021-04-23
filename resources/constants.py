@@ -10,7 +10,7 @@ class Constants:
     VECKODAG = "Veckodag"
     VARDFORM = "Vårdform_text"
     STAT_KOD = "Statistikkod (Ange vilken/vilka)"
-    OP_KORT = "OpkortText"
+    OP_KORT = "Benämning"
     KVAR_PRIO_TID = "Kvar på prio-tid"
     PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"
     INFO_TILL_PLANERARE = "Information till planerare/koordinator"

@@ -13,11 +13,11 @@ import pandas as pd
 class DataFilterer:
     @staticmethod
     def _filter_conditions(inputs) -> List:
-        match_age = LoadedData.loaded_data["PatientÅlderVidOp"].isin(
+        match_age = LoadedData.loaded_data[Constants.PATIENT_ALDER].isin(
             range(inputs["age"]["min"], inputs["age"]["max"] + 1)
         )
 
-        match_op_time = LoadedData.loaded_data["KravOperationstidMinuter"].isin(
+        match_op_time = LoadedData.loaded_data[Constants.OP_TID].isin(
             range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
         )
 
@@ -26,12 +26,12 @@ class DataFilterer:
             if inputs["asa_radio"] == "Visa alla"
             else (
                 (
-                    LoadedData.loaded_data["ASAklass"].isin(inputs["asa"])
+                    LoadedData.loaded_data[Constants.ASA_KLASS].isin(inputs["asa"])
                     if inputs["asa"]
                     else True
                 )
                 | (
-                    LoadedData.loaded_data["ASAklass"].isna()
+                    LoadedData.loaded_data[Constants.ASA_KLASS].isna()
                     if ("Saknas" in inputs["asa"])
                     else False
                 )
@@ -42,20 +42,20 @@ class DataFilterer:
             True
             if inputs["stat_code_radio"] == "Visa alla"
             else (
-                LoadedData.loaded_data["Statistikkod"].isin(inputs["stat_code"])
+                LoadedData.loaded_data[Constants.STAT_KOD].isin(inputs["stat_code"])
                 if inputs["stat_code"]
                 else True
             )
         )
 
         match_op_code = (
-            LoadedData.loaded_data["OpkortText"].isin(inputs["op_code"])
+            LoadedData.loaded_data[Constants.OP_KORT].isin(inputs["op_code"])
             if inputs["op_code"]
             else True
         )
 
         match_care_type = (
-            LoadedData.loaded_data["Vårdform_text"].isin([inputs["caretype"]])
+            LoadedData.loaded_data[Constants.VARDFORM].isin([inputs["caretype"]])
             if inputs["caretype"] and inputs["caretype"] != "Alla"
             else True
         )
@@ -140,11 +140,11 @@ class LoadedData:
         """
         Calculate days left within the patients priority days
         """
-        today = datetime.date.today()
-        year, month, day = str(booked_date).split(sep="-")
-        booked_date = datetime.date(int(year), int(month), int(day.split(" ")[0]))
-        critical_date = booked_date + timedelta(prio_days)
-        return (critical_date - today).days
+        # today = datetime.date.today()
+        # year, month, day = str(booked_date).split(sep="-")
+        # booked_date = datetime.date(int(year), int(month), int(day.split(" ")[0]))
+        # critical_date = booked_date + timedelta(prio_days)
+        return 1  # (critical_date - today).days
 
     @staticmethod
     def _add_prio_days_left_col():
@@ -155,7 +155,7 @@ class LoadedData:
         """
         LoadedData.loaded_data["Kvar på prio-tid"] = LoadedData.loaded_data.apply(
             lambda x: LoadedData._prio_days_left(
-                x["Anmälningstidpunkt"], x["Prioritet_dagar"]
+                x[Constants.ANM_TIDPUNKT], x[Constants.PRIORITET_DAGAR]
             ),
             axis=1,
         )

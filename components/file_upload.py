@@ -2,7 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
-
+from resources.constants import Constants
 import components.operator
 from data_handling import LoadedData
 
@@ -82,9 +82,9 @@ class FileUpload:
             if triggered_component == "upload":
                 LoadedData.load_data(filename, contents)
 
-            unique_op_codes = LoadedData.get_unique_label_values("OpkortText")
+            unique_op_codes = LoadedData.get_unique_label_values(Constants.OP_KORT)
             unique_operators = LoadedData.get_unique_label_values(
-                "Planerade operatörer (Ansvarig)"
+                Constants.PLANERAD_OPERATOR
             )
 
             def get_outputs():
