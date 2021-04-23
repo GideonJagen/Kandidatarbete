@@ -13,6 +13,8 @@ class Constants:
     OP_KORT = "OpkortText"
     KVAR_PRIO_TID = "Kvar på prio-tid"
     PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"
+    INFO_TILL_PLANERARE = "Information till planerare/koordinator"
+    KOMMUN = "kommun"  # ???
 
     @staticmethod
     def get_all_columns():
