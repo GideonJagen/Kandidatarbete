@@ -1,20 +1,20 @@
 class Constants:
-    BEHANDLINGS_NUMMER = "Behandlingsnr"
-    ANM_TIDPUNKT = "Anmälningstidpunkt"
+    BEHANDLINGS_NUMMER = "Behandlingsnummer"
+    ANM_TIDPUNKT = "Anmälningsdatum"
     SISTA_OP_TIDPUNKT = "SistaOpTidpunkt"
     OP_KATEGORI = "Opkategori_text"
-    PRIORITET_DAGAR = "Prioritet_dagar"
-    ASA_KLASS = "ASAklass"
-    OP_TID = "KravOperationstidMinuter"  # Change to "Operationstid" column name
-    PATIENT_ALDER = "PatientÅlderVidOp"
+    PRIORITET_DAGAR = "Prioritet"
+    ASA_KLASS = "ASA-klassifiering (preoperativt)"
+    OP_TID = "Operationstid"  # Change to "Operationstid" column name
+    PATIENT_ALDER = "Patient (Ålder)"
     VECKODAG = "Veckodag"
     VARDFORM = "Vårdform_text"
-    STAT_KOD = "Statistikkod"
+    STAT_KOD = "Statistikkod (Ange vilken/vilka)"
     OP_KORT = "OpkortText"
     KVAR_PRIO_TID = "Kvar på prio-tid"
     PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"
     INFO_TILL_PLANERARE = "Information till planerare/koordinator"
-    KOMMUN = "kommun"  # ???
+    KOMMUN = "Patient (Kommun)"  # ???
 
     @staticmethod
     def get_all_columns():
