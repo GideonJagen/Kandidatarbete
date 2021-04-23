@@ -39,7 +39,7 @@ class DetailView:
         return (
             f"Namn: Namn Namnson \n"
             f"Behandlingsnummer: {data[Constants.BEHANDLINGS_NUMMER]} \n"
-            f"Info till planerare:\n"
+            f"Info till planerare:{data[Constants.INFO_TILL_PLANERARE]}\n"
             f"Kommun: \n"
         )
 
