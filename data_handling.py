@@ -121,19 +121,19 @@ class LoadedData:
     patient_count = 0
 
     @staticmethod
-    def load_data(filename, content):
-        if filename.endswith(".csv"):
-            data = content.split(",")[1]
-            data = pd.read_csv(
-                io.StringIO(base64.b64decode(data).decode("utf-8")), sep=";"
-            )  # Data loaded by widget is wrong "format", cant access full path.
+    def load_data(filename, contents):
+        content_type, content_string = contents.split(",")
+
+        decoded = base64.b64decode(content_string)
+        if ".xls" in filename:
+            data = pd.read_excel(io.BytesIO(decoded))
             LoadedData.loaded_data = data
-            LoadedData._update_patient_count()
-            LoadedData._add_prio_days_left_col()
+        LoadedData._update_patient_count()
+        LoadedData._add_prio_days_left_col()
 
     @staticmethod
     def _update_patient_count():
-        LoadedData.patient_count = len(LoadedData.loaded_data.values.tolist())
+        LoadedData.patient_count = LoadedData.loaded_data.values.size
 
     @staticmethod
     def _prio_days_left(booked_date, prio_days):
