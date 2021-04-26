@@ -133,7 +133,7 @@ class LoadedData:
 
     @staticmethod
     def _update_patient_count():
-        LoadedData.patient_count = LoadedData.loaded_data.values.size
+        LoadedData.patient_count = len(LoadedData.loaded_data.values.tolist())
 
     @staticmethod
     def _prio_days_left(booked_date, prio_days):
