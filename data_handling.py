@@ -1,13 +1,14 @@
 import base64
-import datetime
 import io
 import time
-from datetime import timedelta
+import re
 from functools import reduce
 from typing import List
-from resources.constants import Constants
+
 import numpy as np
 import pandas as pd
+
+from resources.constants import Constants
 
 
 class DataFilterer:
@@ -245,3 +246,20 @@ class LoadedData:
         if op_code is not None:
             return op_code.split()[0]
         return ""
+
+    @staticmethod
+    def _extract_pnr_name(string: str) -> (str, str):
+        if type(string) is not str:
+            return "", ""
+
+        pnr = re.findall(r"^[0-9]{8}-[0-9]{4}", string)
+        name = re.findall(r"(?<=^[0-9]{8}-[0-9]{4} - ).*", string)
+        return pnr[0], name[0]
+
+    @staticmethod
+    def _extract_asa_class(string: str):
+        if type(string) is not str:
+            return None
+
+        number = re.findall(r"(?<=[Aa][Ss][Aa] )[1-4]", string)
+        return int(number[0])
