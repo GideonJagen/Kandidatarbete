@@ -3,12 +3,11 @@ class Constants:
     PATIENT = "Patient"
     ANM_TIDPUNKT = "Anmälningsdatum"
     OP_KATEGORI = "Opkategori_text"
-    PRIORITET_DAGAR = "Prioritet"
     ASA_KLASS = "ASA-klassificering (preoperativt)"
     OP_TID = "Operationstid"  # Change to "Operationstid" column name
     PATIENT_ALDER = "Patient (Ålder)"
     VECKODAG = "Veckodag"
-    VARDFORM = "Vårdform_text"
+    VARDFORM = "Vårdform"
     PRIORITET = "Prioritet"
     STAT_CODE = "Statistikkod (Ange vilken/vilka)"
     BENAMNING = "Benämning"

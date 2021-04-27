@@ -103,7 +103,9 @@ class FileUpload:
                 return get_outputs()
 
             # In the case of correctly loading a file
-            elif isinstance(filename, str) and filename.endswith(".csv"):
+            elif isinstance(filename, str) and filename.endswith(
+                LoadedData.CORRECT_FILE_TYPE
+            ):
                 file_label = f"Vald fil: {filename}"
                 return get_outputs()
 

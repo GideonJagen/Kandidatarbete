@@ -54,11 +54,11 @@ class DataFilterer:
             else True
         )
 
-        """match_care_type = (
+        match_care_type = (
             LoadedData.loaded_data[Constants.VARDFORM].isin([inputs["caretype"]])
             if inputs["caretype"] and inputs["caretype"] != "Alla"
             else True
-        )"""
+        )
 
         conditions = []
         conditions.extend(
@@ -68,7 +68,7 @@ class DataFilterer:
                 # match_asa,
                 match_stat_code,
                 match_op_code,
-                # match_care_type,
+                match_care_type,
             ]
         )
 
@@ -101,16 +101,16 @@ class LoadedData:
 
     # Necessary because callbacks will try to search when program is built, key error exception will be thrown,
     # this is a temp fix
+    CORRECT_FILE_TYPE = ".xls"
     COLUMNS = [
         Constants.BEHANDLINGS_NUMMER,
         Constants.ANM_TIDPUNKT,
         # Constants.OP_KATEGORI,
-        Constants.PRIORITET_DAGAR,
         Constants.ASA_KLASS,
         Constants.OP_TID,
         Constants.PATIENT_ALDER,
         # Constants.VECKODAG,
-        # Constants.VARDFORM,
+        Constants.VARDFORM,
         Constants.PRIORITET,
         Constants.BENAMNING,
         # Constants.KVAR_PRIO_TID,
@@ -225,7 +225,6 @@ class LoadedData:
 
     @staticmethod
     def _time_to_minutes(time: str):
-        print(time)
         h, m = time.split(":")
         return int(h) * 60 + int(m)
 
