@@ -162,7 +162,7 @@ class LoadedData:
         """
         LoadedData.loaded_data["Kvar på prio-tid"] = LoadedData.loaded_data.apply(
             lambda x: LoadedData._prio_days_left(
-                x[Constants.ANM_TIDPUNKT], x[Constants.PRIORITET_DAGAR]
+                x[Constants.ANM_TIDPUNKT], x[Constants.PRIORITET]
             ),
             axis=1,
         )
