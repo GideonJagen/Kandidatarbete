@@ -10,25 +10,28 @@ from data_handling import DataFilterer, LoadedData
 
 
 class SearchResult:
+    PAGE_SIZE = 50
+
     @staticmethod
     def get_component():
         cols = [
             Constants.BEHANDLINGS_NUMMER,
             Constants.KVAR_PRIO_TID,
-            Constants.ANM_TIDPUNKT,
             Constants.PRIORITET_DAGAR,
             Constants.ASA_KLASS,
             Constants.OP_TID,
             Constants.PATIENT_ALDER,
-            Constants.OP_KORT
+            Constants.BENAMNING
             # change name of column
         ]
 
         widget = html.Div(
             children=[
                 dash_table.DataTable(
+                    cell_selectable=True,
                     id="search_result",
-                    page_size=50,
+                    page_size=SearchResult.PAGE_SIZE,
+                    page_current=0,
                     style_table={
                         "background-color": "var(--c-very-light-blue)",
                         "height": "50vh",
@@ -46,7 +49,7 @@ class SearchResult:
                         "textAlign": "center",
                     },
                     style_header={
-                        "background-color": "#6ea6cd",
+                        "background-color": "var(--c-dark-blue)",
                         "fontWeight": "bold",
                         "textAlign": "center",
                     },

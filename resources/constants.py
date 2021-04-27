@@ -1,15 +1,38 @@
 class Constants:
     BEHANDLINGS_NUMMER = "Behandlingsnr"
-    ANM_TIDPUNKT = "Anmälningstidpunkt"
-    SISTA_OP_TIDPUNKT = "SistaOpTidpunkt"
+    PATIENT = "Patient"
+    ANM_TIDPUNKT = "Anmälningsdatum"
     OP_KATEGORI = "Opkategori_text"
-    PRIORITET_DAGAR = "Prioritet_dagar"
-    ASA_KLASS = "ASAklass"
-    OP_TID = "KravOperationstidMinuter"  # Change to "Operationstid" column name
-    PATIENT_ALDER = "PatientÅlderVidOp"
+    PRIORITET_DAGAR = "Prioritet"
+    ASA_KLASS = "ASA-klassificering (preoperativt)"
+    OP_TID = "Operationstid"  # Change to "Operationstid" column name
+    PATIENT_ALDER = "Patient (Ålder)"
     VECKODAG = "Veckodag"
     VARDFORM = "Vårdform_text"
-    STAT_KOD = "Statistikkod"
-    OP_KORT = "OpkortText"
+    PRIORITET = "Prioritet"
+    STAT_CODE = "Statistikkod (Ange vilken/vilka)"
+    BENAMNING = "Benämning"
     KVAR_PRIO_TID = "Kvar på prio-tid"
     PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"
+    INFO_TILL_PLANERARE = "Information till planerare/koordinator"
+    KOMMUN = "Patient (Kommun)"  # ???
+
+    @staticmethod
+    def get_all_columns():
+        return [
+            Constants.BEHANDLINGS_NUMMER,
+            Constants.ANM_TIDPUNKT,
+            Constants.SISTA_OP_TIDPUNKT,
+            Constants.OP_KATEGORI,
+            Constants.PRIORITET_DAGAR,
+            Constants.ASA_KLASS,
+            Constants.OP_TID,
+            Constants.PATIENT_ALDER,
+            Constants.VECKODAG,
+            Constants.VARDFORM,
+            Constants.PRIORITET,
+            Constants.BENAMNING,
+            Constants.KVAR_PRIO_TID,
+            Constants.PLANERAD_OPERATOR,
+            Constants.PATIENT,
+        ]

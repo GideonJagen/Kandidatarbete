@@ -10,4 +10,7 @@ class ResetFilterButton:
             color="link",
             style={"height": "2.5em"},
         )
-        return button
+
+        row = dbc.Row(justify="end", children=[button])
+
+        return row
