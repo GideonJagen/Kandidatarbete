@@ -21,7 +21,7 @@ class DataFilterer:
             range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
         )
 
-        match_asa = (
+        """match_asa = (
             True
             if inputs["asa_radio"] == "Visa alla"
             else (
@@ -36,39 +36,39 @@ class DataFilterer:
                     else False
                 )
             )
-        )
+        )"""
 
         match_stat_code = (
             True
             if inputs["stat_code_radio"] == "Visa alla"
             else (
-                LoadedData.loaded_data[Constants.STAT_KOD].isin(inputs["stat_code"])
+                LoadedData.loaded_data[Constants.PRIORITET].isin(inputs["stat_code"])
                 if inputs["stat_code"]
                 else True
             )
         )
 
         match_op_code = (
-            LoadedData.loaded_data[Constants.OP_KORT].isin(inputs["op_code"])
+            LoadedData.loaded_data[Constants.BENAMNING].isin(inputs["op_code"])
             if inputs["op_code"]
             else True
         )
 
-        match_care_type = (
+        """match_care_type = (
             LoadedData.loaded_data[Constants.VARDFORM].isin([inputs["caretype"]])
             if inputs["caretype"] and inputs["caretype"] != "Alla"
             else True
-        )
+        )"""
 
         conditions = []
         conditions.extend(
             [
                 match_age,
                 match_op_time,
-                match_asa,
+                # match_asa,
                 match_stat_code,
                 match_op_code,
-                match_care_type,
+                # match_care_type,
             ]
         )
 
@@ -104,32 +104,39 @@ class LoadedData:
     COLUMNS = [
         Constants.BEHANDLINGS_NUMMER,
         Constants.ANM_TIDPUNKT,
-        Constants.SISTA_OP_TIDPUNKT,
-        Constants.OP_KATEGORI,
+        # Constants.OP_KATEGORI,
         Constants.PRIORITET_DAGAR,
         Constants.ASA_KLASS,
         Constants.OP_TID,
         Constants.PATIENT_ALDER,
-        Constants.VECKODAG,
-        Constants.VARDFORM,
-        Constants.STAT_KOD,
-        Constants.OP_KORT,
-        Constants.KVAR_PRIO_TID,
+        # Constants.VECKODAG,
+        # Constants.VARDFORM,
+        Constants.PRIORITET,
+        Constants.BENAMNING,
+        # Constants.KVAR_PRIO_TID,
         Constants.PLANERAD_OPERATOR,
+        Constants.INFO_TILL_PLANERARE,
+        Constants.PATIENT,
+        Constants.STAT_CODE,
     ]
+
     loaded_data = pd.DataFrame(columns=COLUMNS)
     patient_count = 0
 
     @staticmethod
     def load_data(filename, contents):
         content_type, content_string = contents.split(",")
-
         decoded = base64.b64decode(content_string)
         if ".xls" in filename:
-            data = pd.read_excel(io.BytesIO(decoded))
+            data = pd.read_excel(io.BytesIO(decoded), usecols=LoadedData.COLUMNS)
             LoadedData.loaded_data = data
-        LoadedData._update_patient_count()
-        LoadedData._add_prio_days_left_col()
+
+            LoadedData._update_patient_count()
+            LoadedData._add_prio_days_left_col()
+            LoadedData._strip_age()
+            LoadedData._convert_time()
+            LoadedData._parse_op_code()
+        print(LoadedData.loaded_data.head())
 
     @staticmethod
     def _update_patient_count():
@@ -186,8 +193,44 @@ class LoadedData:
             f"Behandlingsnummer: {patient_row[Constants.BEHANDLINGS_NUMMER].values[0]} \n"
             f"Operationstid: {patient_row[Constants.OP_TID].values[0]} \n"
             f"Operatör: {patient_row[Constants.PLANERAD_OPERATOR].values[0]} \n"
-            f"Operationskod: {patient_row[Constants.OP_KORT].values[0]} \n"
+            f"Operationskod: {patient_row[Constants.BENAMNING].values[0]} \n"
             f"Ålder: {patient_row[Constants.PATIENT_ALDER].values[0]} \n"
-            f"Statistikkod: {patient_row[Constants.STAT_KOD].values[0]} \n"
+            f"Statistikkod: {patient_row[Constants.PRIORITET].values[0]} \n"
             f"ASA-klass : {patient_row[Constants.ASA_KLASS].values[0]} \n"
         )
+
+    @staticmethod
+    def _strip_age():
+        LoadedData.loaded_data[Constants.PATIENT_ALDER] = LoadedData.loaded_data[
+            Constants.PATIENT_ALDER
+        ].map(lambda x: LoadedData._string_to_age(x))
+
+    @staticmethod
+    def _convert_time():
+        LoadedData.loaded_data[Constants.OP_TID] = LoadedData.loaded_data[
+            Constants.OP_TID
+        ].map(lambda x: LoadedData._time_to_minutes(x))
+
+    @staticmethod
+    def _time_to_minutes(time: str):
+        print(time)
+        h, m = time.split(":")
+        return int(h) * 60 + int(m)
+
+    @staticmethod
+    def _string_to_age(age: str):
+        if type(age) == str:
+            return int(age.split()[0])
+        return 0
+
+    @staticmethod
+    def _parse_op_code():
+        LoadedData.loaded_data[Constants.BENAMNING] = LoadedData.loaded_data[
+            Constants.BENAMNING
+        ].map(lambda x: LoadedData._split_op_code(x))
+
+    @staticmethod
+    def _split_op_code(op_code):
+        if op_code is not None:
+            return op_code.split()[0]
+        return ""

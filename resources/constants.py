@@ -1,16 +1,17 @@
 class Constants:
-    BEHANDLINGS_NUMMER = "Behandlingsnummer"
+    BEHANDLINGS_NUMMER = "Behandlingsnr"
+    PATIENT = "Patient"
     ANM_TIDPUNKT = "Anmälningsdatum"
-    SISTA_OP_TIDPUNKT = "SistaOpTidpunkt"
     OP_KATEGORI = "Opkategori_text"
     PRIORITET_DAGAR = "Prioritet"
-    ASA_KLASS = "ASA-klassifiering (preoperativt)"
+    ASA_KLASS = "ASA-klassificering (preoperativt)"
     OP_TID = "Operationstid"  # Change to "Operationstid" column name
     PATIENT_ALDER = "Patient (Ålder)"
     VECKODAG = "Veckodag"
     VARDFORM = "Vårdform_text"
-    STAT_KOD = "Statistikkod (Ange vilken/vilka)"
-    OP_KORT = "Benämning"
+    PRIORITET = "Prioritet"
+    STAT_CODE = "Statistikkod (Ange vilken/vilka)"
+    BENAMNING = "Benämning"
     KVAR_PRIO_TID = "Kvar på prio-tid"
     PLANERAD_OPERATOR = "Planerade operatörer (Ansvarig)"
     INFO_TILL_PLANERARE = "Information till planerare/koordinator"
@@ -29,8 +30,9 @@ class Constants:
             Constants.PATIENT_ALDER,
             Constants.VECKODAG,
             Constants.VARDFORM,
-            Constants.STAT_KOD,
-            Constants.OP_KORT,
+            Constants.PRIORITET,
+            Constants.BENAMNING,
             Constants.KVAR_PRIO_TID,
             Constants.PLANERAD_OPERATOR,
+            Constants.PATIENT,
         ]

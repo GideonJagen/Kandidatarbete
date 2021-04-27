@@ -21,7 +21,7 @@ class SearchResult:
             Constants.ASA_KLASS,
             Constants.OP_TID,
             Constants.PATIENT_ALDER,
-            Constants.OP_KORT
+            Constants.BENAMNING
             # change name of column
         ]
 

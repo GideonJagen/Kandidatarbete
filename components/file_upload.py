@@ -58,7 +58,7 @@ class FileUpload:
             Output(component_id="file-label", component_property="children"),
             Output(component_id="filetype-warning", component_property="is_open"),
             Output(component_id="opCode_dropdown", component_property="options"),
-            Output(component_id="operator_dropdown", component_property="options"),
+            # Output(component_id="operator_dropdown", component_property="options"),
             Input(component_id="upload", component_property="filename"),
             Input(component_id="upload", component_property="contents"),
             Input(
@@ -80,12 +80,14 @@ class FileUpload:
             context = dash.callback_context
             triggered_component = context.triggered[0]["prop_id"].split(".")[0]
             if triggered_component == "upload":
-                LoadedData.load_data(filename, contents)
+                if filename is not None and contents is not None:
+                    LoadedData.load_data(filename, contents)
 
-            unique_op_codes = LoadedData.get_unique_label_values(Constants.OP_KORT)
-            unique_operators = LoadedData.get_unique_label_values(
+            unique_op_codes = LoadedData.get_unique_label_values(Constants.BENAMNING)
+            """unique_operators = LoadedData.get_unique_label_values(
                 Constants.PLANERAD_OPERATOR
             )
+"""
 
             def get_outputs():
                 return (
@@ -93,7 +95,7 @@ class FileUpload:
                     file_label,
                     warning_is_open,
                     unique_op_codes,
-                    unique_operators,
+                    # unique_operators,
                 )
 
             # In the case of closing the warning

@@ -35,12 +35,12 @@ class DetailView:
 
     @staticmethod
     def _row_to_string(data):
-
+        print(data)
         return (
-            f"Namn: Namn Namnson \n"
+            f"Namn: {data[Constants.PATIENT]} \n"
             f"Behandlingsnummer: {data[Constants.BEHANDLINGS_NUMMER]} \n"
             f"Info till planerare:{data[Constants.INFO_TILL_PLANERARE]}\n"
-            f"Kommun: \n"
+            # f"Kommun: \n"
         )
 
     @staticmethod
