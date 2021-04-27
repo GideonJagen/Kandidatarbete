@@ -17,7 +17,7 @@ class SearchResult:
         cols = [
             Constants.BEHANDLINGS_NUMMER,
             Constants.KVAR_PRIO_TID,
-            Constants.PRIORITET_DAGAR,
+            Constants.PRIORITET,
             Constants.ASA_KLASS,
             Constants.OP_TID,
             Constants.PATIENT_ALDER,

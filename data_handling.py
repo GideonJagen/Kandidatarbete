@@ -106,7 +106,6 @@ class LoadedData:
         Constants.BEHANDLINGS_NUMMER,
         Constants.ANM_TIDPUNKT,
         # Constants.OP_KATEGORI,
-        Constants.PRIORITET_DAGAR,
         Constants.ASA_KLASS,
         Constants.OP_TID,
         Constants.PATIENT_ALDER,
@@ -224,7 +223,6 @@ class LoadedData:
 
     @staticmethod
     def _time_to_minutes(time: str):
-        print(time)
         h, m = time.split(":")
         return int(h) * 60 + int(m)
 
