@@ -17,6 +17,7 @@ class SearchResult:
         cols = [
             Constants.BEHANDLINGS_NUMMER,
             Constants.KVAR_PRIO_TID,
+            Constants.ANM_TIDPUNKT,
             Constants.PRIORITET,
             Constants.ASA_KLASS,
             Constants.OP_TID,
@@ -101,6 +102,8 @@ class SearchResult:
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="filetype-warning", component_property="is_open"),
+            Input(component_id="operator_dropdown", component_property="value"),
+            Input(component_id="operator_radioitems", component_property="value"),
         )
         def update_data(
             asa,
@@ -113,7 +116,9 @@ class SearchResult:
             area,
             care_type,
             op_code,
-            warning_is_open,
+            filetype_warning,
+            operator,
+            operator_radio,
         ):
 
             inputs = {
@@ -127,6 +132,8 @@ class SearchResult:
                 "anesthesia": anesthesia,
                 "area": area,
                 "caretype": care_type,
+                "operator": operator,
+                "operator_radio": operator_radio,
             }
             result = DataFilterer.search_data(inputs)
 
