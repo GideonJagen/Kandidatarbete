@@ -54,11 +54,11 @@ class DataFilterer:
             else True
         )
 
-        """match_care_type = (
+        match_care_type = (
             LoadedData.loaded_data[Constants.VARDFORM].isin([inputs["caretype"]])
             if inputs["caretype"] and inputs["caretype"] != "Alla"
             else True
-        )"""
+        )
 
         conditions = []
         conditions.extend(
@@ -68,7 +68,7 @@ class DataFilterer:
                 # match_asa,
                 match_stat_code,
                 match_op_code,
-                # match_care_type,
+                match_care_type,
             ]
         )
 
@@ -110,7 +110,7 @@ class LoadedData:
         Constants.OP_TID,
         Constants.PATIENT_ALDER,
         # Constants.VECKODAG,
-        # Constants.VARDFORM,
+        Constants.VARDFORM,
         Constants.PRIORITET,
         Constants.BENAMNING,
         # Constants.KVAR_PRIO_TID,
@@ -133,7 +133,7 @@ class LoadedData:
 
             LoadedData._update_patient_count()
             LoadedData._add_prio_days_left_col()
-            LoadedData._add_desirous_status()
+            # LoadedData._add_desirous_status()
             LoadedData._strip_age()
             LoadedData._convert_time()
             LoadedData._parse_op_code()

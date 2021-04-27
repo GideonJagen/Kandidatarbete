@@ -8,7 +8,7 @@ class Constants:
     OP_TID = "Operationstid"  # Change to "Operationstid" column name
     PATIENT_ALDER = "Patient (Ålder)"
     VECKODAG = "Veckodag"
-    VARDFORM = "Vårdform_text"
+    VARDFORM = "Vårdform"
     PRIORITET = "Prioritet"
     STAT_CODE = "Statistikkod (Ange vilken/vilka)"
     BENAMNING = "Benämning"
