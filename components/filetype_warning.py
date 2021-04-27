@@ -9,7 +9,7 @@ class FiletypeWarning:
             is_open=False,
             children=[
                 dbc.ModalHeader("File not loaded: wrong filetype"),
-                dbc.ModalBody("Make sure the file is of type: .csv"),
+                dbc.ModalBody("Make sure the file is of type: .xls"),
                 dbc.ModalFooter(
                     children=[dbc.Button("Close", id="filetype_warning_close_button")]
                 ),
