@@ -133,7 +133,7 @@ class LoadedData:
 
             LoadedData._update_patient_count()
             LoadedData._add_prio_days_left_col()
-            # LoadedData._add_desirous_status()
+            LoadedData._add_desirous_status()
             LoadedData._strip_age()
             LoadedData._convert_time()
             LoadedData._parse_op_code()
