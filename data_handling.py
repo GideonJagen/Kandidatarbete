@@ -133,10 +133,10 @@ class LoadedData:
 
             LoadedData._update_patient_count()
             LoadedData._add_prio_days_left_col()
+            LoadedData._add_desirous_status()
             LoadedData._strip_age()
             LoadedData._convert_time()
             LoadedData._parse_op_code()
-        print(LoadedData.loaded_data.head())
 
     @staticmethod
     def _update_patient_count():
@@ -166,6 +166,16 @@ class LoadedData:
             ),
             axis=1,
         )
+
+    @staticmethod
+    def _add_desirous_status():
+        def _is_desirious(s):
+            if s.lower().find("angelägen") == -1:
+                return False
+            else:
+                return True
+
+        LoadedData.loaded_data.assign(desirious=lambda x: _is_desirious(x))
 
     @staticmethod
     def _get_unique_values(col):
