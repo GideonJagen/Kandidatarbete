@@ -101,6 +101,7 @@ class LoadedData:
 
     # Necessary because callbacks will try to search when program is built, key error exception will be thrown,
     # this is a temp fix
+    CORRECT_FILE_TYPE = ".xls"
     COLUMNS = [
         Constants.BEHANDLINGS_NUMMER,
         Constants.ANM_TIDPUNKT,
