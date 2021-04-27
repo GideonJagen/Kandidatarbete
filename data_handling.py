@@ -170,12 +170,14 @@ class LoadedData:
     @staticmethod
     def _add_desirous_status():
         def _is_desirious(s):
-            if s.lower().find("angelägen") == -1:
-                return False
-            else:
-                return True
+            if type(s) is str:
+                desirious = s.lower().find("angelägen")
+                return False if desirious < 0 else True
+            return False
 
-        LoadedData.loaded_data.assign(desirious=lambda x: _is_desirious(x))
+        LoadedData.loaded_data["angelägen"] = LoadedData.loaded_data[
+            Constants.INFO_TILL_PLANERARE
+        ].map(lambda x: _is_desirious(x))
 
     @staticmethod
     def _get_unique_values(col):
