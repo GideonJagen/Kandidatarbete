@@ -6,15 +6,6 @@ from dash.dependencies import Input, Output
 
 
 class Operator:
-    STANDARD_OPERATORS = [
-        "Clara",
-        "David",
-        "Gideon",
-        "Johan",
-        "Linnea",
-        "Raoul",
-    ]  # Made up for testing purposes
-
     @staticmethod
     def get_component():
         widget = dbc.FormGroup(
@@ -57,11 +48,6 @@ class Operator:
             id="operator_dropdown",
             placeholder="Välj operatör",
             multi=True,
-            value=None,
-            options=[
-                {"label": operator, "value": operator}
-                for operator in Operator.STANDARD_OPERATORS
-            ],
             style={"display": "block", "min-width": "15em"},
         )
         return widget

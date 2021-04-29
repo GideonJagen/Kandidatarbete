@@ -205,7 +205,7 @@ class LoadedData:
 
     @staticmethod
     def _get_unique_values(col):
-        return LoadedData.loaded_data[col].unique().tolist()
+        return LoadedData.loaded_data[col].dropna().unique().tolist()
 
     @staticmethod
     def get_unique_label_values(col_name):
