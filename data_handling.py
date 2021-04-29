@@ -65,19 +65,21 @@ class DataFilterer:
             series = LoadedData.loaded_data[Constants.PLANERAD_OPERATOR]
 
             selection = inputs["operator_radio"]
-            # operators = inputs["assigned_to_operator"]
-            # include_unassigned = inputs["operator_include_unassigned"]
+            operators = inputs["assigned_to_operator"]
+            include_unassigned = inputs["operator_include_unassigned"]
 
             if selection == "all":
                 return True
             elif selection == "blank":
                 return series.isna()
-            # elif selection == "operator" and len(operators) > 0:
-            #     if include_unassigned:
-            #         matched_operator = data.isin(operators)
-            #         no_operator = data.isna()
-            #         return data.isin(operators) & no_operator
-            #     return LoadedData.loaded_data[Constants.PLANERAD_OPERATOR].isin(operators)
+            elif selection == "operator" and operators is not None:
+                matched_operator = series.isin(operators)
+                no_operator = series.isna()
+                return (
+                    matched_operator | no_operator
+                    if include_unassigned
+                    else matched_operator
+                )
 
             return True
 
