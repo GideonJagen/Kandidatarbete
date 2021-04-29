@@ -1,7 +1,7 @@
 import base64
 import io
-import time
 import re
+import time
 from functools import reduce
 from typing import List
 
@@ -18,26 +18,26 @@ class DataFilterer:
             range(inputs["age"]["min"], inputs["age"]["max"] + 1)
         )
 
-        match_op_time = LoadedData.loaded_data[Constants.OP_TID].isin(
-            range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
-        )
+        # match_op_time = LoadedData.loaded_data[Constants.OP_TID].isin(
+        #     range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
+        # )
 
-        """match_asa = (
-            True
-            if inputs["asa_radio"] == "Visa alla"
-            else (
-                (
-                    LoadedData.loaded_data[Constants.ASA_KLASS].isin(inputs["asa"])
-                    if inputs["asa"]
-                    else True
-                )
-                | (
-                    LoadedData.loaded_data[Constants.ASA_KLASS].isna()
-                    if ("Saknas" in inputs["asa"])
-                    else False
-                )
-            )
-        )"""
+        # match_asa = (
+        #     True
+        #     if inputs["asa_radio"] == "Visa alla"
+        #     else (
+        #         (
+        #             LoadedData.loaded_data[Constants.ASA_KLASS].isin(inputs["asa"])
+        #             if inputs["asa"]
+        #             else True
+        #         )
+        #         | (
+        #             LoadedData.loaded_data[Constants.ASA_KLASS].isna()
+        #             if ("Saknas" in inputs["asa"])
+        #             else False
+        #         )
+        #     )
+        # )
 
         match_stat_code = (
             True
@@ -61,15 +61,38 @@ class DataFilterer:
             else True
         )
 
+        def _does_operator_match(inputs):
+            series = LoadedData.loaded_data[Constants.PLANERAD_OPERATOR]
+
+            selection = inputs["operator_radio"]
+            # operators = inputs["assigned_to_operator"]
+            # include_unassigned = inputs["operator_include_unassigned"]
+
+            if selection == "all":
+                return True
+            elif selection == "blank":
+                return series.isna()
+            # elif selection == "operator" and len(operators) > 0:
+            #     if include_unassigned:
+            #         matched_operator = data.isin(operators)
+            #         no_operator = data.isna()
+            #         return data.isin(operators) & no_operator
+            #     return LoadedData.loaded_data[Constants.PLANERAD_OPERATOR].isin(operators)
+
+            return True
+
+        match_operator = _does_operator_match(inputs)
+
         conditions = []
         conditions.extend(
             [
                 match_age,
-                match_op_time,
+                # match_op_time,
                 # match_asa,
                 match_stat_code,
                 match_op_code,
                 match_care_type,
+                match_operator,
             ]
         )
 
@@ -163,7 +186,7 @@ class LoadedData:
         """
         LoadedData.loaded_data["Kvar på prio-tid"] = LoadedData.loaded_data.apply(
             lambda x: LoadedData._prio_days_left(
-                x[Constants.ANM_TIDPUNKT], x[Constants.PRIORITET_DAGAR]
+                x[Constants.ANM_TIDPUNKT], x[Constants.PRIORITET]
             ),
             axis=1,
         )

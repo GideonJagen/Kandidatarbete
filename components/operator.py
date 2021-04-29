@@ -67,11 +67,11 @@ class Operator:
         return widget
 
     @staticmethod
-    def _no_operator_checkbox():
+    def _operator_include_unassigned_checkbox():
         component = dbc.FormGroup(
             [
                 dbc.Checkbox(
-                    id="no_operator_checkbox",
+                    id="operator_include_unassigned_checkbox",
                     className="form-check-input",
                     checked=False,
                 ),
@@ -93,7 +93,7 @@ class Operator:
                 dbc.Form(
                     [
                         dbc.FormGroup(Operator._operator_dropdown(), className="mx-3"),
-                        Operator._no_operator_checkbox(),
+                        Operator._operator_include_unassigned_checkbox(),
                     ],
                     style={"visibility": "visible"},
                     id="operator_dropdown_and_checkbox",
@@ -109,7 +109,10 @@ class Operator:
             Output(component_id="operator_collapse", component_property="is_open"),
             Output(component_id="operator_radioitems", component_property="value"),
             Output(component_id="operator_dropdown", component_property="value"),
-            Output(component_id="no_operator_checkbox", component_property="checked"),
+            Output(
+                component_id="operator_include_unassigned_checkbox",
+                component_property="checked",
+            ),
             Input(component_id="operator_radioitems", component_property="value"),
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
@@ -117,14 +120,14 @@ class Operator:
             collapse_is_open = False
             radio_items = value
             dropdown_value = None
-            no_operator_checkbox = False
+            operator_include_unassigned_checkbox = False
 
             def get_output():
                 return (
                     collapse_is_open,
                     radio_items,
                     dropdown_value,
-                    no_operator_checkbox,
+                    operator_include_unassigned_checkbox,
                 )
 
             context = dash.callback_context

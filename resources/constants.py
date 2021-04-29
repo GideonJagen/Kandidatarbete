@@ -21,9 +21,9 @@ class Constants:
         return [
             Constants.BEHANDLINGS_NUMMER,
             Constants.ANM_TIDPUNKT,
-            Constants.SISTA_OP_TIDPUNKT,
+            # Constants.SISTA_OP_TIDPUNKT,
             Constants.OP_KATEGORI,
-            Constants.PRIORITET_DAGAR,
+            # Constants.PRIORITET_DAGAR,
             Constants.ASA_KLASS,
             Constants.OP_TID,
             Constants.PATIENT_ALDER,

@@ -1,9 +1,9 @@
-import dash
 import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
+
+from data_handling import DataFilterer
 from resources.constants import Constants
-from data_handling import DataFilterer, LoadedData
 
 
 # TODO Make callback return a dictionary with inputs
@@ -101,6 +101,12 @@ class SearchResult:
             Input(component_id="care_type_radioitems", component_property="value"),
             Input(component_id="opCode_dropdown", component_property="value"),
             Input(component_id="filetype-warning", component_property="is_open"),
+            Input(component_id="operator_radioitems", component_property="value"),
+            Input(component_id="operator_dropdown", component_property="value"),
+            Input(
+                component_id="operator_include_unassigned_checkbox",
+                component_property="checked",
+            ),
         )
         def update_data(
             asa,
@@ -114,6 +120,9 @@ class SearchResult:
             care_type,
             op_code,
             warning_is_open,
+            operator_radio,
+            assigned_to_operator,
+            operator_include_unassigned,
         ):
 
             inputs = {
@@ -127,6 +136,9 @@ class SearchResult:
                 "anesthesia": anesthesia,
                 "area": area,
                 "caretype": care_type,
+                "operator_radio": operator_radio,
+                "assigned_to_operator": assigned_to_operator,
+                "operator_include_unassigned": operator_include_unassigned,
             }
             result = DataFilterer.search_data(inputs)
 
