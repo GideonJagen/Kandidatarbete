@@ -22,34 +22,44 @@ class Asa:
                 ),
                 Asa._asa_tooltip(),
                 html.Hr(className="sidebar-separator"),
-                dbc.RadioItems(
-                    id="asa_radio_items",
-                    value="Visa alla",
-                    options=[
-                        {"label": "Visa alla", "value": "Visa alla"},
-                        {"label": "Välj: ", "value": "Välj"},
-                    ],
-                ),
-                dbc.Collapse(
-                    id="asa_collapse",
-                    is_open=False,
-                    children=[
-                        dbc.Checklist(
-                            id="asa_checklist",
-                            options=[
-                                {"label": "ASA 1", "value": 1},
-                                {"label": "ASA 2", "value": 2},
-                                {"label": "ASA 3", "value": 3},
-                                {"label": "ASA 4", "value": 4},
-                                {"label": "Saknas", "value": "Saknas"},
-                            ],
-                            labelStyle={"display": "inline-block"},
-                        ),
-                    ],
-                ),
+                Asa._asa_radio_items(),
+                Asa._asa_checklist(),
             ],
         )
         return widget
+
+    @staticmethod
+    def _asa_radio_items():
+        radio_items = dbc.RadioItems(
+            id="asa_radio_items",
+            value="all",
+            options=[
+                {"label": "Visa alla", "value": "all"},
+                {"label": "Välj: ", "value": "selection"},
+            ],
+        )
+        return radio_items
+
+    @staticmethod
+    def _asa_checklist():
+        collapse = dbc.Collapse(
+            id="asa_collapse",
+            is_open=False,
+            children=[
+                dbc.Checklist(
+                    id="asa_checklist",
+                    options=[
+                        {"label": "ASA 1", "value": 1},
+                        {"label": "ASA 2", "value": 2},
+                        {"label": "ASA 3", "value": 3},
+                        {"label": "ASA 4", "value": 4},
+                        {"label": "Saknas", "value": 0},
+                    ],
+                    labelStyle={"display": "inline-block"},
+                ),
+            ],
+        )
+        return collapse
 
     @staticmethod
     def _asa_tooltip():
@@ -73,7 +83,7 @@ class Asa:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):
-            return Asa.STANDARD_VALUE, "Visa alla"
+            return Asa.STANDARD_VALUE, "all"
 
         return app
 
@@ -88,7 +98,7 @@ class Asa:
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
                 return False
-            return value == "Välj"
+            return value == "selection"
 
         return app
 

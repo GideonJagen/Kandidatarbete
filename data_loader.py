@@ -120,7 +120,7 @@ class DataLoader:
         operation_code = patient_row[Constants.BENAMNING].values[0]
         priority = patient_row[Constants.PRIORITET].values[0]
         asa_class_doctor = patient_row[Constants.ASA_KLASS].values[0]
-        asa_class_info = DataLoader._extract_asa_class(
+        asa_class_info = DataLoader.extract_asa_class(
             patient_row[Constants.INFO_TILL_PLANERARE].values[0]
         )
 
@@ -181,12 +181,13 @@ class DataLoader:
 
         pnr = re.findall(r"^[0-9]{8}-[0-9]{4}", string)
         name = re.findall(r"(?<=^[0-9]{8}-[0-9]{4} - ).*", string)
+        # TODO: Handle no found match
         return pnr[0], name[0]
 
     @staticmethod
-    def _extract_asa_class(string: str):
+    def extract_asa_class(string: str):
         if type(string) is not str:
             return None
 
         number = re.findall(r"(?<=[Aa][Ss][Aa] )[1-4]", string)
-        return int(number[0])
+        return int(number[0]) if number else None

@@ -90,8 +90,8 @@ class SearchResult:
         @app.callback(
             Output(component_id="search_result", component_property="data"),
             Output(component_id="number_of_patients", component_property="children"),
-            Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="asa_radio_items", component_property="value"),
+            Input(component_id="asa_checklist", component_property="value"),
             Input(component_id="opTime_slider", component_property="value"),
             Input(component_id="age", component_property="value"),
             Input(component_id="anaesthesia_checklist", component_property="value"),
@@ -109,8 +109,8 @@ class SearchResult:
             ),
         )
         def update_data(
-            asa,
             asa_radio,
+            asa_class,
             op_time,
             age,
             anesthesia,
@@ -127,7 +127,7 @@ class SearchResult:
 
             inputs = {
                 "age": {"min": age[0], "max": age[1]},
-                "asa": asa,
+                "asa_class": asa_class,
                 "asa_radio": asa_radio,
                 "op_time": {"min": op_time[0], "max": op_time[1]},
                 "op_code": op_code,
