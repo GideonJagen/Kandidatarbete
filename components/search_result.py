@@ -2,7 +2,7 @@ import dash_html_components as html
 import dash_table
 from dash.dependencies import Input, Output
 
-from data_handling import DataFilterer
+from data_filterer import DataFilterer
 from resources.constants import Constants
 
 

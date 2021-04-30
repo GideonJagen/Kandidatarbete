@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from data_handling import LoadedData
+from data_loader import DataLoader
 from resources.constants import Constants
 
 
@@ -56,7 +56,7 @@ class DetailView:
             if row:
                 row = row[0]["row"]
                 true_row_nr = page_nr * page_size + row
-                data = LoadedData.loaded_data.iloc[true_row_nr]
+                data = DataLoader.loaded_data.iloc[true_row_nr]
                 return DetailView._row_to_string(data)
             return ""
 
