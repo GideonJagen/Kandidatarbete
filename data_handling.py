@@ -224,17 +224,32 @@ class LoadedData:
         ]
 
     @staticmethod
-    def patient_to_string(patient_row, detailed=True):
+    def patient_to_string(patient_row):
+        pid_nr, name = LoadedData._extract_pnr_name(
+            patient_row[Constants.PATIENT].values[0]
+        )
+        patient_age = patient_row[Constants.PATIENT_ALDER].values[0]
+        treatment_nr = patient_row[Constants.BEHANDLINGS_NUMMER].values[0]
+        operation_time = patient_row[Constants.OP_TID].values[0]
+        operator = patient_row[Constants.PLANERAD_OPERATOR].values[0]
+        operation_code = patient_row[Constants.BENAMNING].values[0]
+        priority = patient_row[Constants.PRIORITET].values[0]
+        asa_class_doctor = patient_row[Constants.ASA_KLASS].values[0]
+        asa_class_info = LoadedData._extract_asa_class(
+            patient_row[Constants.INFO_TILL_PLANERARE].values[0]
+        )
 
         return (
-            f"Namn: David \n"
-            f"Behandlingsnummer: {patient_row[Constants.BEHANDLINGS_NUMMER].values[0]} \n"
-            f"Operationstid: {patient_row[Constants.OP_TID].values[0]} \n"
-            f"Operatör: {patient_row[Constants.PLANERAD_OPERATOR].values[0]} \n"
-            f"Operationskod: {patient_row[Constants.BENAMNING].values[0]} \n"
-            f"Ålder: {patient_row[Constants.PATIENT_ALDER].values[0]} \n"
-            f"Statistikkod: {patient_row[Constants.PRIORITET].values[0]} \n"
-            f"ASA-klass : {patient_row[Constants.ASA_KLASS].values[0]} \n"
+            f"Namn: {name} \n"
+            f"Personnummer: {pid_nr} \n"
+            f"Behandlingsnummer: {treatment_nr} \n"
+            f"Operationstid: {operation_time} \n"
+            f"Operatör: {operator} \n"
+            f"Operationskod: {operation_code} \n"
+            f"Ålder: {patient_age} \n"
+            f"Statistikkod: {priority} \n"
+            f"ASA-klass (Info till pl.): {asa_class_info} \n"
+            f"ASA-klass (Läkare): {asa_class_doctor}"
         )
 
     @staticmethod
@@ -242,6 +257,12 @@ class LoadedData:
         LoadedData.loaded_data[Constants.PATIENT_ALDER] = LoadedData.loaded_data[
             Constants.PATIENT_ALDER
         ].map(lambda x: LoadedData._string_to_age(x))
+
+    @staticmethod
+    def _string_to_age(age: str):
+        if type(age) == str:
+            return int(age.split()[0])
+        return 0
 
     @staticmethod
     def _convert_time():
@@ -253,12 +274,6 @@ class LoadedData:
     def _time_to_minutes(time: str):
         h, m = time.split(":")
         return int(h) * 60 + int(m)
-
-    @staticmethod
-    def _string_to_age(age: str):
-        if type(age) == str:
-            return int(age.split()[0])
-        return 0
 
     @staticmethod
     def _parse_op_code():
