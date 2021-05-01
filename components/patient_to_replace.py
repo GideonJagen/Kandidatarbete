@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-from data_handling import LoadedData
+from data_loader import DataLoader
 
 
 class PatientToReplace:
@@ -98,9 +98,9 @@ class PatientToReplace:
 
             elif context.triggered[0]["prop_id"].split(".")[1] == "n_submit":
                 if input and input.isnumeric():
-                    patient = LoadedData.find_patient(input)
+                    patient = DataLoader.find_patient(input)
                     if len(patient) > 0:
-                        PatientToReplace.current_notes = LoadedData.patient_to_string(
+                        PatientToReplace.current_notes = DataLoader.patient_to_string(
                             patient
                         )
                         valid_input = True
