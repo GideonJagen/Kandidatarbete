@@ -10,6 +10,16 @@ from resources.constants import Constants
 
 
 class DataFilterer:
+    __filtered_data = None
+
+    @staticmethod
+    def get_search_result() -> pd.DataFrame:
+        return DataFilterer.__filtered_data
+
+    @staticmethod
+    def update_search_result(data: pd.DataFrame):
+        DataFilterer.__filtered_data = data
+
     @staticmethod
     def _filter_conditions(inputs) -> List:
         def _does_operator_match(inputs):
@@ -109,7 +119,6 @@ class DataFilterer:
     @staticmethod
     def _filter_vectorized(inputs) -> pd.DataFrame:
         start_time = time.time()
-        print(inputs)
         conditions = DataFilterer._filter_conditions(inputs)
         filtered = np.where(reduce(lambda a, b: a & b, conditions))
         data = DataLoader.loaded_data.iloc[filtered].to_dict("records")
@@ -121,6 +130,9 @@ class DataFilterer:
         # Alternative solution for exception? Only thrown in one case but i want to avoid several if statements
 
         filtered_data = DataFilterer._filter_vectorized(inputs)
+
+        DataFilterer.update_search_result(filtered_data)
+
         search_result = {
             "data": filtered_data,
             "number_of_patients": f"Antal patienter: {len(filtered_data)} / {DataLoader.patient_count}",
