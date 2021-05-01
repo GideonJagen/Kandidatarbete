@@ -1,6 +1,9 @@
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+
+from components.search_result import SearchResult
+from data_filterer import DataFilterer
 from data_loader import DataLoader
 from resources.constants import Constants
 
@@ -35,7 +38,6 @@ class DetailView:
 
     @staticmethod
     def _row_to_string(data):
-        print(data)
         return (
             f"Namn: {data[Constants.PATIENT]} \n"
             f"Behandlingsnummer: {data[Constants.BEHANDLINGS_NUMMER]} \n"
@@ -56,7 +58,13 @@ class DetailView:
             if row:
                 row = row[0]["row"]
                 true_row_nr = page_nr * page_size + row
-                data = DataLoader.loaded_data.iloc[true_row_nr]
+
+                searched_df = DataFilterer.get_search_result()
+                if searched_df:
+                    data = searched_df[true_row_nr]
+                else:
+                    data = DataLoader.loaded_data.iloc[true_row_nr]
+
                 return DetailView._row_to_string(data)
             return ""
 

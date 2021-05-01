@@ -1,8 +1,10 @@
 import dash_html_components as html
 import dash_table
+import pandas as pd
 from dash.dependencies import Input, Output
 
 from data_filterer import DataFilterer
+from data_loader import DataLoader
 from resources.constants import Constants
 
 
@@ -141,7 +143,9 @@ class SearchResult:
                 "operator_include_unassigned": operator_include_unassigned,
             }
             result = DataFilterer.search_data(inputs)
+            data = result["data"]
+            patient_count = result["number_of_patients"]
 
-            return result["data"], result["number_of_patients"]
+            return data, patient_count
 
         return app
