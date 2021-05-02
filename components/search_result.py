@@ -19,6 +19,7 @@ class SearchResult:
         cols = [
             Constants.BEHANDLINGS_NUMMER,
             Constants.KVAR_PRIO_TID,
+            Constants.ANM_TIDPUNKT,
             Constants.PRIORITET,
             Constants.ASA_KLASS,
             Constants.OP_TID,
