@@ -68,9 +68,17 @@ class DataFilterer:
                 return match_selection
             return True
 
-        # match_op_time = DataLoader.loaded_data[Constants.OP_TID].isin(
-        #     range(inputs["op_time"]["min"], inputs["op_time"]["max"] + 1)
-        # )
+        def _does_op_time_match(inputs):
+            selection = inputs["op_time_radio"]
+            min = inputs["op_time"]["min"]
+            max = inputs["op_time"]["max"]
+            if (selection == "all") or (min is None and max is None):
+                return True
+            elif min is None:
+                return DataLoader.loaded_data[Constants.OP_TID].isin(range(0, max + 1))
+            elif max is None:
+                return DataLoader.loaded_data[Constants.OP_TID].isin(range(min, 1440))
+            return DataLoader.loaded_data[Constants.OP_TID].isin(range(min, max + 1))
 
         match_age = DataLoader.loaded_data[Constants.PATIENT_ALDER].isin(
             range(inputs["age"]["min"], inputs["age"]["max"] + 1)
@@ -100,12 +108,13 @@ class DataFilterer:
 
         match_asa = _does_either_asa_match(inputs)
         match_operator = _does_operator_match(inputs)
+        match_op_time = _does_op_time_match(inputs)
 
         conditions = []
         conditions.extend(
             [
                 match_age,
-                # match_op_time,
+                match_op_time,
                 match_asa,
                 match_stat_code,
                 match_op_code,
