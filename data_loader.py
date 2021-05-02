@@ -1,6 +1,8 @@
 import base64
 import io
 import re
+import datetime
+from datetime import timedelta
 
 import pandas as pd
 
@@ -62,7 +64,15 @@ class DataLoader:
         # year, month, day = str(booked_date).split(sep="-")
         # booked_date = datetime.date(int(year), int(month), int(day.split(" ")[0]))
         # critical_date = booked_date + timedelta(prio_days)
-        return 1  # (critical_date - today).days
+        # return 1  # (critical_date - today).days
+        prio_days = prio_days.split()[0]
+        if prio_days.isnumeric():
+            today = datetime.date.today()
+            year, month, day = str(booked_date).split(sep="-")
+            booked_date = datetime.date(int(year), int(month), int(day.split(" ")[0]))
+            critical_date = booked_date + timedelta(int(prio_days))
+            return (critical_date - today).days
+        return "Se prioritet!"
 
     @staticmethod
     def _add_prio_days_left_col():
