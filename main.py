@@ -20,6 +20,7 @@ from components.sidebar import Sidebar
 from components.sidebar_toggle import SidebarToggle
 from components.statistics_code import StatisticsCode
 from components.detail_view import DetailView
+from components.priority import Priority
 
 # TODO Make wrapper for callbacks/ make function to add all callbacks
 # TODO Make callback for op_code, gör likt statistikkod widget
@@ -83,4 +84,5 @@ app = StatisticsCode.add_str_callback(app)
 app = PatientToReplace.add_callback(app)
 app = FreeTextSearch.add_callback(app)
 app = DetailView.add_callback(app)
-app.run_server(debug=False)
+app = Priority.add_callback(app)
+app.run_server(debug=True)

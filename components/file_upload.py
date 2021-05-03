@@ -2,9 +2,9 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
-
+from resources.constants import Constants
 import components.operator
-from data_handling import LoadedData
+from data_loader import DataLoader
 
 
 # Todo to avoid an even more massive callback (search_result) i decided to add a button with the functionality
@@ -80,11 +80,12 @@ class FileUpload:
             context = dash.callback_context
             triggered_component = context.triggered[0]["prop_id"].split(".")[0]
             if triggered_component == "upload":
-                LoadedData.load_data(filename, contents)
+                if filename is not None and contents is not None:
+                    DataLoader.load_data(filename, contents)
 
-            unique_op_codes = LoadedData.get_unique_label_values("OpkortText")
-            unique_operators = LoadedData.get_unique_label_values(
-                "Planerade operatörer (Ansvarig)"
+            unique_op_codes = DataLoader.get_unique_label_values(Constants.BENAMNING)
+            unique_operators = DataLoader.get_unique_label_values(
+                Constants.PLANERAD_OPERATOR
             )
 
             def get_outputs():
@@ -101,7 +102,9 @@ class FileUpload:
                 return get_outputs()
 
             # In the case of correctly loading a file
-            elif isinstance(filename, str) and filename.endswith(".csv"):
+            elif isinstance(filename, str) and filename.endswith(
+                DataLoader.CORRECT_FILE_TYPE
+            ):
                 file_label = f"Vald fil: {filename}"
                 return get_outputs()
 
@@ -124,6 +127,6 @@ class FileUpload:
         def load_data(n_clicks, filename, contents):
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "load_button":
-                LoadedData.load_data(filename, contents)
+                DataLoader.load_data(filename, contents)
 
         return app
