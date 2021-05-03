@@ -10,32 +10,47 @@ class Priority:
 
     @staticmethod
     def get_component():
-        widget = dbc.FormGroup(
+        component = dbc.FormGroup(
             id="priority_widget",
             children=[
-                dbc.Label(
-                    "Prioritet",
-                    className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
-                ),
+                Priority._get_label(),
                 html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
-                dbc.RadioItems(
-                    id="priority_radio_items",
-                    value="Visa alla",
-                    options=[
-                        {"label": "Visa alla", "value": "Visa alla"},
-                        {"label": "Välj: ", "value": "Välj"},
-                    ],
-                ),
-                dbc.Collapse(
-                    id="priority_collapse",
-                    is_open=False,
-                    children=[
-                        Priority._priority_checklist(),
-                    ],
-                ),
+                Priority._get_radio_items(),
+                Priority._get_priority_collapse(),
             ],
         )
-        return widget
+        return component
+
+    @staticmethod
+    def _get_label():
+        label = dbc.Label(
+            "Prioritet",
+            className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
+        )
+        return label
+
+    @staticmethod
+    def _get_radio_items():
+        radio_items = dbc.RadioItems(
+            id="priority_radio_items",
+            value="Visa alla",
+            options=[
+                {"label": "Visa alla", "value": "show_all"},
+                {"label": "Välj: ", "value": "select"},
+            ],
+        )
+        return radio_items
+
+    @staticmethod
+    def _get_priority_collapse():
+        collapse = dbc.Collapse(
+            id="priority_collapse",
+            is_open=False,
+            children=[
+                Priority._priority_checklist(),
+            ],
+        )
+        return collapse
 
     @staticmethod
     def _priority_checklist():
@@ -63,7 +78,7 @@ class Priority:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def reset_component(n_clicks):
-            return Priority.STANDARD_VALUE, "Visa alla"
+            return Priority.STANDARD_VALUE, "show_all"
 
         return app
 
@@ -78,7 +93,7 @@ class Priority:
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
                 return False
-            return value == "Välj"
+            return value == "select"
 
         return app
 
