@@ -43,7 +43,7 @@ class SearchResult:
                     },
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
-                    sort_action="native",
+                    sort_action=None,
                     fixed_rows={"headers": True},
                     style_data={
                         "border": "0.2em solid grey",
