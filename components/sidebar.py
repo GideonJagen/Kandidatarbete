@@ -13,6 +13,7 @@ from components.op_time import OpTime
 from components.operator import Operator
 from components.short_notice import ShortNotice
 from components.statistics_code import StatisticsCode
+from components.priority import Priority
 
 
 class Sidebar:
@@ -48,6 +49,7 @@ class Sidebar:
                 Age.get_component(),
                 Asa.get_component(),
                 Anesthesia.get_component(),
+                Priority.get_component(),
                 StatisticsCode.get_component(),
                 ShortNotice.get_component(),
                 CareType.get_component(),

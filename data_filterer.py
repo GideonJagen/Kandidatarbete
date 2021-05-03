@@ -94,12 +94,12 @@ class DataFilterer:
             range(inputs["age"]["min"], inputs["age"]["max"] + 1)
         )
 
-        match_stat_code = (
+        match_priority = (
             True
-            if inputs["stat_code_radio"] == "Visa alla"
+            if inputs["priority_radio"] == "Visa alla"
             else (
-                DataLoader.loaded_data[Constants.PRIORITET].isin(inputs["stat_code"])
-                if inputs["stat_code"]
+                DataLoader.loaded_data[Constants.PRIORITET].isin(inputs["priority"])
+                if inputs["priority"]
                 else True
             )
         )
@@ -126,7 +126,7 @@ class DataFilterer:
                 match_age,
                 match_op_time,
                 match_asa,
-                match_stat_code,
+                match_priority,
                 match_op_code,
                 match_care_type,
                 match_operator,

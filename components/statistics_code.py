@@ -23,7 +23,7 @@ class StatisticsCode:
                     value="Visa alla",
                     options=[
                         {"label": "Visa alla", "value": "Visa alla"},
-                        {"label": "Välj: ", "value": "Välj"},
+                        {"label": "Välj: ", "value": "Välj", "disabled": True},
                     ],
                 ),
                 dbc.Collapse(
