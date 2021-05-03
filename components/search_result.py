@@ -35,6 +35,7 @@ class SearchResult:
                     id="search_result",
                     page_size=SearchResult.PAGE_SIZE,
                     page_current=0,
+                    sort_action=None,
                     style_table={
                         "background-color": "var(--c-very-light-blue)",
                         "height": "50vh",
@@ -43,7 +44,6 @@ class SearchResult:
                     },
                     columns=[{"name": col, "id": col} for col in cols],
                     data=None,
-                    sort_action="native",
                     fixed_rows={"headers": True},
                     style_data={
                         "border": "0.2em solid grey",
