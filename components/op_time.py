@@ -20,7 +20,6 @@ class OpTime:
                     className="label col-form-label-lg font-weight-bold mb-n4 pd-n4",
                 ),
                 html.Hr(style={"margin-top": 0, "margin-bottom": 10}),
-                # OpTime._op_time_slider(),
                 OpTime._op_time_radio(),
                 OpTime._op_time_collapse(),
             ],
@@ -43,56 +42,25 @@ class OpTime:
 
     @staticmethod
     def _op_time_collapse():
-        component = dbc.Collapse(
+        min_time = dbc.Input(
+            id="op_time_min",
+            placeholder="Min tid",
+            type="number",
+            min=0,
+        )
+
+        max_time = dbc.Input(
+            id="op_time_max",
+            placeholder="Max tid",
+            type="number",
+            min=0,
+        )
+
+        collapse = dbc.Collapse(
             id="op_time_collapse",
-            children=[
-                dbc.InputGroup(
-                    [
-                        dbc.Input(
-                            id="op_time_min",
-                            placeholder="Min tid",
-                            type="number",
-                            min=0,
-                        ),
-                        dbc.Input(
-                            id="op_time_max",
-                            placeholder="Max tid",
-                            type="number",
-                            min=0,
-                        ),
-                    ]
-                )
-            ],
+            children=[dbc.InputGroup([min_time, max_time])],
         )
-        return component
-
-    @staticmethod
-    def _op_time_slider():
-        widget = dcc.RangeSlider(
-            id="opTime_slider",
-            min=OpTime.MIN_TIME,
-            max=OpTime.MAX_TIME,
-            marks={
-                i: "{}min".format(i)
-                if (i == OpTime.MIN_TIME or i == OpTime.MAX_TIME)
-                else f"{i}"
-                for i in range(OpTime.MIN_TIME, OpTime.MAX_TIME + 20, 20)
-            },
-            value=[OpTime.MIN_TIME, OpTime.MAX_TIME],
-            step=20,
-        )
-        return widget
-
-    # @staticmethod
-    # def add_callback(app):
-    #    @app.callback(
-    #        Output(component_id="opTime_slider", component_property="value"),
-    #        Input(component_id="reset_filter_button", component_property="n_clicks"),
-    #    )
-    #    def reset_component(n_clicks):
-    #        return [OpTime.MIN_TIME, OpTime.MAX_TIME]
-
-    #    return app
+        return collapse
 
     @staticmethod
     def add_callback(app):
@@ -105,6 +73,7 @@ class OpTime:
             Input(component_id="reset_filter_button", component_property="n_clicks"),
         )
         def collapse(value, reset):
+            # TODO: Refactor for increased readability
             context = dash.callback_context
             if context.triggered[0]["prop_id"].split(".")[0] == "reset_filter_button":
                 return False, None, None, "all"
@@ -163,4 +132,4 @@ class OpTime:
 
     @staticmethod
     def value_to_string(value_min, value_max):
-        return f"Operationstid: {value_min if value_min else 0} - {value_max if value_max else 'Max' } minuter"
+        return f"Operationstid: {value_min if value_min else 0} - {value_max if value_max else 'Max'} minuter"
